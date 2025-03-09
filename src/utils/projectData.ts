@@ -235,6 +235,7 @@ export interface Education {
   startDate: string;
   endDate: string;
   description?: string;
+  awards?: string[]; // Added awards property as optional
 }
 
 export const education: Education[] = [
@@ -246,7 +247,8 @@ export const education: Education[] = [
     location: "Lyon, France",
     startDate: "septembre 2019",
     endDate: "juin 2021",
-    description: "Spécialisation en développement d'applications web modernes et technologies cloud."
+    description: "Spécialisation en développement d'applications web modernes et technologies cloud.",
+    awards: ["Prix d'excellence académique", "Mention spéciale pour le projet de fin d'études"]
   },
   {
     id: 2,
@@ -256,7 +258,8 @@ export const education: Education[] = [
     location: "Lyon, France",
     startDate: "septembre 2016",
     endDate: "juin 2019",
-    description: "Formation complète en informatique avec focus sur les algorithmes et structures de données."
+    description: "Formation complète en informatique avec focus sur les algorithmes et structures de données.",
+    awards: ["Bourse d'excellence", "Premier prix hackathon étudiant"]
   }
 ];
 
