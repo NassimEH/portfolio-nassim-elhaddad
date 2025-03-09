@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronUp, Award, Certificate, BookOpen, Briefcase, Code, Database, Server, ArtText, Globe } from 'lucide-react';
+import { ChevronDown, ChevronUp, Award, Bookmark, BookOpen, Briefcase, Code, Database, Server, FileText, Globe } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -262,6 +262,7 @@ const Certifications: React.FC = () => {
               className="relative group"
               variants={itemVariants}
               whileHover={{ y: -5 }}
+              key={cert.id}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all">
