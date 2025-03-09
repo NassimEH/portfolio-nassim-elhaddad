@@ -2,13 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronUp, Award, Bookmark, BookOpen, Briefcase, Code, Database, Server, FileText, Globe } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Award, Filter, Tag, Book, Code, Database, Server, FileText, Globe, CheckCircle2 } from 'lucide-react';
 
 interface Certification {
   id: number;
@@ -102,15 +96,20 @@ const certifications: Certification[] = [
   }
 ];
 
-interface FilterCategory {
-  name: string;
-  icon: React.ReactNode;
-  filters: string[];
-  color: string;
-}
+const filters = [
+  { id: 'all', name: 'All', icon: <Filter className="w-4 h-4" /> },
+  { id: 'frontend', name: 'Frontend', icon: <Code className="w-4 h-4" /> },
+  { id: 'backend', name: 'Backend', icon: <Server className="w-4 h-4" /> },
+  { id: 'fullstack', name: 'Fullstack', icon: <Database className="w-4 h-4" /> },
+  { id: 'devops', name: 'DevOps', icon: <Globe className="w-4 h-4" /> },
+  { id: 'design', name: 'Design', icon: <FileText className="w-4 h-4" /> },
+  { id: 'mobile', name: 'Mobile', icon: <Tag className="w-4 h-4" /> },
+  { id: 'data_science', name: 'Data Science', icon: <Book className="w-4 h-4" /> },
+  { id: 'project_management', name: 'Management', icon: <CheckCircle2 className="w-4 h-4" /> },
+];
 
 const Certifications: React.FC = () => {
-  const [currentFilter, setCurrentFilter] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string>('all');
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -131,13 +130,9 @@ const Certifications: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const handleFilterChange = (filter: string) => {
-    setCurrentFilter(currentFilter === filter ? null : filter);
-  };
-
-  const filteredCertifications = currentFilter
-    ? certifications.filter(cert => cert.category.toLowerCase().includes(currentFilter))
-    : certifications;
+  const filteredCertifications = activeFilter === 'all'
+    ? certifications
+    : certifications.filter(cert => cert.category === activeFilter);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -150,38 +145,16 @@ const Certifications: React.FC = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.6, 0.05, -0.01, 0.9]
+        duration: 0.5,
+        ease: "easeOut"
       }
     }
   };
-  
-  // Filter categories
-  const filterCategories: FilterCategory[] = [
-    {
-      name: "Domaines Techniques",
-      icon: <Code className="w-5 h-5 text-purple-400" />,
-      filters: ["Frontend", "Backend", "Fullstack", "Mobile", "Data Science"],
-      color: "purple"
-    },
-    {
-      name: "Organisations",
-      icon: <Briefcase className="w-5 h-5 text-cyan-400" />,
-      filters: ["Udacity", "Coursera", "AWS", "Google", "Microsoft", "OpenClassrooms"],
-      color: "cyan"
-    },
-    {
-      name: "Spécialités",
-      icon: <Bookmark className="w-5 h-5 text-pink-400" />,
-      filters: ["DevOps", "Project Management", "Design", "Cloud"],
-      color: "pink"
-    }
-  ];
 
   return (
     <section id="certifications" className="py-24 relative overflow-hidden" ref={containerRef}>
@@ -196,8 +169,8 @@ const Certifications: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         
-        {/* Moving particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Moving particles - reduced count for better performance */}
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-purple-500/50"
@@ -214,30 +187,6 @@ const Certifications: React.FC = () => {
               duration: Math.random() * 20 + 10,
               repeat: Infinity,
               repeatType: "mirror"
-            }}
-          />
-        ))}
-        
-        {/* Moving light lines */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"
-            style={{ 
-              width: Math.random() * 300 + 100,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              rotate: `${Math.random() * 360}deg`
-            }}
-            animate={{ 
-              opacity: [0, 0.7, 0],
-              width: [0, Math.random() * 300 + 200, 0]
-            }}
-            transition={{ 
-              duration: Math.random() * 5 + 5,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: i * 2
             }}
           />
         ))}
@@ -266,136 +215,123 @@ const Certifications: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Filters */}
-        <div className="mb-12">
-          <motion.div 
-            className="max-w-3xl mx-auto glass-morphism p-6 rounded-xl border border-purple-500/20 relative overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+        {/* Filters - Horizontal compact design */}
+        <motion.div 
+          className="mb-10 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="glass-morphism p-3 rounded-full flex flex-wrap justify-center gap-2 border border-purple-500/20 max-w-3xl shadow-lg">
+            {filters.map((filter) => (
+              <motion.button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-all ${
+                  activeFilter === filter.id
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
+                    : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {filter.icon}
+                <span>{filter.name}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Certifications cards with filtered animation */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter} // This forces re-render when filter changes
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/5 via-cyan-500/5 to-pink-500/5 blur-xl rounded-xl"></div>
-            
-            <h3 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Filtrer par catégorie
-            </h3>
-            
-            <div className="grid gap-4">
-              {filterCategories.map((category, index) => (
+            {filteredCertifications.length > 0 ? (
+              filteredCertifications.map(cert => (
                 <motion.div 
-                  key={index}
-                  className={`rounded-lg border border-${category.color}-500/20 overflow-hidden`}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  className="relative group"
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
+                  key={cert.id}
+                  layout
                 >
-                  <div className={`px-4 py-3 flex justify-between items-center bg-${category.color}-500/10 hover:bg-${category.color}-500/15 transition-all cursor-pointer`}>
-                    <div className="flex items-center gap-2">
-                      {category.icon}
-                      <span className="font-medium">{category.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all h-full">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
+                    
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
+                        <Award className="h-5 w-5 text-pink-400" />
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-6 text-sm flex-grow">{cert.description}</p>
+                      
+                      <div className="mt-auto flex justify-between items-center">
+                        <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
+                        <div className="text-sm text-muted-foreground">{cert.organization}</div>
+                      </div>
+                      
+                      {/* Category badge */}
+                      <div className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs bg-black/50 border border-pink-500/30 text-pink-300">
+                        {cert.category}
+                      </div>
                     </div>
-                    <ChevronDown className={`w-5 h-5 text-${category.color}-400`} />
-                  </div>
-                  
-                  <div className="px-4 py-3 bg-black/20 grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {category.filters.map((filter) => (
-                      <motion.button
-                        key={filter}
-                        onClick={() => handleFilterChange(filter.toLowerCase())}
-                        className={`px-3 py-2 rounded-md text-sm transition-all ${
-                          currentFilter === filter.toLowerCase() 
-                            ? `bg-gradient-to-r from-${category.color}-500 to-${category.color === 'purple' ? 'pink' : category.color === 'cyan' ? 'blue' : 'purple'}-500 text-white shadow-lg` 
-                            : 'bg-white/5 text-muted-foreground hover:bg-white/10'
-                        }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {filter}
-                      </motion.button>
-                    ))}
                   </div>
                 </motion.div>
-              ))}
-            </div>
-            
-            {currentFilter && (
+              ))
+            ) : (
               <motion.div 
-                className="mt-4 flex justify-center"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
+                className="col-span-1 md:col-span-3 text-center py-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
+                <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
                 <button
-                  onClick={() => setCurrentFilter(null)}
-                  className="px-4 py-2 text-sm bg-white/10 hover:bg-white/15 rounded-lg flex items-center gap-2 transition-all"
+                  onClick={() => setActiveFilter('all')}
+                  className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
                 >
-                  <span>Réinitialiser le filtre</span>
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    className="w-4 h-4 border-t border-r border-purple-400 rounded-full"
-                  ></motion.div>
+                  Afficher toutes les certifications
                 </button>
               </motion.div>
             )}
           </motion.div>
-        </div>
-
-        {/* Certifications cards */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {filteredCertifications.length > 0 ? (
-            filteredCertifications.map(cert => (
-              <motion.div 
-                className="relative group"
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-                key={cert.id}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
-                  
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
-                      <Award className="h-5 w-5 text-pink-400" />
-                    </div>
-                    
-                    <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
-                    
-                    <div className="flex justify-between items-center">
-                      <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
-                      <div className="text-sm text-muted-foreground">{cert.organization}</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))
-          ) : (
-            <motion.div 
-              className="col-span-1 md:col-span-3 text-center py-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
-              <button
-                onClick={() => setCurrentFilter(null)}
-                className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
-              >
-                Afficher toutes les certifications
-              </button>
-            </motion.div>
-          )}
-        </motion.div>
+        </AnimatePresence>
+        
+        {/* Floating decoration elements */}
+        <motion.div 
+          className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-purple-500/10 blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        <motion.div 
+          className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
       </div>
     </section>
   );

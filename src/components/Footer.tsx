@@ -42,15 +42,15 @@ const Footer: React.FC = () => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center glass-morphism p-6 rounded-xl border border-purple-500/20 group"
+              className="flex flex-col items-center justify-center glass-morphism p-6 rounded-xl border border-blue-500/20 group"
               whileHover={{ 
                 y: -10, 
-                boxShadow: "0 0 30px rgba(168,85,247,0.3)",
-                borderColor: "rgba(168,85,247,0.5)"
+                boxShadow: "0 0 30px rgba(59,130,246,0.3)",
+                borderColor: "rgba(59,130,246,0.5)"
               }}
             >
               <motion.div 
-                className="text-purple-400 mb-3 transition-transform"
+                className="text-blue-400 mb-3 transition-transform"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ 
                   repeat: Infinity, 
@@ -60,14 +60,14 @@ const Footer: React.FC = () => {
               >
                 {link.icon}
               </motion.div>
-              <span className="text-lg font-medium group-hover:text-purple-400 transition-colors">{link.label}</span>
+              <span className="text-lg font-medium group-hover:text-blue-400 transition-colors">{link.name}</span>
             </motion.a>
           ))}
         </div>
         
         <div className="glass-morphism border border-cyan-500/20 rounded-2xl p-8 mb-12 relative overflow-hidden">
           {/* Background glow effects */}
-          <div className="absolute -inset-10 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-cyan-500/10 blur-3xl rounded-full"></div>
+          <div className="absolute -inset-10 bg-gradient-to-r from-blue-500/10 via-cyan-500/5 to-blue-500/10 blur-3xl rounded-full"></div>
           
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Logo & About */}
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-400 bg-clip-text text-transparent">
                   Portfolio
                 </span>
                 <span className="text-primary font-bold text-3xl ml-1">.</span>
@@ -103,12 +103,11 @@ const Footer: React.FC = () => {
             
             {/* Quick Links */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Navigation</h3>
+              <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Navigation</h3>
               <ul className="space-y-3 grid grid-cols-2">
                 {[
                   { name: 'Accueil', id: 'hero' },
                   { name: 'À propos', id: 'about' },
-                  { name: 'CV', id: 'resume' },
                   { name: 'Projets', id: 'projects' },
                   { name: 'Témoignages', id: 'testimonials' },
                   { name: 'Expérience', id: 'experience' },
@@ -124,7 +123,7 @@ const Footer: React.FC = () => {
                         handleNavClick(link.id);
                       }}
                     >
-                      <span className="w-1 h-1 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1 h-1 bg-blue-400 rounded-full mr-2"></span>
                       {link.name}
                     </a>
                   </li>
@@ -137,7 +136,7 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact</h3>
               <ul className="space-y-4">
                 <li className="flex items-start text-muted-foreground">
-                  <Mail className="w-5 h-5 mr-3 text-cyan-400 flex-shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 mr-3 text-blue-400 flex-shrink-0 mt-1" />
                   <a 
                     href="mailto:contact@example.com"
                     className="hover:text-foreground transition-colors duration-300"
@@ -146,12 +145,12 @@ const Footer: React.FC = () => {
                   </a>
                 </li>
                 <li className="flex items-start text-muted-foreground">
-                  <MapPin className="w-5 h-5 mr-3 text-pink-400 flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 mr-3 text-cyan-400 flex-shrink-0 mt-1" />
                   <span>Lyon, France</span>
                 </li>
                 <motion.li 
-                  className="mt-6 glass-morphism rounded-lg p-4 bg-gradient-to-br from-purple-500/10 to-pink-500/5"
-                  whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(168,85,247,0.2)" }}
+                  className="mt-6 glass-morphism rounded-lg p-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/5"
+                  whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(59,130,246,0.2)" }}
                 >
                   <p className="text-sm">
                     Disponible pour de nouveaux projets freelance à partir de {new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
@@ -166,7 +165,7 @@ const Footer: React.FC = () => {
           <p className="text-muted-foreground text-sm flex items-center">
             &copy; {currentYear} Portfolio. Tous droits réservés.
             <motion.span 
-              className="ml-2 inline-flex items-center text-pink-400"
+              className="ml-2 inline-flex items-center text-blue-400"
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const NeonTransition: React.FC = () => {
   return (
-    <div className="relative h-24 w-full overflow-hidden bg-gradient-to-b from-purple-900 via-indigo-900 to-cyan-900">
+    <div className="relative h-24 w-full overflow-hidden bg-gradient-to-b from-background via-background to-background">
       {/* Middle horizontal neon line */}
       <motion.div
         className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[2px] bg-pink-500"

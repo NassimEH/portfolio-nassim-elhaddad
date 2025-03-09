@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
@@ -17,10 +18,7 @@ import { useSettingsStore } from '../store/useSettingsStore';
 import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
-import ResumeSection from '../components/ResumeSection';
 import Certifications from '../components/Certifications';
-import CreativeShowcase from '../components/CreativeShowcase';
-import StreetGraphicSection from '../components/StreetGraphicSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -33,8 +31,18 @@ const Index = () => {
   const sectionsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    setTheme(theme);
-    setLanguage(language);
+    // Apply theme/language on initial load
+    if (localStorage.getItem('theme')) {
+      setTheme(localStorage.getItem('theme') as 'dark' | 'light' || theme);
+    } else {
+      setTheme(theme);
+    }
+    
+    if (localStorage.getItem('language')) {
+      setLanguage(localStorage.getItem('language') as 'fr' | 'en' || language);
+    } else {
+      setLanguage(language);
+    }
     
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -88,7 +96,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <ParticleBackground particleCount={70} />
+      <ParticleBackground particleCount={35} />
       
       <ThemeLanguageSwitch />
       
@@ -101,14 +109,6 @@ const Index = () => {
         
         <div className="section-transition">
           <About />
-        </div>
-        
-        <div className="section-transition">
-          <CreativeShowcase />
-        </div>
-        
-        <div className="section-transition">
-          <StreetGraphicSection />
         </div>
         
         <div className="section-transition">
@@ -129,10 +129,6 @@ const Index = () => {
         
         <div className="section-transition">
           <Services />
-        </div>
-        
-        <div className="section-transition">
-          <ResumeSection />
         </div>
         
         <div className="section-transition">
