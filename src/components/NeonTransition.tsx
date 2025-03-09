@@ -4,38 +4,7 @@ import { motion } from 'framer-motion';
 
 const NeonTransition: React.FC = () => {
   return (
-    <div className="relative h-24 w-full overflow-hidden">
-      {/* Curved synthwave background shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg className="absolute w-full h-full" viewBox="0 0 1440 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M0,192L48,197.3C96,203,192,213,288,197.3C384,181,480,139,576,144C672,149,768,203,864,197.3C960,192,1056,128,1152,122.7C1248,117,1344,171,1392,197.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" 
-            fill="url(#paint0_linear)" 
-            fillOpacity="0.1"
-          />
-          <defs>
-            <linearGradient id="paint0_linear" x1="720" y1="160" x2="720" y2="320" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#A855F7" stopOpacity="0.5" />
-              <stop offset="1" stopColor="#A855F7" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-        
-        <svg className="absolute w-full h-full opacity-30" viewBox="0 0 1440 240" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: 'scaleX(-1)' }}>
-          <path 
-            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" 
-            fill="url(#paint1_linear)" 
-            fillOpacity="0.2"
-          />
-          <defs>
-            <linearGradient id="paint1_linear" x1="720" y1="128" x2="720" y2="320" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#EC4899" stopOpacity="0.5" />
-              <stop offset="1" stopColor="#EC4899" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      
+    <div className="relative h-24 w-full overflow-hidden bg-gradient-to-b from-background via-background to-background">
       {/* Middle horizontal neon line */}
       <motion.div
         className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[2px] bg-pink-500"
@@ -114,23 +83,6 @@ const NeonTransition: React.FC = () => {
           repeatType: "reverse"
         }}
       />
-      
-      {/* Additional synthwave elements */}
-      <div className="absolute bottom-0 left-0 w-full">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M0,64L60,58.7C120,53,240,43,360,42.7C480,43,600,53,720,58.7C840,64,960,64,1080,58.7C1200,53,1320,43,1380,37.3L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" 
-            fill="url(#paint2_linear)" 
-            fillOpacity="0.15"
-          />
-          <defs>
-            <linearGradient id="paint2_linear" x1="720" y1="76" x2="720" y2="120" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#22D3EE" stopOpacity="0.7" />
-              <stop offset="1" stopColor="#22D3EE" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
     </div>
   );
 };

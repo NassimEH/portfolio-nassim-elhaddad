@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <span className="bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-400 bg-clip-text text-transparent">
-                  NE
+                  Portfolio
                 </span>
                 <span className="text-primary font-bold text-3xl ml-1">.</span>
               </motion.a>
@@ -163,7 +163,7 @@ const Footer: React.FC = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10">
           <p className="text-muted-foreground text-sm flex items-center">
-            &copy; {currentYear} NE. Tous droits réservés.
+            &copy; {currentYear} Portfolio. Tous droits réservés.
             <motion.span 
               className="ml-2 inline-flex items-center text-blue-400"
               animate={{ scale: [1, 1.2, 1] }}

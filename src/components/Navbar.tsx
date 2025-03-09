@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
             handleNavClick('hero');
           }}
         >
-          NASSIM<span className="text-cyan-400 font-bold">.portfolio</span>
+          nassim<span className="text-cyan-400 font-bold">.portfolio</span>
         </a>
         
         {/* Desktop Navigation */}
