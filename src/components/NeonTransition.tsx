@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const NeonTransition: React.FC = () => {
   return (
-    <div className="relative w-full h-32 md:h-40 bg-black overflow-hidden">
+    <div className="relative w-full h-32 md:h-40 overflow-hidden">
       <div className="absolute w-full h-px top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-80"></div>
       
       <motion.div 

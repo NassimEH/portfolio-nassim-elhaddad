@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Award, Bookmark, BookOpen, Briefcase, Code, Database, Server, FileText, Globe } from 'lucide-react';
+import { Award, Globe, Code, Server, BookOpen, Database, Bookmark, Briefcase, FileText } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 
 interface Certification {
@@ -123,15 +123,20 @@ const filterCategories = [
 
 const Certifications: React.FC = () => {
   const [currentFilter, setCurrentFilter] = useState<string>('all');
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
   const { t } = useTranslation();
   
   const handleFilterChange = (filter: string) => {
     setCurrentFilter(filter);
   };
 
+  const toggleCategory = (category: string) => {
+    setOpenCategory(openCategory === category ? null : category);
+  };
+
   const filteredCertifications = currentFilter === 'all'
     ? certifications
-    : certifications.filter(cert => cert.category.toLowerCase() === currentFilter);
+    : certifications.filter(cert => cert.category === currentFilter);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -157,14 +162,14 @@ const Certifications: React.FC = () => {
   return (
     <section id="certifications" className="py-20 relative overflow-hidden">
       {/* Background with animated elements */}
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         
-        {/* Animated particles */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {/* Moving particles */}
+        {Array.from({ length: 12 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-purple-500/30"
+            className="absolute w-1 h-1 rounded-full bg-purple-500/20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -182,10 +187,10 @@ const Certifications: React.FC = () => {
           />
         ))}
         
-        {/* Moving light beams */}
-        {Array.from({ length: 3 }).map((_, i) => (
+        {/* Decorative neon lines */}
+        {Array.from({ length: 4 }).map((_, i) => (
           <motion.div
-            key={i}
+            key={`line-${i}`}
             className="absolute h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"
             style={{
               width: Math.random() * 300 + 100,
@@ -228,7 +233,7 @@ const Certifications: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Horizontal Filters */}
+        {/* Horizontal Compact Filters */}
         <motion.div 
           className="mb-8 flex flex-wrap justify-center gap-2"
           initial={{ opacity: 0, y: 20 }}
@@ -241,7 +246,7 @@ const Certifications: React.FC = () => {
               onClick={() => handleFilterChange(category.value)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
                 currentFilter === category.value 
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md' 
                   : 'bg-white/5 text-muted-foreground hover:bg-white/10'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -261,94 +266,83 @@ const Certifications: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {filteredCertifications.length > 0 ? (
-            filteredCertifications.map(cert => (
-              <motion.div 
-                key={cert.id}
-                className="relative group"
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
-                  
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
-                      <Award className="h-5 w-5 text-pink-400" />
-                    </div>
+          <AnimatePresence mode="sync">
+            {filteredCertifications.length > 0 ? (
+              filteredCertifications.map(cert => (
+                <motion.div 
+                  key={cert.id}
+                  className="relative group"
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
+                  layout
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-cyan-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/30 hover:bg-black/40 transition-all">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
                     
-                    <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
-                    
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {cert.tags.slice(0, 3).map((tag, idx) => (
-                        <Badge 
-                          key={idx}
-                          variant="outline" 
-                          className="bg-white/5 text-xs border-purple-500/20"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                      {cert.tags.length > 3 && (
-                        <Badge 
-                          variant="outline" 
-                          className="bg-white/5 text-xs border-cyan-500/20"
-                        >
-                          +{cert.tags.length - 3}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="flex justify-between items-center text-xs">
-                      <div className="text-cyan-400 font-mono">{cert.date}</div>
-                      <div className="text-muted-foreground">{cert.organization}</div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold text-white">{cert.name}</h3>
+                        <Award className="h-5 w-5 text-pink-400" />
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
+                      
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {cert.tags.slice(0, 3).map((tag, idx) => (
+                          <Badge 
+                            key={idx}
+                            variant="outline" 
+                            className="bg-white/5 text-xs border-purple-500/20"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                        {cert.tags.length > 3 && (
+                          <Badge 
+                            variant="outline" 
+                            className="bg-white/5 text-xs border-cyan-500/20"
+                          >
+                            +{cert.tags.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+                      
+                      <div className="flex justify-between items-center text-xs">
+                        <div className="text-cyan-400 font-mono">{cert.date}</div>
+                        <div className="text-muted-foreground">{cert.organization}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))
-          ) : (
-            <motion.div 
-              className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
-              <button
-                onClick={() => setCurrentFilter('all')}
-                className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                </motion.div>
+              ))
+            ) : (
+              <motion.div 
+                className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
-                Afficher toutes les certifications
-              </button>
-            </motion.div>
-          )}
+                <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
+                <button
+                  onClick={() => setCurrentFilter('all')}
+                  className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                >
+                  Afficher toutes les certifications
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
         
-        {/* LinkedIn CTA - more minimal with neon effect */}
+        {/* Neon effect decoration at the bottom */}
         <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-16 h-px w-full"
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
         >
-          <a 
-            href="https://linkedin.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-purple-500/30 rounded-lg hover:border-purple-500/60 transition-all group relative overflow-hidden"
-          >
-            <span className="relative z-10 font-medium text-white">Voir mon profil LinkedIn</span>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 transition-opacity duration-300"></div>
-            <div className="absolute inset-0 w-0 group-hover:w-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 transition-all duration-500 ease-out"></div>
-            <div className="absolute -inset-px opacity-0 group-hover:opacity-100 overflow-hidden">
-              <div className="absolute inset-0 rounded-lg"></div>
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-70 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-70 transform translate-x-[100%] group-hover:translate-x-[-100%] transition-transform duration-1000"></div>
-            </div>
-          </a>
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
         </motion.div>
       </div>
     </section>

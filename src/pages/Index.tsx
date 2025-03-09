@@ -71,6 +71,26 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Fix for color bug - ensure theme is properly initialized and maintained
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    
+    // Ensure background color is properly set
+    if (theme === 'dark') {
+      htmlElement.classList.add('dark');
+      // Explicitly set the background color to prevent unwanted shifts
+      document.body.style.backgroundColor = 'rgb(10, 10, 10)';
+    } else {
+      htmlElement.classList.remove('dark');
+      document.body.style.backgroundColor = 'rgb(255, 255, 255)';
+    }
+    
+    return () => {
+      // Cleanup function to remove added styles
+      document.body.style.backgroundColor = '';
+    };
+  }, [theme]);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-screen h-screen bg-background">
@@ -81,7 +101,7 @@ const Index = () => {
 
   return (
     <motion.div 
-      className="min-h-screen relative"
+      className="min-h-screen relative bg-background"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
