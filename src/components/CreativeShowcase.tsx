@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FileText, Download, Play, Pause, Sparkles, Zap, Lightbulb } from 'lucide-react';
+import { Sparkles, Zap, Lightbulb } from 'lucide-react';
 
 const CreativeShowcase: React.FC = () => {
   const { t } = useTranslation();
@@ -59,11 +59,11 @@ const CreativeShowcase: React.FC = () => {
   }, [isPlaying]);
   
   return (
-    <section id="creative-showcase" className="relative py-24 overflow-hidden" ref={containerRef}>
+    <section id="creative-showcase" className="relative py-16 overflow-hidden" ref={containerRef}>
       {/* Enhanced synthwave background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-950/40 to-background"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1572053675669-0731a6b4b669?q=80&w=1000')] bg-fixed bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1637419450536-378d5457abb8?q=80&w=1968')] bg-fixed bg-cover bg-center opacity-10"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
         
         {/* Enhanced synthwave sun */}
@@ -98,196 +98,167 @@ const CreativeShowcase: React.FC = () => {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <motion.h2 
-            className="text-5xl md:text-6xl font-bold mb-6 tracking-tight"
+            className="text-4xl md:text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{
-              WebkitTextStroke: '2px rgba(255,255,255,0.1)',
-              textShadow: '0 0 20px rgba(236,72,153,0.5), 0 0 40px rgba(124,58,237,0.3)'
-            }}
           >
-            Créations & Réalisations
+            Expériences Immersives
           </motion.h2>
           
           <motion.p 
-            className="text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Découvrez mes projets créatifs et explorez mon univers digital à travers ces réalisations
+            Une fusion de design, code et créativité digitale
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Video Showcase */}
+        <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+          {/* Main video showcase */}
           <motion.div 
-            className="relative"
+            className="relative w-full lg:w-2/3"
             style={{ opacity, scale, rotateY }}
             whileHover={{ scale: 1.02 }}
           >
-            <div className="relative rounded-xl overflow-hidden border-4 border-white/10 shadow-[0_0_30px_rgba(236,72,153,0.4)]">
+            <div className="relative rounded-xl overflow-hidden border border-pink-500/30 shadow-[0_0_30px_rgba(236,72,153,0.2)]">
               <video 
                 ref={videoRef}
                 className="w-full aspect-video object-cover"
                 loop
                 muted
                 playsInline
+                onClick={togglePlayPause}
               >
-                <source src="https://cdn.pixabay.com/vimeo/414848094/26985-76833.mp4?width=1280&hash=b1f34f4a3e662d8fa9a6ef9b3bfdd1c5143380af" type="video/mp4" />
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-city-in-neon-colors-34676-large.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end justify-between p-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Processus Créatif</h3>
-                  <p className="text-sm text-white/80">Aperçu de mon workflow et de mes inspirations en développement web</p>
-                </div>
-                
-                <motion.button
-                  className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center"
-                  onClick={togglePlayPause}
-                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.2)' }}
-                  whileTap={{ scale: 0.95 }}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              {/* Play/Pause button and effect */}
+              <motion.div 
+                className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                whileHover={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                onClick={togglePlayPause}
+              >
+                <motion.div
+                  className="w-20 h-20 rounded-full flex items-center justify-center bg-black/20 backdrop-blur-lg border border-white/20"
+                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.5)' }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: isPlaying ? 0 : 1 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {isPlaying ? (
-                    <Pause className="h-6 w-6 text-white" />
-                  ) : (
-                    <Play className="h-6 w-6 text-white ml-1" />
-                  )}
-                </motion.button>
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+              
+              {/* Video title */}
+              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <h3 className="text-xl md:text-2xl font-bold text-white">Vision Synthwave</h3>
+                <p className="text-white/80 text-sm">Explorez l'esthétique rétrofuturiste et l'ambiance nocturne</p>
               </div>
             </div>
             
-            {/* Enhanced decorative elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/40 to-transparent blur-2xl"></div>
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-gradient-to-tr from-pink-500/40 to-transparent blur-2xl"></div>
+            {/* Animated pulse rings */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-yellow-500/20 blur-xl rounded-xl"></div>
             
-            {/* Pulsing indicator */}
-            <motion.div 
-              className="absolute top-4 right-4 w-3 h-3 rounded-full bg-red-500"
-              animate={{ 
-                opacity: [1, 0.3, 1],
-                scale: [1, 1.2, 1]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop"
-              }}
-            ></motion.div>
+            {/* Hover information */}
+            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white/80 border border-white/10">
+              Cliquez pour {isPlaying ? 'pauser' : 'lancer'}
+            </div>
           </motion.div>
           
-          {/* Resume download with enhanced synthwave style */}
-          <motion.div
-            className="relative z-10"
+          {/* Side feature panels */}
+          <motion.div 
+            className="w-full lg:w-1/3 space-y-4"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7, staggerChildren: 0.1 }}
           >
-            <div className="neo-blur p-8 rounded-2xl relative overflow-hidden border border-pink-500/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-yellow-500/10"></div>
-              
-              {/* Enhanced synthwave decorative elements */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-gradient-to-bl from-purple-500/30 to-transparent blur-3xl"></div>
-              <div className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-gradient-to-tr from-pink-500/30 to-transparent blur-3xl"></div>
-              
-              <div className="absolute right-8 top-0 h-full w-1 bg-gradient-to-b from-transparent via-pink-500/40 to-transparent"></div>
-              <div className="absolute left-0 bottom-8 h-1 w-full bg-gradient-to-r from-transparent via-purple-500/40 to-transparent"></div>
-              
-              <div className="relative">
-                <h3 className="text-3xl font-bold mb-6">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-br from-cyan-400 via-pink-500 to-purple-400">
-                    Portfolio Digital
-                  </span>
-                </h3>
-                
-                <div className="space-y-5 mb-8">
-                  <div className="flex items-start">
-                    <Sparkles className="h-5 w-5 text-pink-400 mt-1 mr-3" />
-                    <p className="text-muted-foreground">
-                      Explorez mon portfolio complet présentant l'étendue de mes compétences et de mes réalisations en développement web et design
-                    </p>
+            {[
+              { 
+                icon: <Sparkles className="h-5 w-5 text-pink-400" />, 
+                title: "Design Immersif", 
+                desc: "Création d'interfaces interactives qui captent l'attention et stimulent l'engagement" 
+              },
+              { 
+                icon: <Zap className="h-5 w-5 text-cyan-400" />, 
+                title: "Animations Fluides", 
+                desc: "Transitions et effets visuels dynamiques inspirés de l'esthétique synthwave" 
+              },
+              { 
+                icon: <Lightbulb className="h-5 w-5 text-yellow-400" />, 
+                title: "Concept Rétrofuturiste", 
+                desc: "Fusion des éléments rétro des années 80 avec une vision moderne et futuriste" 
+              }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                className="glass-morphism p-5 rounded-xl border border-white/10 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.03, borderColor: 'rgba(255,255,255,0.2)' }}
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-cyan-500/5 blur-xl rounded-xl"></div>
+                <div className="relative flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                    {item.icon}
                   </div>
-                  
-                  <div className="flex items-start">
-                    <Zap className="h-5 w-5 text-cyan-400 mt-1 mr-3" />
-                    <p className="text-muted-foreground">
-                      Découvrez mon parcours, mes méthodes de travail et ma vision du développement web moderne
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Lightbulb className="h-5 w-5 text-yellow-400 mt-1 mr-3" />
-                    <p className="text-muted-foreground">
-                      Apprenez comment je peux contribuer à vos projets en apportant des solutions créatives et performantes
-                    </p>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
                   </div>
                 </div>
-                
-                <motion.div 
-                  className="flex flex-col sm:flex-row gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <motion.a
-                    href="/resume.pdf"
-                    download="cv-2023.pdf"
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white flex items-center justify-center hover:brightness-110 transition-all"
-                    whileHover={{ 
-                      scale: 1.03, 
-                      boxShadow: "0 10px 25px -5px rgba(236,72,153,0.5)" 
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Download className="w-5 h-5 mr-2" />
-                    Télécharger mon CV
-                  </motion.a>
-                  
-                  <motion.a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-lg glass-morphism border border-white/10 hover:bg-white/10 flex items-center justify-center transition-all"
-                    whileHover={{ 
-                      scale: 1.03, 
-                      boxShadow: "0 10px 25px -5px rgba(168,85,247,0.3)" 
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <FileText className="w-5 h-5 mr-2 text-cyan-500" />
-                    Consulter en ligne
-                  </motion.a>
-                </motion.div>
-                
-                {/* Enhanced synthwave style decoration */}
-                <div className="absolute right-0 bottom-0 transform rotate-6">
-                  <div className="text-6xl font-bold opacity-10 text-pink-500" 
-                    style={{ 
-                      fontFamily: "'Permanent Marker', cursive",
-                      textShadow: "0 0 10px rgba(236,72,153,0.7)"
-                    }}
-                  >
-                    CV
-                  </div>
+              </motion.div>
+            ))}
+            
+            {/* Moving decorative element */}
+            <motion.div 
+              className="hidden lg:block h-24 relative overflow-hidden glass-morphism rounded-xl border border-white/10"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10"></div>
+              
+              <motion.div
+                className="absolute inset-0 flex items-center"
+                animate={{ 
+                  x: ["-100%", "100%"]
+                }}
+                transition={{ 
+                  duration: 8, 
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "linear" 
+                }}
+              >
+                <div className="whitespace-nowrap text-xl tracking-widest opacity-20 font-mono">
+                  CREATIVITY • INNOVATION • DESIGN • CODE • EXPERIENCE • DIGITAL • ART • 
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

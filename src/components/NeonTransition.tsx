@@ -4,70 +4,85 @@ import { motion } from 'framer-motion';
 
 const NeonTransition: React.FC = () => {
   return (
-    <div className="relative h-32 overflow-hidden">
-      {/* Background gradient transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-background"></div>
-      
-      {/* Horizontal neon lines */}
-      <motion.div 
-        className="absolute w-full h-0.5 top-1/2 left-0 transform -translate-y-6"
-        style={{ 
-          background: 'linear-gradient(90deg, rgba(34, 211, 238, 0), rgba(34, 211, 238, 1) 20%, rgba(34, 211, 238, 1) 80%, rgba(34, 211, 238, 0))',
-          boxShadow: '0 0 15px rgba(34, 211, 238, 0.7), 0 0 30px rgba(34, 211, 238, 0.5), 0 0 45px rgba(34, 211, 238, 0.3)'
+    <div className="relative h-24 w-full overflow-hidden bg-gradient-to-b from-purple-900 via-indigo-900 to-cyan-900">
+      {/* Middle horizontal neon line */}
+      <motion.div
+        className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[2px] bg-pink-500"
+        initial={{ scaleX: 0, opacity: 0, filter: 'blur(4px)' }}
+        whileInView={{ 
+          scaleX: 1, 
+          opacity: 1,
+          filter: 'blur(2px)',
+          boxShadow: [
+            '0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.3)', 
+            '0 0 10px rgba(236, 72, 153, 0.7), 0 0 20px rgba(236, 72, 153, 0.5)', 
+            '0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.3)'
+          ]
         }}
-        animate={{
-          opacity: [0.3, 1, 0.3],
-          scaleX: [0.7, 1, 0.7]
+        transition={{ 
+          duration: 1.5, 
+          ease: "easeInOut",
+          boxShadow: {
+            repeat: Infinity,
+            duration: 2,
+            repeatType: "reverse"
+          }
         }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "reverse"
-        }}
+        viewport={{ once: true }}
       />
       
-      <motion.div 
-        className="absolute w-full h-0.5 top-1/2 left-0 transform translate-y-6"
-        style={{ 
-          background: 'linear-gradient(90deg, rgba(236, 72, 153, 0), rgba(236, 72, 153, 1) 20%, rgba(236, 72, 153, 1) 80%, rgba(236, 72, 153, 0))',
-          boxShadow: '0 0 15px rgba(236, 72, 153, 0.7), 0 0 30px rgba(236, 72, 153, 0.5), 0 0 45px rgba(236, 72, 153, 0.3)'
-        }}
-        animate={{
-          opacity: [0.3, 1, 0.3],
-          scaleX: [0.7, 1, 0.7]
-        }}
-        transition={{
-          duration: 5,
-          delay: 0.5,
-          repeat: Infinity,
-          repeatType: "reverse"
-        }}
-      />
+      {/* Horizontal grid lines */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div 
+          key={i} 
+          className="absolute w-full h-[1px] bg-pink-500/20"
+          style={{ top: `${(i + 1) * 8}%` }}
+          initial={{ scaleX: 0, x: i % 2 === 0 ? '-100%' : '100%' }}
+          whileInView={{ scaleX: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: i * 0.05 }}
+          viewport={{ once: true }}
+        />
+      ))}
       
-      {/* Central cross beam */}
-      <motion.div 
-        className="absolute h-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        style={{ 
-          width: '200px',
-          background: 'linear-gradient(90deg, rgba(168, 85, 247, 0), rgba(168, 85, 247, 1) 50%, rgba(168, 85, 247, 0))',
-          boxShadow: '0 0 15px rgba(168, 85, 247, 0.7), 0 0 30px rgba(168, 85, 247, 0.5), 0 0 45px rgba(168, 85, 247, 0.3)'
+      {/* Vertical grid lines */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div 
+          key={i} 
+          className="absolute h-full w-[1px] bg-cyan-500/20"
+          style={{ left: `${(i + 1) * 5}%` }}
+          initial={{ scaleY: 0, y: i % 2 === 0 ? '-100%' : '100%' }}
+          whileInView={{ scaleY: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: i * 0.02 }}
+          viewport={{ once: true }}
+        />
+      ))}
+      
+      {/* Animated glow circles */}
+      <motion.div
+        className="absolute left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-purple-600/20 blur-3xl"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.7, 0.3]
         }}
-        animate={{
-          opacity: [0.7, 1, 0.7],
-          width: ['150px', '300px', '150px']
-        }}
-        transition={{
+        transition={{ 
           duration: 4,
           repeat: Infinity,
           repeatType: "reverse"
         }}
       />
       
-      {/* Synthwave sun/grid reference */}
-      <div className="absolute bottom-0 left-0 w-full h-5">
-        <div className="w-full h-full bg-gradient-to-t from-pink-600/20 via-orange-500/10 to-transparent"></div>
-        <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
-      </div>
+      <motion.div
+        className="absolute right-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-cyan-600/20 blur-3xl"
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.3, 0.7, 0.3]
+        }}
+        transition={{ 
+          duration: 4,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      />
     </div>
   );
 };

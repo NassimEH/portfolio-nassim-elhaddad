@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '../utils/projectData';
 import { useTranslation } from 'react-i18next';
-import { Code, Music, Dumbbell, Network, Share2, LightbulbIcon, PenTool, Cpu } from 'lucide-react';
+import { Code, Music, Dumbbell, Network, Share2, LightbulbIcon, PenTool, Cpu, FileText, Download, Eye, Check } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 // Define interest categories
 interface Interest {
@@ -17,8 +18,13 @@ interface Interest {
 
 const About: React.FC = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const titleRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  
+  // State for CV section
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
   
   // State to track active interest
   const [activeInterest, setActiveInterest] = useState<number>(0);
@@ -90,6 +96,43 @@ const About: React.FC = () => {
       bgGradient: "from-red-500/20 to-red-500/5"
     },
   ];
+
+  const handleDownload = () => {
+    setIsDownloading(true);
+    
+    // Simulate download delay
+    setTimeout(() => {
+      setIsDownloading(false);
+      setHasDownloaded(true);
+      
+      // Reset the downloaded state after 3 seconds
+      setTimeout(() => {
+        setHasDownloaded(false);
+      }, 3000);
+      
+      toast({
+        title: "CV téléchargé",
+        description: "Merci de votre intérêt pour mon parcours !",
+      });
+      
+      // Create a link element and trigger download
+      const link = document.createElement('a');
+      link.href = '/resume.pdf'; // This would be your actual resume PDF
+      link.download = 'cv-2023.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 1500);
+  };
+  
+  const viewCV = () => {
+    window.open('/resume.pdf', '_blank');
+    
+    toast({
+      title: "Aperçu du CV",
+      description: "Ouverture du CV dans un nouvel onglet",
+    });
+  };
 
   // Get color class based on active interest
   const getColorClass = () => {
@@ -205,68 +248,189 @@ const About: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="space-y-8"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-            {interests.map((item, index) => (
+          {/* Left Column - Interest categories */}
+          <div className="lg:col-span-2 space-y-8">
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+              {interests.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  className={`flex flex-col items-center cursor-pointer transition-all duration-300 ${activeInterest === index ? 'scale-110' : 'opacity-70 hover:opacity-100'}`}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  onClick={() => setActiveInterest(index)}
+                >
+                  <div className={`w-14 h-14 rounded-2xl glass-morphism flex items-center justify-center mb-2 ${activeInterest === index ? 'glow shadow-lg border border-white/30' : 'border border-white/10'}`}>
+                    {item.icon}
+                  </div>
+                  <span className="text-xs font-medium text-center">{item.title}</span>
+                </motion.div>
+              ))}
+            </div>
+            
+            <AnimatePresence mode="wait">
               <motion.div 
-                key={index}
-                className={`flex flex-col items-center cursor-pointer transition-all duration-300 ${activeInterest === index ? 'scale-110' : 'opacity-70 hover:opacity-100'}`}
-                whileHover={{ y: -5, scale: 1.05 }}
-                onClick={() => setActiveInterest(index)}
+                key={activeInterest}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className={`glass-morphism p-8 rounded-2xl space-y-6 relative overflow-hidden bg-gradient-to-br ${getBgGradient()}`}
               >
-                <div className={`w-14 h-14 rounded-2xl glass-morphism flex items-center justify-center mb-2 ${activeInterest === index ? 'glow shadow-lg border border-white/30' : 'border border-white/10'}`}>
-                  {item.icon}
+                {/* Background glow effect */}
+                <div className={`absolute -inset-1 ${getBgGradient()} blur-3xl opacity-50 rounded-3xl transition-all duration-500`}></div>
+                
+                <div className="relative">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 ${getColorClass()}`}>
+                      {interests[activeInterest].icon}
+                    </div>
+                    <h3 className="text-2xl font-semibold">{interests[activeInterest].title}</h3>
+                  </div>
+                  
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    {interests[activeInterest].description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    {interests[activeInterest].technologies.map((tech) => (
+                      <motion.span
+                        key={tech}
+                        className={`inline-block px-4 py-2 text-sm font-medium rounded-full glass-morphism border ${getBorderColorClass()} ${getShadowClass()}`}
+                        whileHover={{ 
+                          scale: 1.05, 
+                          transition: { duration: 0.2 }
+                        }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <span className="text-xs font-medium text-center">{item.title}</span>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
           
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeInterest}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className={`glass-morphism p-8 rounded-2xl space-y-6 relative overflow-hidden bg-gradient-to-br ${getBgGradient()}`}
-            >
-              {/* Background glow effect */}
-              <div className={`absolute -inset-1 ${getBgGradient()} blur-3xl opacity-50 rounded-3xl transition-all duration-500`}></div>
+          {/* Right Column - CV */}
+          <motion.div
+            className="lg:col-span-1"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="glass-morphism p-6 rounded-2xl relative overflow-hidden border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.15)] h-full">
+              {/* Background gradient effect */}
+              <div className="absolute -inset-10 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-3xl rounded-full"></div>
               
               <div className="relative">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 ${getColorClass()}`}>
-                    {interests[activeInterest].icon}
-                  </div>
-                  <h3 className="text-2xl font-semibold">{interests[activeInterest].title}</h3>
+                <motion.h3
+                  className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Mon CV
+                </motion.h3>
+                
+                <motion.p
+                  className="text-muted-foreground mb-6"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  Téléchargez mon CV pour découvrir mon parcours professionnel complet
+                </motion.p>
+                
+                <div className="relative">
+                  <motion.div
+                    className="w-full aspect-[3/4] mb-6 glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl flex items-center justify-center group"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    {/* Mock CV icon */}
+                    <FileText className="w-16 h-16 text-cyan-400/70 group-hover:scale-110 transition-transform duration-300" />
+                    
+                    {/* Effet de néon en hover */}
+                    <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-cyan-500/30 transition-colors duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 group-hover:from-cyan-500/10 group-hover:to-purple-500/10 transition-colors duration-300"></div>
+                  </motion.div>
+                  
+                  {/* Floating elements */}
+                  <motion.div 
+                    className="absolute -top-3 -left-3 w-8 h-8 glass-morphism rounded-lg flex items-center justify-center"
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    whileHover={{ scale: 1.2, rotate: 45 }}
+                  >
+                    <FileText className="w-4 h-4 text-cyan-400" />
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="absolute -bottom-3 -right-3 w-8 h-8 glass-morphism rounded-lg flex items-center justify-center"
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    whileHover={{ scale: 1.2, rotate: -45 }}
+                  >
+                    <Download className="w-4 h-4 text-pink-400" />
+                  </motion.div>
                 </div>
                 
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  {interests[activeInterest].description}
-                </p>
-                
-                <div className="flex flex-wrap gap-3">
-                  {interests[activeInterest].technologies.map((tech) => (
-                    <motion.span
-                      key={tech}
-                      className={`inline-block px-4 py-2 text-sm font-medium rounded-full glass-morphism border ${getBorderColorClass()} ${getShadowClass()}`}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        transition: { duration: 0.2 }
-                      }}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
+                <div className="space-y-3">
+                  <motion.button
+                    className="w-full flex items-center gap-2 px-4 py-3 rounded-lg glass-morphism hover:bg-cyan-500/10 transition-all duration-300 group"
+                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(34,211,238,0.5)" }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    onClick={viewCV}
+                  >
+                    <Eye className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+                    <span>Consulter le CV</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    className={`w-full flex items-center gap-2 px-4 py-3 rounded-lg ${hasDownloaded ? 'bg-green-500/20 text-green-300' : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'} transition-all duration-300`}
+                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(34,211,238,0.5)" }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                  >
+                    {isDownloading ? (
+                      <>
+                        <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Téléchargement...</span>
+                      </>
+                    ) : hasDownloaded ? (
+                      <>
+                        <Check className="w-5 h-5" />
+                        <span>Téléchargé</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-5 h-5" />
+                        <span>Télécharger le CV</span>
+                      </>
+                    )}
+                  </motion.button>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </motion.div>
           
           {/* Easter egg */}
           <motion.div 
