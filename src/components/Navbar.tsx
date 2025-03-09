@@ -1,10 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { scrollToElement } from '../utils/transitions';
+import { useTranslation } from 'react-i18next';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation();
+  const { language } = useSettingsStore();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +26,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-30 px-6 md:px-12 transition-all duration-500 ease-cinematic ${
+      className={`fixed top-0 left-0 right-0 z-30 px-6 md:px-12 transition-all duration-700 ease-cinematic ${
         isScrolled ? 'py-4 glass-morphism backdrop-blur-lg' : 'py-6 bg-transparent'
       }`}
     >
@@ -50,7 +54,18 @@ const Navbar: React.FC = () => {
                 handleNavClick(item);
               }}
             >
-              {item}
+              {language === 'fr' ? 
+                // French translations
+                item === 'about' ? 'À propos' :
+                item === 'resume' ? 'CV' :
+                item === 'certifications' ? 'Certifications' :
+                item === 'projects' ? 'Projets' :
+                item === 'experience' ? 'Expérience' :
+                item === 'contact' ? 'Contact' : item
+                : 
+                // English translations
+                item
+              }
             </a>
           ))}
         </nav>

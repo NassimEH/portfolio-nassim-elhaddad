@@ -12,7 +12,9 @@
     "description": "I create modern, performant, and accessible web applications that solve real-world problems.",
     "cta_projects": "View my projects",
     "cta_contact": "Contact me",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "welcome": "Welcome to my portfolio!",
+    "toast_message": "Discover my projects and web development skills."
   },
   "about": {
     "title": "ABOUT ME",
@@ -22,6 +24,21 @@
       "With several years of experience in web development, I've worked on various projects ranging from showcase websites to complex applications with sophisticated architectures.",
       "My philosophy is centered on creating solutions that combine aesthetics and functionality, using the most suitable technologies for each project."
     ]
+  },
+  "certifications": {
+    "title": "MY CERTIFICATIONS",
+    "subtitle": "Learning path and skill validations",
+    "description": "Discover my technical and professional certifications obtained from recognized organizations.",
+    "categories": {
+      "all": "All",
+      "development": "Development",
+      "design": "Design",
+      "devops": "DevOps",
+      "management": "Management"
+    },
+    "issuer": "Issued by",
+    "date": "Date",
+    "view_credential": "View credential"
   },
   "projects": {
     "title": "MY PROJECTS",
@@ -72,6 +89,11 @@
     },
     "social": {
       "title": "Follow Me"
+    },
+    "placeholders": {
+      "name": "Your full name",
+      "email": "your.email@example.com",
+      "message": "Describe your project or ask me a question..."
     }
   },
   "footer": {
@@ -80,5 +102,11 @@
     "contact": "Contact",
     "rights": "All rights reserved.",
     "back_to_top": "Back to top"
+  },
+  "toast": {
+    "language_changed": "Language changed",
+    "theme_changed": "Theme changed",
+    "dark_theme": "Dark theme activated",
+    "light_theme": "Light theme activated"
   }
 }

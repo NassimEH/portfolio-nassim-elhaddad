@@ -18,6 +18,7 @@ import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
 import ResumeSection from '../components/ResumeSection';
+import Certifications from '../components/Certifications';
 
 const Index = () => {
   useRevealOnScroll();
@@ -81,13 +82,38 @@ const Index = () => {
       {/* Contenu principal */}
       <main>
         <Hero />
-        <About />
-        <ResumeSection />
-        <Projects />
-        <Testimonials />
-        <Experience />
-        <Services />
-        <Contact />
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <About />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <ResumeSection />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Certifications />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Projects />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Testimonials />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Experience />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Services />
+        </div>
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+          <Contact />
+        </div>
       </main>
       
       {/* Footer */}

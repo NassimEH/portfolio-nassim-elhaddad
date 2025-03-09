@@ -65,8 +65,8 @@ const ThemeLanguageSwitch: React.FC = () => {
         </motion.button>
       </div>
       
-      {/* Theme and language switches */}
-      <div className="fixed top-5 right-5 z-50 flex items-center space-x-3">
+      {/* Theme and language switches - Now vertically stacked */}
+      <div className="fixed top-20 right-5 z-50 flex flex-col items-center space-y-3">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -91,7 +91,7 @@ const ThemeLanguageSwitch: React.FC = () => {
             <Languages className="w-5 h-5" />
           </motion.button>
           
-          <div className="absolute right-0 mt-2 w-24 py-2 glass-morphism rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+          <div className="absolute right-12 top-1 w-24 py-2 glass-morphism rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
             <button 
               className={`w-full py-1 px-3 text-left hover:bg-white/10 transition-colors ${language === 'fr' ? 'text-primary' : ''}`}
               onClick={() => handleLanguageChange('fr')}
@@ -113,7 +113,7 @@ const ThemeLanguageSwitch: React.FC = () => {
         <div className="flex flex-col h-full p-5">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Menu
+              {language === 'fr' ? 'Menu' : 'Menu'}
             </h2>
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -125,20 +125,36 @@ const ThemeLanguageSwitch: React.FC = () => {
           </div>
           
           <nav className="space-y-4 flex-grow">
-            <a href="#hero" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Accueil</a>
-            <a href="#about" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>À propos</a>
-            <a href="#resume" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>CV</a>
-            <a href="#certifications" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Certifications</a>
-            <a href="#projects" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Projets</a>
-            <a href="#experience" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Expérience</a>
-            <a href="#services" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Services</a>
-            <a href="#contact" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>Contact</a>
+            <a href="#hero" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Accueil' : 'Home'}
+            </a>
+            <a href="#about" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'À propos' : 'About'}
+            </a>
+            <a href="#resume" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'CV' : 'Resume'}
+            </a>
+            <a href="#certifications" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Certifications' : 'Certifications'}
+            </a>
+            <a href="#projects" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Projets' : 'Projects'}
+            </a>
+            <a href="#experience" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Expérience' : 'Experience'}
+            </a>
+            <a href="#services" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Services' : 'Services'}
+            </a>
+            <a href="#contact" className="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors" onClick={toggleSidebar}>
+              {language === 'fr' ? 'Contact' : 'Contact'}
+            </a>
           </nav>
           
           <div className="mt-auto pt-4 border-t border-white/10">
             <div className="text-sm text-muted-foreground">
               <p>© 2023 Nassim Portfolio</p>
-              <p className="mt-1">Tous droits réservés</p>
+              <p className="mt-1">{language === 'fr' ? 'Tous droits réservés' : 'All rights reserved'}</p>
             </div>
             
             <div className="flex space-x-2 mt-3">

@@ -68,14 +68,24 @@ const ResumeSection: React.FC = () => {
           >
             Mon CV
           </motion.h2>
+          
+          <motion.p
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            Téléchargez mon CV pour découvrir mon parcours professionnel complet
+          </motion.p>
         </motion.div>
         
         <div className="glass-morphism p-6 md:p-8 rounded-2xl border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.15)] relative overflow-hidden">
           {/* Background gradient effect */}
           <div className="absolute -inset-10 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-3xl rounded-full"></div>
           
-          <div className="relative grid grid-cols-1 md:grid-cols-8 gap-8 items-center">
-            <div className="md:col-span-5">
+          <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8">
               <motion.p
                 className="text-lg text-muted-foreground mb-6"
                 initial={{ opacity: 0, x: -20 }}
@@ -83,8 +93,7 @@ const ResumeSection: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Téléchargez mon CV pour découvrir mon parcours professionnel et académique, 
-                mes compétences techniques et soft skills, ainsi que mes certifications.
+                Découvrez mon parcours professionnel, mes compétences techniques et mon expérience en téléchargeant mon CV complet.
               </motion.p>
               
               <div className="flex flex-wrap gap-4">
@@ -131,52 +140,22 @@ const ResumeSection: React.FC = () => {
                   )}
                 </motion.button>
               </div>
-              
-              {/* Easter egg */}
-              <div className="mt-6 text-xs text-muted-foreground italic opacity-50 cursor-help group">
-                <span className="group-hover:text-cyan-400 transition-colors duration-300">Conseil: Utilisez le raccourci Konami Code sur la page d'accueil</span>
-              </div>
             </div>
             
             <motion.div
-              className="md:col-span-3 relative"
+              className="md:col-span-4 relative"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl">
-                {/* Mock CV design */}
-                <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-                <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-white/10"></div>
-                <div className="absolute top-8 right-6 w-24 h-2 rounded-full bg-white/10"></div>
-                <div className="absolute top-12 right-6 w-16 h-2 rounded-full bg-white/10"></div>
-                <div className="absolute top-24 left-6 w-32 h-3 rounded-full bg-white/10"></div>
+              <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl flex items-center justify-center group">
+                {/* Mock CV icon */}
+                <FileText className="w-20 h-20 text-cyan-400/70 group-hover:scale-110 transition-transform duration-300" />
                 
-                <div className="absolute top-32 left-6 right-6 space-y-2">
-                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
-                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
-                  <div className="w-3/4 h-1.5 rounded-full bg-white/10"></div>
-                </div>
-                
-                <div className="absolute top-44 left-6 right-6 space-y-2">
-                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
-                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
-                  <div className="w-2/3 h-1.5 rounded-full bg-white/10"></div>
-                </div>
-                
-                <motion.div 
-                  className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-tl from-purple-500/20 to-transparent rounded-full" 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                ></motion.div>
-                
-                <motion.div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                >
-                  <FileText className="w-10 h-10 text-cyan-400 opacity-80" />
-                </motion.div>
+                {/* Effet de néon en hover */}
+                <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-cyan-500/30 transition-colors duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 group-hover:from-cyan-500/10 group-hover:to-purple-500/10 transition-colors duration-300"></div>
               </div>
               
               {/* Small floating elements */}

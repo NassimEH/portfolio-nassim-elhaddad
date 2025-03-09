@@ -12,7 +12,9 @@
     "description": "Je crée des applications web modernes, performantes et accessibles qui résolvent des problèmes concrets.",
     "cta_projects": "Voir mes projets",
     "cta_contact": "Me contacter",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "welcome": "Bienvenue sur mon portfolio !",
+    "toast_message": "Découvrez mes projets et compétences en développement web."
   },
   "about": {
     "title": "À PROPOS DE MOI",
@@ -22,6 +24,21 @@
       "Avec plusieurs années d'expérience dans le développement web, j'ai travaillé sur divers projets allant des sites vitrines aux applications complexes avec des architectures sophistiquées.",
       "Ma philosophie est centrée sur la création de solutions qui combinent esthétique et fonctionnalité, en utilisant les technologies les plus adaptées à chaque projet."
     ]
+  },
+  "certifications": {
+    "title": "MES CERTIFICATIONS",
+    "subtitle": "Parcours d'apprentissage et validations de compétences",
+    "description": "Découvrez mes certifications techniques et professionnelles obtenues auprès d'organisations reconnues.",
+    "categories": {
+      "all": "Toutes",
+      "development": "Développement",
+      "design": "Design",
+      "devops": "DevOps",
+      "management": "Management"
+    },
+    "issuer": "Délivré par",
+    "date": "Date",
+    "view_credential": "Voir le certificat"
   },
   "projects": {
     "title": "MES PROJETS",
@@ -72,6 +89,11 @@
     },
     "social": {
       "title": "Suivez-moi"
+    },
+    "placeholders": {
+      "name": "Votre nom complet",
+      "email": "votre.email@exemple.com",
+      "message": "Décrivez votre projet ou posez-moi une question..."
     }
   },
   "footer": {
@@ -80,5 +102,11 @@
     "contact": "Contact",
     "rights": "Tous droits réservés.",
     "back_to_top": "Retour en haut"
+  },
+  "toast": {
+    "language_changed": "Langue modifiée",
+    "theme_changed": "Thème modifié",
+    "dark_theme": "Thème sombre activé",
+    "light_theme": "Thème clair activé"
   }
 }

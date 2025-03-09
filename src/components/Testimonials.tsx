@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, MessageSquare, Calendar, Star, User, Building } from 'lucide-react';
 
 interface Testimonial {
   id: number;
@@ -11,6 +11,9 @@ interface Testimonial {
   company: string;
   avatar: string;
   text: string;
+  date: string;
+  project: string;
+  color: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -20,7 +23,10 @@ const testimonials: Testimonial[] = [
     position: "Directrice Marketing",
     company: "TechVision",
     avatar: "https://randomuser.me/api/portraits/women/32.jpg",
-    text: "Travailler avec ce développeur a été une expérience incroyable. Sa capacité à comprendre nos besoins et à livrer des solutions sur mesure a transformé notre présence en ligne. Je recommande ses services à quiconque cherche un développeur web de premier ordre."
+    text: "Travailler avec ce développeur a été une expérience incroyable. Sa capacité à comprendre nos besoins et à livrer des solutions sur mesure a transformé notre présence en ligne. Je recommande ses services à quiconque cherche un développeur web de premier ordre.",
+    date: "Juin 2023",
+    project: "Refonte site e-commerce",
+    color: "from-purple-400 to-pink-500"
   },
   {
     id: 2,
@@ -28,7 +34,10 @@ const testimonials: Testimonial[] = [
     position: "CEO",
     company: "StartupFlow",
     avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-    text: "Un talent exceptionnel. Ce développeur a créé pour nous une application web qui a dépassé toutes nos attentes. Son expertise technique et sa créativité ont fait toute la différence dans notre projet."
+    text: "Un talent exceptionnel. Ce développeur a créé pour nous une application web qui a dépassé toutes nos attentes. Son expertise technique et sa créativité ont fait toute la différence dans notre projet.",
+    date: "Mars 2023",
+    project: "Application de gestion",
+    color: "from-blue-500 to-cyan-400"
   },
   {
     id: 3,
@@ -36,7 +45,10 @@ const testimonials: Testimonial[] = [
     position: "Directrice Produit",
     company: "InnovateLab",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    text: "Nous avons eu la chance de travailler avec ce développeur sur plusieurs projets, et chaque fois, les résultats ont été spectaculaires. Sa compréhension des tendances actuelles et son souci du détail font de lui un partenaire de développement idéal."
+    text: "Nous avons eu la chance de travailler avec ce développeur sur plusieurs projets, et chaque fois, les résultats ont été spectaculaires. Sa compréhension des tendances actuelles et son souci du détail font de lui un partenaire de développement idéal.",
+    date: "Octobre 2022",
+    project: "Dashboard analytique",
+    color: "from-amber-400 to-orange-500"
   }
 ];
 
@@ -85,9 +97,9 @@ const Testimonials: React.FC = () => {
           >
             Découvrez ce que mes clients disent de ma prestation et de mon travail
           </motion.p>
-        </div>
+        </motion.div>
         
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           {/* Background effects */}
           <div className="absolute -inset-10 bg-gradient-to-r from-cyan-500/10 via-blue-500/5 to-purple-500/10 blur-3xl rounded-full opacity-50"></div>
           
@@ -104,28 +116,90 @@ const Testimonials: React.FC = () => {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="p-8 glass-morphism rounded-2xl border border-cyan-500/30 shadow-[0_0_25px_rgba(34,211,238,0.2)] relative"
                   >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-5 rounded-2xl`}></div>
                     <Quote className="absolute top-6 left-6 h-10 w-10 text-cyan-500/10" />
                     
-                    <div className="text-center mb-6">
-                      <p className="text-xl italic text-muted-foreground leading-relaxed mb-6">
-                        "{testimonial.text}"
-                      </p>
-                    </div>
-                    
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.3)] mb-4">
-                        <img 
-                          src={testimonial.avatar} 
-                          alt={testimonial.name} 
-                          className="w-full h-full object-cover"
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                      <div className="md:col-span-3">
+                        <div className="mb-6">
+                          <div className="flex items-center mb-4">
+                            <MessageSquare className="w-5 h-5 text-cyan-400 mr-2" />
+                            <span className="text-sm text-cyan-400 font-medium">Témoignage client</span>
+                          </div>
+                          
+                          <p className="text-xl italic text-muted-foreground leading-relaxed mb-6">
+                            "{testimonial.text}"
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-shrink-0">
+                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                              <img 
+                                src={testimonial.avatar} 
+                                alt={testimonial.name} 
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <h4 className="text-xl font-semibold flex items-center">
+                              <User className="w-4 h-4 mr-2 text-indigo-400" />
+                              {testimonial.name}
+                            </h4>
+                            <p className="text-muted-foreground flex items-center">
+                              <Building className="w-4 h-4 mr-2 text-pink-400" />
+                              {testimonial.position}, <span className="text-cyan-400 ml-1">{testimonial.company}</span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
                       
-                      <div className="text-center">
-                        <h4 className="text-xl font-semibold">{testimonial.name}</h4>
-                        <p className="text-muted-foreground">
-                          {testimonial.position}, <span className="text-cyan-400">{testimonial.company}</span>
-                        </p>
+                      <div className="md:col-span-2 glass-morphism rounded-xl p-5 border border-white/10">
+                        <div className="mb-4">
+                          <h5 className={`text-lg font-medium mb-2 bg-gradient-to-r ${testimonial.color} bg-clip-text text-transparent`}>
+                            À propos du projet
+                          </h5>
+                          <div className="flex justify-between mb-2">
+                            <div className="flex items-center">
+                              <Calendar className="w-4 h-4 mr-2 text-purple-400" />
+                              <span className="text-sm text-muted-foreground">{testimonial.date}</span>
+                            </div>
+                            <div className="flex">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <motion.div 
+                                  key={star}
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{ 
+                                    opacity: 1, 
+                                    scale: 1,
+                                    transition: { delay: 0.1 * star }
+                                  }}
+                                >
+                                  <div className={`w-4 h-4 ${testimonial.color} opacity-70`}>
+                                    <div className={`w-4 h-4 bg-gradient-to-r ${testimonial.color} rounded-full`}></div>
+                                  </div>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            <p>Projet: <span className="text-primary">{testimonial.project}</span></p>
+                          </div>
+                        </div>
+                        
+                        <div className={`w-full h-1 bg-gradient-to-r ${testimonial.color} rounded-full mb-4`}></div>
+                        
+                        <div className="flex justify-center mt-4">
+                          <motion.button
+                            className={`px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r ${testimonial.color} text-white`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            Voir le projet
+                          </motion.button>
+                        </div>
                       </div>
                     </div>
                     
@@ -162,8 +236,8 @@ const Testimonials: React.FC = () => {
               {testimonials.map((_, index) => (
                 <motion.button
                   key={index}
-                  className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                    index === current ? 'bg-cyan-400' : 'bg-white/20'
+                  className={`w-10 h-2 rounded-full transition-colors duration-300 ${
+                    index === current ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-white/20'
                   }`}
                   onClick={() => goToSlide(index)}
                   whileHover={{ scale: 1.2 }}
