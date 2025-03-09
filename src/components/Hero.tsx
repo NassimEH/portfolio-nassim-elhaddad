@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import ThreeScene from './ThreeScene';
@@ -308,7 +307,7 @@ const Hero: React.FC = () => {
           className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
           variants={itemVariants}
         >
-          {t('hero.title')}
+          NASSIM EL HADDAD
         </motion.h1>
         
         <motion.p 
