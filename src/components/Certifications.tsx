@@ -1,107 +1,119 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Award, Calendar, ExternalLink, Filter, Check, Tag, Briefcase, Layers } from 'lucide-react';
+import { ChevronDown, ChevronUp, Award, Certificate, BookOpen, Briefcase, Code, Database, Server, ArtText, Globe } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface Certification {
   id: number;
-  title: string;
-  issuer: string;
+  name: string;
+  organization: string;
   date: string;
-  logo: string;
-  category: string[];
-  company?: string;
-  domain: string[];
-  credentialUrl: string;
-  color: string;
+  description: string;
+  category: string;
 }
 
 const certifications: Certification[] = [
   {
     id: 1,
-    title: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services",
+    name: "React Nanodegree",
+    organization: "Udacity",
     date: "2023",
-    logo: "https://d1.awsstatic.com/training-and-certification/certification-badges/AWS-Certified-Solutions-Architect-Associate_badge.3419559c682629072f1eb968d59dea0741772c0f.png",
-    category: ["development", "devops"],
-    company: "Amazon",
-    domain: ["cloud", "infrastructure"],
-    credentialUrl: "#",
-    color: "from-blue-500 to-teal-400"
+    description: "A comprehensive program covering React, Redux, and React Native.",
+    category: "frontend"
   },
   {
     id: 2,
-    title: "React Developer Certification",
-    issuer: "Meta",
+    name: "Node.js Developer Certification",
+    organization: "Coursera",
     date: "2022",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png",
-    category: ["development"],
-    company: "Meta",
-    domain: ["frontend", "javascript"],
-    credentialUrl: "#",
-    color: "from-cyan-500 to-blue-500"
+    description: "An in-depth course on building scalable APIs with Node.js and Express.",
+    category: "backend"
   },
   {
     id: 3,
-    title: "Professional UI/UX Designer",
-    issuer: "Google",
+    name: "AWS Certified Developer",
+    organization: "Amazon Web Services",
     date: "2021",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png",
-    category: ["design"],
-    company: "Google",
-    domain: ["design", "frontend"],
-    credentialUrl: "#",
-    color: "from-amber-400 to-red-500"
+    description: "Certification demonstrating proficiency in developing and deploying applications on AWS.",
+    category: "devops"
   },
   {
     id: 4,
-    title: "Professional Scrum Master I",
-    issuer: "Scrum.org",
-    date: "2022",
-    logo: "https://www.scrum.org/themes/custom/scrumorg_v2/assets/images/logo-250.png",
-    category: ["management"],
-    company: "Scrum.org",
-    domain: ["agile", "management"],
-    credentialUrl: "#",
-    color: "from-indigo-500 to-purple-500"
+    name: "Google Cloud Professional Cloud Architect",
+    organization: "Google",
+    date: "2023",
+    description: "Certification demonstrating expertise in designing and managing cloud solutions on Google Cloud Platform.",
+    category: "devops"
   },
   {
     id: 5,
-    title: "Docker Certified Associate",
-    issuer: "Docker",
-    date: "2023",
-    logo: "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
-    category: ["devops"],
-    company: "Docker",
-    domain: ["infrastructure", "containerization"],
-    credentialUrl: "#",
-    color: "from-blue-400 to-blue-600"
+    name: "Certified Scrum Master",
+    organization: "Scrum Alliance",
+    date: "2022",
+    description: "Certification demonstrating knowledge of Scrum principles and practices.",
+    category: "project_management"
   },
   {
     id: 6,
-    title: "JavaScript Algorithms & Data Structures",
-    issuer: "freeCodeCamp",
+    name: "Microsoft Certified Azure Solutions Architect Expert",
+    organization: "Microsoft",
+    date: "2024",
+    description: "Certification demonstrating expertise in designing and implementing solutions on Microsoft Azure.",
+    category: "devops"
+  },
+  {
+    id: 7,
+    name: "Full-Stack Web Development",
+    organization: "OpenClassrooms",
+    date: "2023",
+    description: "A comprehensive program covering both front-end and back-end web development technologies.",
+    category: "fullstack"
+  },
+  {
+    id: 8,
+    name: "Data Science Specialization",
+    organization: "Coursera",
+    date: "2022",
+    description: "A specialization in data science covering topics such as machine learning, data analysis, and data visualization.",
+    category: "data_science"
+  },
+  {
+    id: 9,
+    name: "UI/UX Design Specialization",
+    organization: "Coursera",
     date: "2021",
-    logo: "https://design-style-guide.freecodecamp.org/downloads/fcc_primary_large.jpg",
-    category: ["development"],
-    company: "freeCodeCamp",
-    domain: ["javascript", "algorithms"],
-    credentialUrl: "#",
-    color: "from-green-400 to-cyan-500"
+    description: "A specialization in UI/UX design covering topics such as user research, wireframing, and prototyping.",
+    category: "design"
+  },
+  {
+    id: 10,
+    name: "Mobile App Development with React Native",
+    organization: "Udemy",
+    date: "2023",
+    description: "A course on building cross-platform mobile applications with React Native.",
+    category: "mobile"
   }
 ];
 
-type FilterType = 'all' | 'category' | 'company' | 'domain';
-
 const Certifications: React.FC = () => {
+  const [currentFilter, setCurrentFilter] = useState<string | null>(null);
   const { t } = useTranslation();
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [filterType, setFilterType] = useState<FilterType>('all');
-  const [filteredCertifications, setFilteredCertifications] = useState<Certification[]>(certifications);
-  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
-  
-  // Define animation variants
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleFilterChange = (filter: string) => {
+    setCurrentFilter(filter);
+  };
+
+  const filteredCertifications = currentFilter
+    ? certifications.filter(cert => cert.category.toLowerCase().includes(currentFilter))
+    : certifications;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -111,378 +123,167 @@ const Certifications: React.FC = () => {
       }
     }
   };
-  
+
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { opacity: 0, y: 50 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.6, 0.05, -0.01, 0.9]
+      }
     }
   };
-  
-  useEffect(() => {
-    if (filterType === 'all' || activeFilter === 'all') {
-      setFilteredCertifications(certifications);
-    } else if (filterType === 'category') {
-      setFilteredCertifications(
-        certifications.filter(cert => cert.category.includes(activeFilter))
-      );
-    } else if (filterType === 'company') {
-      setFilteredCertifications(
-        certifications.filter(cert => cert.company === activeFilter)
-      );
-    } else if (filterType === 'domain') {
-      setFilteredCertifications(
-        certifications.filter(cert => cert.domain.includes(activeFilter))
-      );
-    }
-  }, [activeFilter, filterType]);
-  
-  // Get unique values for filters
-  const getUniqueValues = (field: 'category' | 'company' | 'domain'): string[] => {
-    const values = new Set<string>();
-    
-    if (field === 'category' || field === 'domain') {
-      certifications.forEach(cert => {
-        cert[field].forEach(value => values.add(value));
-      });
-    } else if (field === 'company') {
-      certifications.forEach(cert => {
-        if (cert.company) values.add(cert.company);
-      });
-    }
-    
-    return Array.from(values);
-  };
-  
-  const uniqueCategories = getUniqueValues('category');
-  const uniqueCompanies = getUniqueValues('company');
-  const uniqueDomains = getUniqueValues('domain');
-  
+
   return (
-    <section id="certifications" className="py-20 px-6 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-950/10 to-background transition-colors duration-1000"></div>
+    <section id="certifications" className="py-24 relative overflow-hidden" ref={containerRef}>
+      {/* Background synthwave */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/80 to-background"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-purple-600/10 to-transparent"></div>
-      
-      <motion.div 
-        className="absolute top-0 left-0 w-full h-1"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
-        <div className="h-full bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-      </motion.div>
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.span 
-            className="px-4 py-1.5 text-sm font-medium rounded-full glass-morphism inline-block mb-4"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+      <div className="absolute top-0 w-full h-24 bg-gradient-to-b from-purple-600/20 to-transparent"></div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-12">
+          <motion.h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
           >
             {t('certifications.title')}
-          </motion.span>
-          
-          <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {t('certifications.subtitle')}
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
           >
             {t('certifications.description')}
           </motion.p>
-        </motion.div>
-        
-        {/* Filter Controls */}
-        <motion.div 
-          className="mb-10 relative z-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.button
-              className={`px-4 py-2 rounded-lg flex items-center gap-2 ${filterType === 'all' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'glass-morphism'}`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setFilterType('all');
-                setActiveFilter('all');
-                setIsFilterMenuOpen(false);
-              }}
-            >
-              <Layers className="w-4 h-4" />
-              <span>{t('certifications.all')}</span>
-            </motion.button>
-            
-            <div className="relative">
-              <motion.button
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${filterType === 'category' ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white' : 'glass-morphism'}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setFilterType('category');
-                  setIsFilterMenuOpen(prev => !prev && filterType === 'category');
-                }}
-              >
-                <Tag className="w-4 h-4" />
-                <span>{t('certifications.by_category')}</span>
-              </motion.button>
-              
-              {isFilterMenuOpen && filterType === 'category' && (
-                <motion.div 
-                  className="absolute mt-2 left-0 z-20 w-48 py-2 glass-morphism rounded-lg shadow-xl backdrop-blur-xl"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {uniqueCategories.map(category => (
-                    <button
-                      key={category}
-                      className={`w-full py-2 px-4 text-left hover:bg-white/10 transition-colors flex items-center ${activeFilter === category ? 'text-primary' : ''}`}
-                      onClick={() => {
-                        setActiveFilter(category);
-                        setIsFilterMenuOpen(false);
-                      }}
-                    >
-                      {activeFilter === category && <Check className="w-4 h-4 mr-2" />}
-                      <span>{t(`certifications.categories.${category}`)}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </div>
-            
-            <div className="relative">
-              <motion.button
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${filterType === 'company' ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white' : 'glass-morphism'}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setFilterType('company');
-                  setIsFilterMenuOpen(prev => !prev && filterType === 'company');
-                }}
-              >
-                <Briefcase className="w-4 h-4" />
-                <span>{t('certifications.by_company')}</span>
-              </motion.button>
-              
-              {isFilterMenuOpen && filterType === 'company' && (
-                <motion.div 
-                  className="absolute mt-2 left-0 z-20 w-48 py-2 glass-morphism rounded-lg shadow-xl backdrop-blur-xl"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {uniqueCompanies.map(company => (
-                    <button
-                      key={company}
-                      className={`w-full py-2 px-4 text-left hover:bg-white/10 transition-colors flex items-center ${activeFilter === company ? 'text-primary' : ''}`}
-                      onClick={() => {
-                        setActiveFilter(company);
-                        setIsFilterMenuOpen(false);
-                      }}
-                    >
-                      {activeFilter === company && <Check className="w-4 h-4 mr-2" />}
-                      <span>{company}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </div>
-            
-            <div className="relative">
-              <motion.button
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${filterType === 'domain' ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white' : 'glass-morphism'}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setFilterType('domain');
-                  setIsFilterMenuOpen(prev => !prev && filterType === 'domain');
-                }}
-              >
-                <Filter className="w-4 h-4" />
-                <span>{t('certifications.by_domain')}</span>
-              </motion.button>
-              
-              {isFilterMenuOpen && filterType === 'domain' && (
-                <motion.div 
-                  className="absolute mt-2 left-0 z-20 w-48 py-2 glass-morphism rounded-lg shadow-xl backdrop-blur-xl"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {uniqueDomains.map(domain => (
-                    <button
-                      key={domain}
-                      className={`w-full py-2 px-4 text-left hover:bg-white/10 transition-colors flex items-center ${activeFilter === domain ? 'text-primary' : ''}`}
-                      onClick={() => {
-                        setActiveFilter(domain);
-                        setIsFilterMenuOpen(false);
-                      }}
-                    >
-                      {activeFilter === domain && <Check className="w-4 h-4 mr-2" />}
-                      <span>{t(`certifications.domains.${domain}`, domain)}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </div>
-          </div>
+        </div>
+
+        <div className="mb-12">
+          <h3 className="text-2xl font-bold mb-6 text-center">Filtres par catégorie</h3>
           
-          {activeFilter !== 'all' && (
-            <div className="mt-4 text-center">
-              <motion.span
-                className="inline-block px-3 py-1 rounded-full bg-white/10 text-sm"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {filterType === 'category' ? t(`certifications.categories.${activeFilter}`) : 
-                 filterType === 'domain' ? t(`certifications.domains.${activeFilter}`, activeFilter) : 
-                 activeFilter}
-                <button 
-                  className="ml-2 text-xs opacity-70 hover:opacity-100"
-                  onClick={() => {
-                    setFilterType('all');
-                    setActiveFilter('all');
-                  }}
-                >
-                  ×
-                </button>
-              </motion.span>
-            </div>
-          )}
-        </motion.div>
-        
-        {/* Grid of certifications */}
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={activeFilter + filterType}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {filteredCertifications.map((cert) => (
-              <motion.div
-                key={cert.id}
-                className="relative glass-morphism rounded-xl overflow-hidden group"
-                variants={itemVariants}
-                whileHover={{ y: -5, boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.3)" }}
-                layout
-              >
-                {/* Background glow */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                
-                <div className="p-6 relative z-10">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-16 h-16 rounded-lg glass-morphism p-2 flex items-center justify-center overflow-hidden">
-                      <img 
-                        src={cert.logo} 
-                        alt={cert.issuer} 
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    </div>
-                    
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${cert.color} bg-clip-text text-transparent flex items-center`}>
-                      <Calendar className="w-3 h-3 mr-1 inline" />
-                      {cert.date}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{cert.title}</h3>
-                  
-                  <div className="flex items-center text-sm text-muted-foreground mb-4">
-                    <Award className="w-4 h-4 mr-1.5" />
-                    <span>{t('certifications.issuer')}: {cert.issuer}</span>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {cert.category.map(cat => (
-                      <span 
-                        key={cat} 
-                        className="text-xs py-1 px-2 rounded-full glass-morphism"
-                      >
-                        {t(`certifications.categories.${cat}`)}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {cert.domain.map(domain => (
-                      <span 
-                        key={domain} 
-                        className="text-xs py-1 px-2 rounded-full glass-morphism bg-gradient-to-r from-blue-500/20 to-purple-500/20"
-                      >
-                        {t(`certifications.domains.${domain}`, domain)}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <motion.a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`mt-4 group-hover:flex hidden items-center justify-center w-full py-2 rounded-lg bg-gradient-to-r ${cert.color} text-white transition-all`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    {t('certifications.view_credential')}
-                  </motion.a>
+          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+            <AccordionItem value="technical" className="border border-purple-500/20 rounded-lg mb-4 overflow-hidden">
+              <AccordionTrigger className="px-4 py-3 hover:bg-purple-500/10 transition-all neo-blur font-medium">
+                <div className="flex items-center">
+                  <Code className="w-5 h-5 mr-3 text-purple-400" />
+                  <span>Compétences Techniques</span>
                 </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-3 bg-black/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {['Frontend', 'Backend', 'Fullstack', 'Mobile', 'Design', 'DevOps'].map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => handleFilterChange(item.toLowerCase())}
+                      className={`px-3 py-2 rounded-md text-sm transition-all ${
+                        currentFilter === item.toLowerCase() 
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white' 
+                          : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="company" className="border border-cyan-500/20 rounded-lg mb-4 overflow-hidden">
+              <AccordionTrigger className="px-4 py-3 hover:bg-cyan-500/10 transition-all neo-blur font-medium">
+                <div className="flex items-center">
+                  <Briefcase className="w-5 h-5 mr-3 text-cyan-400" />
+                  <span>Entreprises & Organisations</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-3 bg-black/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {['Google', 'Microsoft', 'AWS', 'Udemy', 'Coursera', 'OpenClassrooms'].map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => handleFilterChange(item.toLowerCase())}
+                      className={`px-3 py-2 rounded-md text-sm transition-all ${
+                        currentFilter === item.toLowerCase() 
+                          ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white' 
+                          : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="domain" className="border border-pink-500/20 rounded-lg overflow-hidden">
+              <AccordionTrigger className="px-4 py-3 hover:bg-pink-500/10 transition-all neo-blur font-medium">
+                <div className="flex items-center">
+                  <Globe className="w-5 h-5 mr-3 text-pink-400" />
+                  <span>Domaines d'expertise</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-3 bg-black/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {['Web', 'Mobile', 'IA', 'Cloud', 'Data', 'Security'].map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => handleFilterChange(item.toLowerCase())}
+                      className={`px-3 py-2 rounded-md text-sm transition-all ${
+                        currentFilter === item.toLowerCase() 
+                          ? 'bg-gradient-to-r from-pink-500 to-yellow-500 text-white' 
+                          : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {filteredCertifications.map(cert => (
+            <motion.div 
+              className="relative group"
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
                 
-                {/* Effet de néon en hover */}
-                <div className={`absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r ${cert.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-        
-        {filteredCertifications.length === 0 && (
-          <motion.div 
-            className="text-center py-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="w-20 h-20 mx-auto mb-6 glass-morphism rounded-full flex items-center justify-center">
-              <Award className="w-10 h-10 text-muted-foreground" />
-            </div>
-            <h3 className="text-xl font-medium mb-2">{t('certifications.no_results')}</h3>
-            <p className="text-muted-foreground">{t('certifications.try_different_filter')}</p>
-          </motion.div>
-        )}
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
+                    <Award className="h-5 w-5 text-pink-400" />
+                  </div>
+                  
+                  <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
+                    <div className="text-sm text-muted-foreground">{cert.organization}</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

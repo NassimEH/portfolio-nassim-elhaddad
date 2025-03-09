@@ -333,6 +333,31 @@ const Contact: React.FC = () => {
                   <span className="text-sm">{t('contact.view_all_profiles')}</span>
                   <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
                 </motion.a>
+                
+                <div className="mt-12 w-full text-center">
+                  <motion.a
+                    href="https://www.linkedin.com/in/nassim-elhaddad/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block relative overflow-hidden group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white flex items-center justify-center transition-all duration-300 z-10 relative">
+                      <Linkedin className="w-5 h-5 mr-2" />
+                      <span className="font-medium">Connectons-nous sur LinkedIn</span>
+                      <span className="ml-2 opacity-60">→</span>
+                    </div>
+                    
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-600/30 to-cyan-500/30 blur-xl transition-opacity group-hover:opacity-100 opacity-0 animate-pulse"></div>
+                    
+                    {/* Animated border */}
+                    <div className="absolute inset-0 rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 rounded-lg border-2 border-transparent before:absolute before:inset-0 before:rounded-lg before:border-2 before:border-pink-500/50 before:content-[''] before:animate-[spin_4s_linear_infinite]"></div>
+                    </div>
+                  </motion.a>
+                </div>
               </div>
             </div>
           </motion.div>

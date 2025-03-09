@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
@@ -10,6 +9,7 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ParticleBackground from '../components/ParticleBackground';
 import ThemeLanguageSwitch from '../components/ThemeLanguageSwitch';
+import NeonTransition from '../components/NeonTransition';
 import { useRevealOnScroll, useParallax } from '../utils/transitions';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +20,7 @@ import Services from '../components/Services';
 import ResumeSection from '../components/ResumeSection';
 import Certifications from '../components/Certifications';
 import CreativeShowcase from '../components/CreativeShowcase';
+import StreetGraphicSection from '../components/StreetGraphicSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -31,15 +32,10 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sectionsRef = useRef<HTMLDivElement>(null);
   
-  // Initialize theme and language
   useEffect(() => {
-    // Apply saved theme
     setTheme(theme);
-    
-    // Apply saved language
     setLanguage(language);
     
-    // Simulate loading for performance optimization
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 300);
@@ -47,7 +43,6 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  // Show welcome toast after loading
   useEffect(() => {
     if (!isLoading) {
       toast({
@@ -57,7 +52,6 @@ const Index = () => {
     }
   }, [isLoading, toast, t]);
 
-  // Custom scroll behavior for fluid section transitions
   useEffect(() => {
     const handleScroll = () => {
       if (sectionsRef.current) {
@@ -94,48 +88,58 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Background effects */}
       <ParticleBackground particleCount={70} />
       
-      {/* Theme and language switch */}
       <ThemeLanguageSwitch />
       
-      {/* Fixed navigation */}
       <Navbar />
       
-      {/* Main content */}
       <main ref={sectionsRef}>
         <Hero />
+        
+        <NeonTransition />
+        
         <div className="section-transition">
           <About />
         </div>
+        
         <div className="section-transition">
           <CreativeShowcase />
         </div>
+        
+        <div className="section-transition">
+          <StreetGraphicSection />
+        </div>
+        
         <div className="section-transition">
           <Projects />
         </div>
+        
         <div className="section-transition">
           <Certifications />
         </div>
+        
         <div className="section-transition">
           <Experience />
         </div>
+        
         <div className="section-transition">
           <Testimonials />
         </div>
+        
         <div className="section-transition">
           <Services />
         </div>
+        
         <div className="section-transition">
           <ResumeSection />
         </div>
+        
         <div className="section-transition">
           <Contact />
         </div>
       </main>
       
-      {/* Footer */}
       <Footer />
     </motion.div>
   );

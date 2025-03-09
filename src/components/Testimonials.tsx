@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -26,9 +25,9 @@ const testimonials: Testimonial[] = [
     position: "Directrice Marketing",
     company: "TechVision",
     avatar: "https://randomuser.me/api/portraits/women/32.jpg",
-    text: "Travailler avec ce développeur a été une expérience incroyable. Sa capacité à comprendre nos besoins et à livrer des solutions sur mesure a transformé notre présence en ligne. Je recommande ses services à quiconque cherche un développeur web de premier ordre.",
+    text: "Une collaboration exceptionnelle qui a transformé notre présence digitale. La vision créative et l'expertise technique ont permis de dépasser nos attentes et d'atteindre des résultats impressionnants.",
     date: "Juin 2023",
-    project: "Refonte site e-commerce",
+    project: "Refonte plateforme e-commerce",
     skills: ["React", "Node.js", "UI/UX Design"],
     highlight: "Augmentation des conversions de 40% en 3 mois",
     rating: 5,
@@ -40,9 +39,9 @@ const testimonials: Testimonial[] = [
     position: "CEO",
     company: "StartupFlow",
     avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-    text: "Un talent exceptionnel. Ce développeur a créé pour nous une application web qui a dépassé toutes nos attentes. Son expertise technique et sa créativité ont fait toute la différence dans notre projet.",
+    text: "Un talent visionnaire qui a su comprendre et concrétiser nos besoins. La qualité du code et la fluidité de l'interface ont révolutionné notre façon de travailler au quotidien.",
     date: "Mars 2023",
-    project: "Application de gestion",
+    project: "Application SaaS",
     skills: ["Vue.js", "Firebase", "Tailwind CSS"],
     highlight: "Temps de développement réduit de 30%",
     rating: 5,
@@ -54,12 +53,12 @@ const testimonials: Testimonial[] = [
     position: "Directrice Produit",
     company: "InnovateLab",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    text: "Nous avons eu la chance de travailler avec ce développeur sur plusieurs projets, et chaque fois, les résultats ont été spectaculaires. Sa compréhension des tendances actuelles et son souci du détail font de lui un partenaire de développement idéal.",
+    text: "Une approche à la fois technique et créative qui a donné vie à notre vision. La capacité à traduire des concepts complexes en solutions élégantes fait toute la différence dans nos projets.",
     date: "Octobre 2022",
     project: "Dashboard analytique",
     skills: ["React", "D3.js", "API REST"],
-    highlight: "Visualisation de données complexes simplifiée",
-    rating: 4,
+    highlight: "Visualisation de données optimisée et intuitive",
+    rating: 5,
     color: "from-amber-400 to-orange-500"
   }
 ];
@@ -97,7 +96,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {t('testimonials.title')}
+            Témoignages
           </motion.h2>
           
           <motion.p 
@@ -129,7 +128,27 @@ const Testimonials: React.FC = () => {
                     className="p-8 glass-morphism rounded-2xl border border-cyan-500/30 shadow-[0_0_25px_rgba(34,211,238,0.2)] relative"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-5 rounded-2xl`}></div>
-                    <Quote className="absolute top-6 left-6 h-10 w-10 text-cyan-500/10" />
+                    
+                    {/* Add a synthwave grid to the background */}
+                    <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+                      <div className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-pink-500/10 to-transparent"></div>
+                      
+                      {/* Horizontal grid lines */}
+                      {[...Array(5)].map((_, i) => (
+                        <div 
+                          key={i} 
+                          className="absolute w-full h-px"
+                          style={{ 
+                            background: `linear-gradient(90deg, transparent 0%, rgba(236, 72, 153, ${0.03 + i * 0.01}) 50%, transparent 100%)`,
+                            bottom: `${i * 15}px`,
+                            opacity: 0.3
+                          }}
+                        ></div>
+                      ))}
+                    </div>
+                    
+                    <Quote className="absolute top-6 left-6 h-10 w-10 text-cyan-500/20" />
                     
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                       <div className="md:col-span-3">
@@ -168,11 +187,12 @@ const Testimonials: React.FC = () => {
                         </div>
                       </div>
                       
-                      <div className="md:col-span-2 glass-morphism rounded-xl p-5 border border-white/10">
+                      <div className="md:col-span-2 neo-blur rounded-xl p-5 border border-white/10">
                         <div className="mb-4">
                           <h5 className={`text-lg font-medium mb-2 bg-gradient-to-r ${testimonial.color} bg-clip-text text-transparent`}>
-                            {t('testimonials.project_details')}
+                            Détails du projet
                           </h5>
+                          
                           <div className="flex justify-between mb-2">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-2 text-purple-400" />
@@ -252,9 +272,9 @@ const Testimonials: React.FC = () => {
           {/* Navigation controls */}
           <div className="flex justify-between items-center mt-8">
             <motion.button
-              className="p-2 rounded-full glass-morphism hover:bg-white/10 transition-all duration-300"
+              className="p-2 rounded-full neo-blur hover:bg-white/10 transition-all duration-300 border border-cyan-500/30"
               onClick={prevSlide}
-              whileHover={{ scale: 1.1, x: -3 }}
+              whileHover={{ scale: 1.1, x: -3, boxShadow: "0 0 15px rgba(34,211,238,0.5)" }}
               whileTap={{ scale: 0.95 }}
             >
               <ChevronLeft className="h-6 w-6 text-cyan-400" />
@@ -275,9 +295,9 @@ const Testimonials: React.FC = () => {
             </div>
             
             <motion.button
-              className="p-2 rounded-full glass-morphism hover:bg-white/10 transition-all duration-300"
+              className="p-2 rounded-full neo-blur hover:bg-white/10 transition-all duration-300 border border-cyan-500/30"
               onClick={nextSlide}
-              whileHover={{ scale: 1.1, x: 3 }}
+              whileHover={{ scale: 1.1, x: 3, boxShadow: "0 0 15px rgba(34,211,238,0.5)" }}
               whileTap={{ scale: 0.95 }}
             >
               <ChevronRight className="h-6 w-6 text-cyan-400" />

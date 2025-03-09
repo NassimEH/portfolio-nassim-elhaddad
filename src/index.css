@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -65,9 +64,9 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
   }
-}
 
-@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&display=swap');
+
   * {
     @apply border-border selection:bg-primary/20 selection:text-primary;
   }
@@ -83,9 +82,6 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
   
-  /* Modern, clean fonts that are more readable and professional */
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
   /* Apply the new fonts */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
@@ -181,6 +177,68 @@
   
   .hover-lift:hover {
     @apply transform -translate-y-1 shadow-lg;
+  }
+
+  /* Enhanced synthwave styles */
+  .synthwave-glow {
+    text-shadow: 
+      0 0 5px rgba(236, 72, 153, 0.5),
+      0 0 10px rgba(236, 72, 153, 0.3),
+      0 0 15px rgba(236, 72, 153, 0.2),
+      0 0 20px rgba(236, 72, 153, 0.1);
+  }
+  
+  .synthwave-glow-text {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+    opacity: 0.9;
+  }
+  
+  .synthwave-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(236, 72, 153, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(236, 72, 153, 0.1) 1px, transparent 1px);
+  }
+  
+  .neon-border {
+    @apply relative;
+  }
+  
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, rgba(236, 72, 153, 1), rgba(124, 58, 237, 1), rgba(34, 211, 238, 1), rgba(236, 72, 153, 1));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    animation: rotate 4s linear infinite;
+  }
+  
+  @keyframes rotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 130% 50%;
+    }
+  }
+  
+  /* Enhanced glass-morphism for synthwave */
+  .synthwave-card {
+    @apply backdrop-blur-xl bg-black/40 border border-pink-500/20;
+    box-shadow: 
+      0 0 10px rgba(236, 72, 153, 0.2),
+      0 0 20px rgba(124, 58, 237, 0.1),
+      inset 0 0 10px rgba(34, 211, 238, 0.1);
   }
 }
 
@@ -367,4 +425,72 @@ html.smooth-scroll {
   background: linear-gradient(to bottom, hsl(var(--background)), transparent);
   z-index: 1;
   pointer-events: none;
+}
+
+/* Fix for color issues on the sides */
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before, body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: hsl(var(--background));
+  z-index: 1000;
+}
+
+body::before {
+  left: 0;
+}
+
+body::after {
+  right: 0;
+}
+
+/* Enhanced section transitions */
+.section-transition {
+  position: relative;
+  z-index: 1;
+}
+
+.section-transition::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to top, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to bottom, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Improved konami code effect for easter egg */
+@keyframes synthwaveEffect {
+  0% { background-color: rgba(168, 85, 247, 0.1); }
+  20% { background-color: rgba(236, 72, 153, 0.1); }
+  40% { background-color: rgba(34, 211, 238, 0.1); }
+  60% { background-color: rgba(124, 58, 237, 0.1); }
+  80% { background-color: rgba(245, 158, 11, 0.1); }
+  100% { background-color: rgba(168, 85, 247, 0.1); }
+}
+
+.konami-code-activated {
+  animation: synthwaveEffect 5s linear infinite;
 }
