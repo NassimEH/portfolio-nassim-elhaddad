@@ -81,16 +81,17 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
   
-  /* Google Font - Outfit et Syncopate pour une esthétique synthwave */
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
+  /* Modern, clean fonts that are more readable and professional */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-  /* Appliquer les nouveaux styles de police */
+  /* Apply the new fonts */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syncopate', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
   }
   
   body, p, a, button, input, textarea, select {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
@@ -126,6 +127,11 @@
   
   .glow-text {
     @apply text-shadow-[0_0_10px_currentColor];
+  }
+  
+  /* Smooth section transitions */
+  section {
+    @apply transition-all duration-700 ease-cinematic;
   }
 }
 
@@ -218,4 +224,25 @@
 /* Parallax effect */
 .parallax {
   transition: transform 0.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improved transitions for interactive elements */
+a, button {
+  @apply transition-all duration-300 ease-cinematic;
+}
+
+/* Improved focus styles for accessibility */
+:focus-visible {
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-background;
 }

@@ -28,11 +28,14 @@ const Footer: React.FC = () => {
       {/* Background synthwave */}
       <div className="absolute inset-0 bg-gradient-to-t from-black to-background/80 pointer-events-none"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+      
+      {/* Glow effect */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/70 to-purple-500/0 blur-xl"></div>
       <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-purple-600/20 to-transparent pointer-events-none"></div>
       
-      {/* Réseaux sociaux à grande échelle */}
+      {/* Content */}
       <div className="max-w-7xl mx-auto pt-16 pb-8 px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {socialLinks.map((link, index) => (
             <motion.a
               key={index}
@@ -62,8 +65,11 @@ const Footer: React.FC = () => {
           ))}
         </div>
         
-        <div className="glass-morphism border border-cyan-500/20 rounded-2xl p-8 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="glass-morphism border border-cyan-500/20 rounded-2xl p-8 mb-12 relative overflow-hidden">
+          {/* Background glow effects */}
+          <div className="absolute -inset-10 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-cyan-500/10 blur-3xl rounded-full"></div>
+          
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Logo & About */}
             <div>
               <motion.a 
@@ -82,7 +88,7 @@ const Footer: React.FC = () => {
               </motion.a>
               
               <p className="mt-4 text-muted-foreground">
-                Développeur web passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.
+                À propos de moi
               </p>
               
               <div className="mt-6 flex items-center">
@@ -102,10 +108,11 @@ const Footer: React.FC = () => {
                 {[
                   { name: 'Accueil', id: 'hero' },
                   { name: 'À propos', id: 'about' },
-                  { name: 'Services', id: 'services' },
+                  { name: 'CV', id: 'resume' },
                   { name: 'Projets', id: 'projects' },
                   { name: 'Témoignages', id: 'testimonials' },
                   { name: 'Expérience', id: 'experience' },
+                  { name: 'Services', id: 'services' },
                   { name: 'Contact', id: 'contact' }
                 ].map((link) => (
                   <li key={link.id}>
@@ -132,10 +139,10 @@ const Footer: React.FC = () => {
                 <li className="flex items-start text-muted-foreground">
                   <Mail className="w-5 h-5 mr-3 text-cyan-400 flex-shrink-0 mt-1" />
                   <a 
-                    href="mailto:nassim.elhaddad@example.com"
+                    href="mailto:contact@example.com"
                     className="hover:text-foreground transition-colors duration-300"
                   >
-                    nassim.elhaddad@example.com
+                    contact@example.com
                   </a>
                 </li>
                 <li className="flex items-start text-muted-foreground">
@@ -167,13 +174,15 @@ const Footer: React.FC = () => {
             </motion.span>
           </p>
           
-          <div className="mt-4 md:mt-0">
+          <div className="mt-4 md:mt-0 flex items-center">
+            <span className="text-xs text-muted-foreground mr-4">Easter egg #3: Appuyez sur le logo 5 fois rapidement</span>
+            
             <motion.button 
               onClick={() => handleNavClick('hero')}
               className="flex items-center px-4 py-2 text-sm glass-morphism rounded-full hover:bg-white/10 transition-all duration-300"
               whileHover={{ y: -3, boxShadow: "0 10px 15px rgba(0,0,0,0.1)" }}
             >
-              <span>Retour en haut</span>
+              <span>Haut</span>
               <ChevronUp className="w-4 h-4 ml-2" />
             </motion.button>
           </div>

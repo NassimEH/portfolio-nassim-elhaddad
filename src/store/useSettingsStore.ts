@@ -16,17 +16,29 @@ interface SettingsState {
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       theme: 'dark',
       language: 'fr',
-      setTheme: (theme) => set({ theme }),
+      setTheme: (theme) => {
+        set({ theme });
+        // Apply theme to document element directly
+        if (theme === 'light') {
+          document.documentElement.classList.add('light-theme');
+        } else {
+          document.documentElement.classList.remove('light-theme');
+        }
+      },
       setLanguage: (language) => {
         i18n.changeLanguage(language);
         set({ language });
+        // Set document language attribute
+        document.documentElement.lang = language;
       },
-      toggleTheme: () => set((state) => ({ 
-        theme: state.theme === 'dark' ? 'light' : 'dark' 
-      })),
+      toggleTheme: () => {
+        const currentTheme = get().theme;
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        get().setTheme(newTheme);
+      },
     }),
     {
       name: 'settings-storage',

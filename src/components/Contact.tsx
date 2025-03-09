@@ -1,7 +1,10 @@
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { contactInfo } from '../utils/projectData';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
+import { Send, Mail, MapPin, ArrowRight, Github, Linkedin, Check } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +13,9 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,188 +29,252 @@ const Contact: React.FC = () => {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
+      setFormSubmitted(true);
+      
       toast({
-        title: "Message envoyé !",
-        description: "Merci pour votre message. Je vous répondrai dès que possible.",
+        title: t('contact.success_title'),
+        description: t('contact.success_message'),
       });
-      setFormData({ name: '', email: '', message: '' });
+      
+      // Reset form after delay
+      setTimeout(() => {
+        setFormData({ name: '', email: '', message: '' });
+        setFormSubmitted(false);
+      }, 3000);
     }, 1500);
   };
 
   return (
-    <section id="contact" className="py-24 px-6 relative overflow-hidden bg-secondary/30">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 reveal-on-scroll">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/10 backdrop-blur-sm">
-            <p className="text-sm font-mono text-primary">
-              Contact
-            </p>
-          </div>
+    <section id="contact" className="py-24 px-6 relative overflow-hidden">
+      {/* Synthwave background effect */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-purple-600/20 to-transparent"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            {t('contact.title')}
+          </motion.h2>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-            Travaillons ensemble
-          </h2>
-          
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter de votre idée.
-          </p>
+          <motion.p 
+            className="text-xl text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {t('contact.subtitle')}
+          </motion.p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Form */}
-          <div className="glass-morphism p-8 rounded-xl reveal-on-scroll">
-            <h3 className="text-2xl font-semibold mb-6">Envoyez-moi un message</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+          {/* Contact Form - Takes more space */}
+          <motion.div 
+            className="lg:col-span-3 glass-morphism p-8 rounded-2xl border border-purple-500/20 shadow-[0_0_30px_rgba(168,85,247,0.1)] relative overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Background gradient effects */}
+            <div className="absolute -inset-10 bg-gradient-to-tr from-purple-500/10 via-pink-500/5 to-transparent blur-3xl rounded-full"></div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-tl from-cyan-500/10 to-transparent rounded-full"></div>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Nom
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                  placeholder="Votre nom"
-                />
-              </div>
+            <div className="relative">
+              <h3 className="text-2xl font-semibold mb-6 flex items-center">
+                <Send className="w-6 h-6 mr-3 text-purple-400" />
+                {t('contact.form_title')}
+              </h3>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
-                  placeholder="votre@email.com"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 resize-none"
-                  placeholder="Votre message"
-                />
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-70 transition-all duration-300 ease-cinematic font-medium transform hover:scale-[1.02] active:scale-[0.98] flex justify-center items-center"
-              >
-                {isSubmitting ? (
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                ) : null}
-                {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
-              </button>
-            </form>
-          </div>
+              <AnimatePresence mode="wait">
+                {formSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="text-center py-16"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-6">
+                      <Check className="w-10 h-10 text-white" />
+                    </div>
+                    <h4 className="text-2xl font-semibold mb-2">{t('contact.thank_you')}</h4>
+                    <p className="text-muted-foreground">{t('contact.will_reply_soon')}</p>
+                  </motion.div>
+                ) : (
+                  <motion.form 
+                    onSubmit={handleSubmit} 
+                    className="space-y-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                        {t('contact.name')}
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
+                        placeholder={t('contact.name_placeholder')}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                        {t('contact.email')}
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
+                        placeholder={t('contact.email_placeholder')}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium mb-2">
+                        {t('contact.message')}
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300 resize-none"
+                        placeholder={t('contact.message_placeholder')}
+                      />
+                    </div>
+                    
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 disabled:opacity-70 transition-all duration-300 font-medium flex justify-center items-center"
+                      whileHover={{ translateY: -5, boxShadow: "0 10px 25px -5px rgba(168,85,247,0.4)" }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {isSubmitting ? (
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : null}
+                      {isSubmitting ? t('contact.sending') : t('contact.send')}
+                    </motion.button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
           
           {/* Contact Information */}
-          <div className="space-y-8 reveal-on-scroll">
-            <div className="glass-morphism p-8 rounded-xl mb-8">
-              <h3 className="text-2xl font-semibold mb-6">Coordonnées</h3>
+          <motion.div 
+            className="lg:col-span-2 space-y-6"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="glass-morphism p-8 rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.1)] relative overflow-hidden">
+              {/* Background effects */}
+              <div className="absolute -inset-10 bg-gradient-to-tl from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl rounded-full"></div>
               
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-muted-foreground mb-1">Email</h4>
-                    <a 
-                      href={`mailto:${contactInfo.email}`} 
-                      className="text-lg hover:text-primary transition-colors duration-300"
-                    >
-                      {contactInfo.email}
-                    </a>
-                  </div>
-                </div>
+              <div className="relative">
+                <h3 className="text-2xl font-semibold mb-6">{t('contact.info_title')}</h3>
                 
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-muted-foreground mb-1">Téléphone</h4>
-                    <a 
-                      href={`tel:${contactInfo.phone}`} 
-                      className="text-lg hover:text-primary transition-colors duration-300"
-                    >
-                      {contactInfo.phone}
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-muted-foreground mb-1">Localisation</h4>
-                    <p className="text-lg">{contactInfo.location}</p>
-                  </div>
+                <div className="space-y-6">
+                  <motion.div 
+                    className="flex items-start group"
+                    whileHover={{ x: 5 }}
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center mr-4 group-hover:from-cyan-500/30 group-hover:to-blue-500/30 transition-all duration-300">
+                      <Mail className="w-6 h-6 text-cyan-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.email_label')}</h4>
+                      <a 
+                        href={`mailto:${contactInfo.email}`} 
+                        className="text-lg hover:text-cyan-400 transition-colors duration-300"
+                      >
+                        {contactInfo.email}
+                      </a>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="flex items-start group"
+                    whileHover={{ x: 5 }}
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center mr-4 group-hover:from-pink-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                      <MapPin className="w-6 h-6 text-pink-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.location_label')}</h4>
+                      <p className="text-lg">{contactInfo.location}</p>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
             
-            <div className="glass-morphism p-8 rounded-xl">
-              <h3 className="text-2xl font-semibold mb-6">Suivez-moi</h3>
+            <div className="glass-morphism p-8 rounded-xl border border-purple-500/20 shadow-[0_0_30px_rgba(168,85,247,0.1)] relative overflow-hidden">
+              {/* Background effect */}
+              <div className="absolute -inset-10 bg-gradient-to-bl from-purple-500/10 via-pink-500/5 to-transparent blur-3xl rounded-full"></div>
               
-              <div className="flex space-x-4">
-                <a 
-                  href={contactInfo.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300"
-                  aria-label="GitHub"
-                >
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.836 2.807 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
-                  </svg>
-                </a>
+              <div className="relative">
+                <h3 className="text-2xl font-semibold mb-6">{t('contact.follow_title')}</h3>
                 
-                <a 
-                  href={contactInfo.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300"
-                  aria-label="LinkedIn"
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.a 
+                    href={contactInfo.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-4 rounded-xl glass-morphism hover:bg-white/10 transition-all duration-300 group"
+                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(168,85,247,0.3)" }}
+                  >
+                    <Github className="w-8 h-8 mb-2 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                    <span className="text-sm">GitHub</span>
+                  </motion.a>
+                  
+                  <motion.a 
+                    href={contactInfo.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-4 rounded-xl glass-morphism hover:bg-white/10 transition-all duration-300 group"
+                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(34,211,238,0.3)" }}
+                  >
+                    <Linkedin className="w-8 h-8 mb-2 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+                    <span className="text-sm">LinkedIn</span>
+                  </motion.a>
+                </div>
+                
+                <motion.a
+                  href="#"
+                  className="flex items-center justify-between mt-6 px-4 py-3 rounded-lg glass-morphism hover:bg-white/10 transition-colors group"
+                  whileHover={{ x: 5 }}
                 >
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
+                  <span className="text-sm">{t('contact.view_all_profiles')}</span>
+                  <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
+                </motion.a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

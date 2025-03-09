@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -17,6 +17,7 @@ import { useSettingsStore } from '../store/useSettingsStore';
 import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
+import ResumeSection from '../components/ResumeSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -24,33 +25,46 @@ const Index = () => {
   
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { theme, language } = useSettingsStore();
+  const { theme, language, setTheme, setLanguage } = useSettingsStore();
+  const [isLoading, setIsLoading] = useState(true);
   
-  // Appliquer le changement de langue
+  // Initialize theme and language
   useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+    // Apply saved theme
+    setTheme(theme);
+    
+    // Apply saved language
+    setLanguage(language);
+    
+    // Simulate loading for performance optimization
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
-  // Appliquer le thème
+  // Show welcome toast after loading
   useEffect(() => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('light-theme');
-    } else {
-      document.documentElement.classList.remove('light-theme');
+    if (!isLoading) {
+      toast({
+        title: t('hero.welcome'),
+        description: t('hero.toast_message'),
+      });
     }
-  }, [theme]);
-  
-  useEffect(() => {
-    // Afficher un toast de bienvenue
-    toast({
-      title: t('hero.title'),
-      description: t('hero.description'),
-    });
-  }, [toast, t]);
+  }, [isLoading, toast, t]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center w-screen h-screen bg-background">
+        <div className="w-16 h-16 border-4 border-primary border-solid rounded-full border-t-transparent animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <motion.div 
-      className={`min-h-screen relative ${theme === 'light' ? 'light-theme' : ''}`}
+      className="min-h-screen relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -68,10 +82,11 @@ const Index = () => {
       <main>
         <Hero />
         <About />
-        <Services />
+        <ResumeSection />
         <Projects />
         <Testimonials />
         <Experience />
+        <Services />
         <Contact />
       </main>
       
