@@ -97,7 +97,7 @@ const Testimonials: React.FC = () => {
           >
             Découvrez ce que mes clients disent de ma prestation et de mon travail
           </motion.p>
-        </motion.div>
+        </div>
         
         <div className="relative max-w-5xl mx-auto">
           {/* Background effects */}
