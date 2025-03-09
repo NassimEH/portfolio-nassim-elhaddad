@@ -3,7 +3,7 @@ import React from 'react';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Sun, Moon, Languages, Menu } from 'lucide-react';
+import { Sun, Moon, Languages, Menu, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const ThemeLanguageSwitch: React.FC = () => {
