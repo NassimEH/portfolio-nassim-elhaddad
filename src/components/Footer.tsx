@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
               >
                 {link.icon}
               </motion.div>
-              <span className="text-lg font-medium group-hover:text-blue-400 transition-colors">{link.name}</span>
+              <span className="text-lg font-medium group-hover:text-blue-400 transition-colors">{link.label}</span>
             </motion.a>
           ))}
         </div>

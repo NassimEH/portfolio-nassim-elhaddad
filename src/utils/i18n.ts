@@ -34,7 +34,6 @@ i18n
     interpolation: {
       escapeValue: false
     },
-    useSuspense: false, // Set this to avoid hydration issues
     react: {
       useSuspense: false
     }
