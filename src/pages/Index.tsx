@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -30,8 +30,13 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sectionsRef = useRef<HTMLDivElement>(null);
   
+  // Initialize theme properly at load time
   useEffect(() => {
-    setTheme(theme);
+    // Force immediate theme application to prevent flash
+    document.documentElement.classList.toggle('light-theme', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    
+    // Set language
     setLanguage(language);
     
     const timer = setTimeout(() => {
@@ -78,10 +83,12 @@ const Index = () => {
     // Ensure background color is properly set
     if (theme === 'dark') {
       htmlElement.classList.add('dark');
+      htmlElement.classList.remove('light-theme');
       // Explicitly set the background color to prevent unwanted shifts
       document.body.style.backgroundColor = 'rgb(10, 10, 10)';
     } else {
       htmlElement.classList.remove('dark');
+      htmlElement.classList.add('light-theme');
       document.body.style.backgroundColor = 'rgb(255, 255, 255)';
     }
     
@@ -106,7 +113,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <ParticleBackground particleCount={70} />
+      <ParticleBackground particleCount={35} />
       
       <ThemeLanguageSwitch />
       
