@@ -1,9 +1,8 @@
-
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../utils/projectData';
 import { useTranslation } from 'react-i18next';
-import { X, ExternalLink, Github, Clock, Tag, Sparkles } from 'lucide-react';
+import { X, ExternalLink, Github, Clock, Tag, Sparkles, Code } from 'lucide-react';
 
 interface ProjectDetailModalProps {
   project: Project | null;
