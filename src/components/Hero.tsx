@@ -15,6 +15,7 @@ interface Planet {
   color: string;
   initialPosition: { x: number; y: number };
   message?: string;
+  visible: boolean;
 }
 
 const Hero: React.FC = () => {
@@ -23,34 +24,23 @@ const Hero: React.FC = () => {
   const theme = useSettingsStore(state => state.theme);
   const { toast } = useToast();
   
-  // Interactive planets
+  // Interactive planets - reduced number and set initially invisible
   const [planets, setPlanets] = useState<Planet[]>([
     { 
       id: 1, 
       size: 60, 
       color: 'from-purple-500 to-blue-600', 
       initialPosition: { x: -150, y: 100 },
-      message: '✨ Bienvenue dans mon univers digital !'
+      message: '✨ Bienvenue dans mon univers digital !',
+      visible: false
     },
     { 
       id: 2, 
-      size: 40, 
-      color: 'from-pink-500 to-red-500', 
-      initialPosition: { x: 200, y: -120 },
-      message: '🚀 Explorez mes projets pour découvrir mes compétences !'
-    },
-    { 
-      id: 3, 
       size: 80, 
       color: 'from-cyan-400 to-blue-500', 
       initialPosition: { x: 180, y: 150 },
-      message: '💡 Essayez le code Konami: ↑↑↓↓←→←→BA'
-    },
-    { 
-      id: 4, 
-      size: 30, 
-      color: 'from-yellow-400 to-orange-500', 
-      initialPosition: { x: -180, y: -80 }
+      message: '💡 Essayez le code Konami: ↑↑↓↓←→←→BA',
+      visible: false
     },
   ]);
   
@@ -76,6 +66,52 @@ const Hero: React.FC = () => {
     };
   }, [mouseX, mouseY]);
   
+  useEffect(() => {
+    // Animate the text on load
+    const textElement = textRef.current;
+    if (textElement) {
+      textElement.classList.add('animate-slide-up');
+    }
+    
+    // Occasionally make a planet appear
+    const planetInterval = setInterval(() => {
+      setPlanets(prev => 
+        prev.map((planet, idx) => {
+          // 20% chance for a planet to appear or disappear
+          if (Math.random() < 0.2) {
+            return {
+              ...planet,
+              visible: !planet.visible
+            };
+          }
+          return planet;
+        })
+      );
+    }, 5000);
+    
+    // Random planet movement animation
+    const movementInterval = setInterval(() => {
+      setPlanets(prev => 
+        prev.map((planet) => 
+          planet.visible 
+            ? {
+                ...planet,
+                initialPosition: {
+                  x: planet.initialPosition.x + (Math.random() * 40 - 20),
+                  y: planet.initialPosition.y + (Math.random() * 40 - 20)
+                }
+              }
+            : planet
+        )
+      );
+    }, 8000);
+    
+    return () => {
+      clearInterval(planetInterval);
+      clearInterval(movementInterval);
+    }
+  }, []);
+  
   const showPlanetMessage = (planet: Planet) => {
     if (planet.message) {
       setActiveMessage(planet.message);
@@ -90,35 +126,6 @@ const Hero: React.FC = () => {
       });
     }
   };
-  
-  useEffect(() => {
-    // Animate the text on load
-    const textElement = textRef.current;
-    if (textElement) {
-      textElement.classList.add('animate-slide-up');
-    }
-    
-    // Random planet movement animation
-    const interval = setInterval(() => {
-      const randomPlanetIndex = Math.floor(Math.random() * planets.length);
-      
-      setPlanets(prev => 
-        prev.map((planet, idx) => 
-          idx === randomPlanetIndex 
-            ? {
-                ...planet,
-                initialPosition: {
-                  x: planet.initialPosition.x + (Math.random() * 40 - 20),
-                  y: planet.initialPosition.y + (Math.random() * 40 - 20)
-                }
-              }
-            : planet
-        )
-      );
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
   
   // Animation variants
   const containerVariants = {
@@ -142,9 +149,7 @@ const Hero: React.FC = () => {
 
   const floatingIcons = [
     { icon: <Code size={24} className="text-purple-400" />, delay: 0, x: -120, y: -80 },
-    { icon: <Sparkles size={20} className="text-pink-400" />, delay: 0.2, x: 150, y: -120 },
-    { icon: <Cpu size={22} className="text-cyan-400" />, delay: 0.3, x: -180, y: 60 },
-    { icon: <ZapIcon size={18} className="text-yellow-400" />, delay: 0.4, x: 190, y: 90 }
+    { icon: <Sparkles size={20} className="text-pink-400" />, delay: 0.2, x: 150, y: -120 }
   ];
   
   // Easter egg - konami code
@@ -188,6 +193,9 @@ const Hero: React.FC = () => {
       
       {/* Interactive Planets */}
       {planets.map((planet, index) => {
+        // Only render if the planet is visible
+        if (!planet.visible) return null;
+        
         // Calculate position based on mouse and initial position
         const planetX = useTransform(
           smoothMouseX,
@@ -259,7 +267,7 @@ const Hero: React.FC = () => {
         )}
       </AnimatePresence>
       
-      {/* Floating interactive elements */}
+      {/* Floating interactive elements - reduced */}
       {floatingIcons.map((item, index) => (
         <motion.div
           key={index}

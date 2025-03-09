@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
@@ -17,10 +18,7 @@ import { useSettingsStore } from '../store/useSettingsStore';
 import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
-import ResumeSection from '../components/ResumeSection';
 import Certifications from '../components/Certifications';
-import CreativeShowcase from '../components/CreativeShowcase';
-import StreetGraphicSection from '../components/StreetGraphicSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -104,14 +102,6 @@ const Index = () => {
         </div>
         
         <div className="section-transition">
-          <CreativeShowcase />
-        </div>
-        
-        <div className="section-transition">
-          <StreetGraphicSection />
-        </div>
-        
-        <div className="section-transition">
           <Projects />
         </div>
         
@@ -129,10 +119,6 @@ const Index = () => {
         
         <div className="section-transition">
           <Services />
-        </div>
-        
-        <div className="section-transition">
-          <ResumeSection />
         </div>
         
         <div className="section-transition">
