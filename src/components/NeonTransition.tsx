@@ -33,6 +33,21 @@ const NeonTransition: React.FC = () => {
           delay: 1
         }}
       />
+      
+      {/* Adding more visual interest with a third line */}
+      <motion.div 
+        className="absolute left-[25%] w-[40%] h-px top-1/4 bg-gradient-to-r from-transparent via-teal-500 to-transparent opacity-70"
+        animate={{
+          left: ["25%", "55%", "10%", "25%"],
+          width: ["40%", "25%", "60%", "40%"]
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "mirror",
+          delay: 0.5
+        }}
+      />
     </div>
   );
 };

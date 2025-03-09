@@ -33,6 +33,9 @@ i18n
     fallbackLng: 'fr',
     interpolation: {
       escapeValue: false
+    },
+    react: {
+      useSuspense: false // This helps prevent issues during language switching
     }
   });
 

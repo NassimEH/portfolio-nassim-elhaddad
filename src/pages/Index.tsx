@@ -92,6 +92,9 @@ const Index = () => {
       document.body.style.backgroundColor = 'rgb(255, 255, 255)';
     }
     
+    // Store theme in localStorage to prevent flashing
+    localStorage.setItem('theme', theme);
+    
     return () => {
       // Cleanup function to remove added styles
       document.body.style.backgroundColor = '';
@@ -113,7 +116,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <ParticleBackground particleCount={35} />
+      <ParticleBackground particleCount={30} />
       
       <ThemeLanguageSwitch />
       
