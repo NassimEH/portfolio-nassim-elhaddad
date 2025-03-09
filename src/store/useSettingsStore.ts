@@ -24,24 +24,15 @@ export const useSettingsStore = create<SettingsState>()(
         // Apply theme to document element directly
         if (theme === 'light') {
           document.documentElement.classList.add('light-theme');
-          document.documentElement.classList.remove('dark');
-          document.body.style.backgroundColor = 'rgb(255, 255, 255)';
         } else {
-          document.documentElement.classList.add('dark');
           document.documentElement.classList.remove('light-theme');
-          document.body.style.backgroundColor = 'rgb(10, 10, 10)';
         }
-        
-        // Store in localStorage for persistence
-        localStorage.setItem('theme', theme);
       },
       setLanguage: (language) => {
         i18n.changeLanguage(language);
         set({ language });
         // Set document language attribute
         document.documentElement.lang = language;
-        // Store in localStorage for persistence
-        localStorage.setItem('app-language', language);
       },
       toggleTheme: () => {
         const currentTheme = get().theme;

@@ -4,48 +4,83 @@ import { motion } from 'framer-motion';
 
 const NeonTransition: React.FC = () => {
   return (
-    <div className="relative w-full h-32 md:h-40 overflow-hidden">
-      <div className="absolute w-full h-px top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-80"></div>
-      
-      <motion.div 
-        className="absolute left-0 w-[50%] h-px top-1/3 bg-gradient-to-r from-transparent via-purple-500 to-transparent"
-        animate={{
-          left: ["0%", "100%"],
-          width: ["50%", "70%", "30%", "50%"]
+    <div className="relative h-24 w-full overflow-hidden bg-gradient-to-b from-purple-900 via-indigo-900 to-cyan-900">
+      {/* Middle horizontal neon line */}
+      <motion.div
+        className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[2px] bg-pink-500"
+        initial={{ scaleX: 0, opacity: 0, filter: 'blur(4px)' }}
+        whileInView={{ 
+          scaleX: 1, 
+          opacity: 1,
+          filter: 'blur(2px)',
+          boxShadow: [
+            '0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.3)', 
+            '0 0 10px rgba(236, 72, 153, 0.7), 0 0 20px rgba(236, 72, 153, 0.5)', 
+            '0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.3)'
+          ]
         }}
-        transition={{
-          duration: 8,
+        transition={{ 
+          duration: 1.5, 
+          ease: "easeInOut",
+          boxShadow: {
+            repeat: Infinity,
+            duration: 2,
+            repeatType: "reverse"
+          }
+        }}
+        viewport={{ once: true }}
+      />
+      
+      {/* Horizontal grid lines */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div 
+          key={i} 
+          className="absolute w-full h-[1px] bg-pink-500/20"
+          style={{ top: `${(i + 1) * 8}%` }}
+          initial={{ scaleX: 0, x: i % 2 === 0 ? '-100%' : '100%' }}
+          whileInView={{ scaleX: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: i * 0.05 }}
+          viewport={{ once: true }}
+        />
+      ))}
+      
+      {/* Vertical grid lines */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div 
+          key={i} 
+          className="absolute h-full w-[1px] bg-cyan-500/20"
+          style={{ left: `${(i + 1) * 5}%` }}
+          initial={{ scaleY: 0, y: i % 2 === 0 ? '-100%' : '100%' }}
+          whileInView={{ scaleY: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: i * 0.02 }}
+          viewport={{ once: true }}
+        />
+      ))}
+      
+      {/* Animated glow circles */}
+      <motion.div
+        className="absolute left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-purple-600/20 blur-3xl"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.7, 0.3]
+        }}
+        transition={{ 
+          duration: 4,
           repeat: Infinity,
-          repeatType: "mirror"
+          repeatType: "reverse"
         }}
       />
       
-      <motion.div 
-        className="absolute right-0 w-[30%] h-px top-2/3 bg-gradient-to-r from-transparent via-pink-500 to-transparent"
-        animate={{
-          right: ["0%", "100%"],
-          width: ["30%", "50%", "20%", "30%"]
+      <motion.div
+        className="absolute right-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-cyan-600/20 blur-3xl"
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.3, 0.7, 0.3]
         }}
-        transition={{
-          duration: 6,
+        transition={{ 
+          duration: 4,
           repeat: Infinity,
-          repeatType: "mirror",
-          delay: 1
-        }}
-      />
-      
-      {/* Adding more visual interest with a third line */}
-      <motion.div 
-        className="absolute left-[25%] w-[40%] h-px top-1/4 bg-gradient-to-r from-transparent via-teal-500 to-transparent opacity-70"
-        animate={{
-          left: ["25%", "55%", "10%", "25%"],
-          width: ["40%", "25%", "60%", "40%"]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          repeatType: "mirror",
-          delay: 0.5
+          repeatType: "reverse"
         }}
       />
     </div>

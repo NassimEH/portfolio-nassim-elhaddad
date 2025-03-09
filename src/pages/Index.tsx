@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -18,7 +17,10 @@ import { useSettingsStore } from '../store/useSettingsStore';
 import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
+import ResumeSection from '../components/ResumeSection';
 import Certifications from '../components/Certifications';
+import CreativeShowcase from '../components/CreativeShowcase';
+import StreetGraphicSection from '../components/StreetGraphicSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -30,13 +32,8 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const sectionsRef = useRef<HTMLDivElement>(null);
   
-  // Initialize theme properly at load time
   useEffect(() => {
-    // Force immediate theme application to prevent flash
-    document.documentElement.classList.toggle('light-theme', theme === 'light');
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    
-    // Set language
+    setTheme(theme);
     setLanguage(language);
     
     const timer = setTimeout(() => {
@@ -76,31 +73,6 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fix for color bug - ensure theme is properly initialized and maintained
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-    
-    // Ensure background color is properly set
-    if (theme === 'dark') {
-      htmlElement.classList.add('dark');
-      htmlElement.classList.remove('light-theme');
-      // Explicitly set the background color to prevent unwanted shifts
-      document.body.style.backgroundColor = 'rgb(10, 10, 10)';
-    } else {
-      htmlElement.classList.remove('dark');
-      htmlElement.classList.add('light-theme');
-      document.body.style.backgroundColor = 'rgb(255, 255, 255)';
-    }
-    
-    // Store theme in localStorage to prevent flashing
-    localStorage.setItem('theme', theme);
-    
-    return () => {
-      // Cleanup function to remove added styles
-      document.body.style.backgroundColor = '';
-    };
-  }, [theme]);
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-screen h-screen bg-background">
@@ -111,12 +83,12 @@ const Index = () => {
 
   return (
     <motion.div 
-      className="min-h-screen relative bg-background"
+      className="min-h-screen relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <ParticleBackground particleCount={30} />
+      <ParticleBackground particleCount={70} />
       
       <ThemeLanguageSwitch />
       
@@ -129,6 +101,14 @@ const Index = () => {
         
         <div className="section-transition">
           <About />
+        </div>
+        
+        <div className="section-transition">
+          <CreativeShowcase />
+        </div>
+        
+        <div className="section-transition">
+          <StreetGraphicSection />
         </div>
         
         <div className="section-transition">
@@ -149,6 +129,10 @@ const Index = () => {
         
         <div className="section-transition">
           <Services />
+        </div>
+        
+        <div className="section-transition">
+          <ResumeSection />
         </div>
         
         <div className="section-transition">

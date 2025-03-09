@@ -1,9 +1,14 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Award, Globe, Code, Server, BookOpen, Database, Bookmark, Briefcase, FileText } from 'lucide-react';
-import { Badge } from "@/components/ui/badge";
+import { ChevronDown, ChevronUp, Award, Bookmark, BookOpen, Briefcase, Code, Database, Server, FileText, Globe } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface Certification {
   id: number;
@@ -12,7 +17,6 @@ interface Certification {
   date: string;
   description: string;
   category: string;
-  tags: string[];
 }
 
 const certifications: Certification[] = [
@@ -22,8 +26,7 @@ const certifications: Certification[] = [
     organization: "Udacity",
     date: "2023",
     description: "A comprehensive program covering React, Redux, and React Native.",
-    category: "frontend",
-    tags: ["React", "Redux", "React Native", "JavaScript", "TypeScript"]
+    category: "frontend"
   },
   {
     id: 2,
@@ -31,8 +34,7 @@ const certifications: Certification[] = [
     organization: "Coursera",
     date: "2022",
     description: "An in-depth course on building scalable APIs with Node.js and Express.",
-    category: "backend",
-    tags: ["Node.js", "Express", "MongoDB", "REST API", "GraphQL"]
+    category: "backend"
   },
   {
     id: 3,
@@ -40,8 +42,7 @@ const certifications: Certification[] = [
     organization: "Amazon Web Services",
     date: "2021",
     description: "Certification demonstrating proficiency in developing and deploying applications on AWS.",
-    category: "devops",
-    tags: ["AWS", "Cloud", "Lambda", "EC2", "S3"]
+    category: "devops"
   },
   {
     id: 4,
@@ -49,8 +50,7 @@ const certifications: Certification[] = [
     organization: "Google",
     date: "2023",
     description: "Certification demonstrating expertise in designing and managing cloud solutions on Google Cloud Platform.",
-    category: "devops",
-    tags: ["GCP", "Cloud", "Kubernetes", "Containers", "Microservices"]
+    category: "devops"
   },
   {
     id: 5,
@@ -58,8 +58,7 @@ const certifications: Certification[] = [
     organization: "Scrum Alliance",
     date: "2022",
     description: "Certification demonstrating knowledge of Scrum principles and practices.",
-    category: "project_management",
-    tags: ["Agile", "Scrum", "Kanban", "Team Management", "Sprint Planning"]
+    category: "project_management"
   },
   {
     id: 6,
@@ -67,8 +66,7 @@ const certifications: Certification[] = [
     organization: "Microsoft",
     date: "2024",
     description: "Certification demonstrating expertise in designing and implementing solutions on Microsoft Azure.",
-    category: "devops",
-    tags: ["Azure", "Cloud", "Identity", "Security", "Storage"]
+    category: "devops"
   },
   {
     id: 7,
@@ -76,8 +74,7 @@ const certifications: Certification[] = [
     organization: "OpenClassrooms",
     date: "2023",
     description: "A comprehensive program covering both front-end and back-end web development technologies.",
-    category: "fullstack",
-    tags: ["HTML", "CSS", "JavaScript", "Node.js", "Database"]
+    category: "fullstack"
   },
   {
     id: 8,
@@ -85,8 +82,7 @@ const certifications: Certification[] = [
     organization: "Coursera",
     date: "2022",
     description: "A specialization in data science covering topics such as machine learning, data analysis, and data visualization.",
-    category: "data_science",
-    tags: ["Python", "R", "Machine Learning", "Statistics", "Data Visualization"]
+    category: "data_science"
   },
   {
     id: 9,
@@ -94,8 +90,7 @@ const certifications: Certification[] = [
     organization: "Coursera",
     date: "2021",
     description: "A specialization in UI/UX design covering topics such as user research, wireframing, and prototyping.",
-    category: "design",
-    tags: ["Figma", "Adobe XD", "User Testing", "Prototyping", "Design Thinking"]
+    category: "design"
   },
   {
     id: 10,
@@ -103,40 +98,46 @@ const certifications: Certification[] = [
     organization: "Udemy",
     date: "2023",
     description: "A course on building cross-platform mobile applications with React Native.",
-    category: "mobile",
-    tags: ["React Native", "iOS", "Android", "Mobile", "Cross-platform"]
+    category: "mobile"
   }
 ];
 
-// All available filters
-const filterCategories = [
-  { value: "all", label: "Tous", icon: <Globe className="w-4 h-4" /> },
-  { value: "frontend", label: "Frontend", icon: <Code className="w-4 h-4" /> },
-  { value: "backend", label: "Backend", icon: <Server className="w-4 h-4" /> },
-  { value: "fullstack", label: "Fullstack", icon: <BookOpen className="w-4 h-4" /> },
-  { value: "devops", label: "DevOps", icon: <Database className="w-4 h-4" /> },
-  { value: "design", label: "Design", icon: <Bookmark className="w-4 h-4" /> },
-  { value: "project_management", label: "Gestion de projet", icon: <Briefcase className="w-4 h-4" /> },
-  { value: "mobile", label: "Mobile", icon: <FileText className="w-4 h-4" /> },
-  { value: "data_science", label: "Data Science", icon: <Database className="w-4 h-4" /> },
-];
+interface FilterCategory {
+  name: string;
+  icon: React.ReactNode;
+  filters: string[];
+  color: string;
+}
 
 const Certifications: React.FC = () => {
-  const [currentFilter, setCurrentFilter] = useState<string>('all');
-  const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [currentFilter, setCurrentFilter] = useState<string | null>(null);
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
+  // Mouse position tracking for background effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const handleFilterChange = (filter: string) => {
-    setCurrentFilter(filter);
+    setCurrentFilter(currentFilter === filter ? null : filter);
   };
 
-  const toggleCategory = (category: string) => {
-    setOpenCategory(openCategory === category ? null : category);
-  };
-
-  const filteredCertifications = currentFilter === 'all'
-    ? certifications
-    : certifications.filter(cert => cert.category === currentFilter);
+  const filteredCertifications = currentFilter
+    ? certifications.filter(cert => cert.category.toLowerCase().includes(currentFilter))
+    : certifications;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -149,75 +150,106 @@ const Certifications: React.FC = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5
+        duration: 0.6,
+        ease: [0.6, 0.05, -0.01, 0.9]
       }
     }
   };
+  
+  // Filter categories
+  const filterCategories: FilterCategory[] = [
+    {
+      name: "Domaines Techniques",
+      icon: <Code className="w-5 h-5 text-purple-400" />,
+      filters: ["Frontend", "Backend", "Fullstack", "Mobile", "Data Science"],
+      color: "purple"
+    },
+    {
+      name: "Organisations",
+      icon: <Briefcase className="w-5 h-5 text-cyan-400" />,
+      filters: ["Udacity", "Coursera", "AWS", "Google", "Microsoft", "OpenClassrooms"],
+      color: "cyan"
+    },
+    {
+      name: "Spécialités",
+      icon: <Bookmark className="w-5 h-5 text-pink-400" />,
+      filters: ["DevOps", "Project Management", "Design", "Cloud"],
+      color: "pink"
+    }
+  ];
 
   return (
-    <section id="certifications" className="py-20 relative overflow-hidden">
-      {/* Background with animated elements */}
+    <section id="certifications" className="py-24 relative overflow-hidden" ref={containerRef}>
+      {/* Background interactive effects */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/80 to-background"
+        style={{
+          background: `radial-gradient(circle ${Math.max(400, window.innerWidth / 3)}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(168, 85, 247, 0.15), transparent 80%)`
+        }}
+      ></div>
+      
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         
         {/* Moving particles */}
-        {Array.from({ length: 12 }).map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-purple-500/20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+            className="absolute w-1 h-1 rounded-full bg-purple-500/50"
+            initial={{ 
+              x: Math.random() * window.innerWidth, 
+              y: Math.random() * window.innerHeight,
+              opacity: Math.random() * 0.5 + 0.3
             }}
-            animate={{
-              y: [0, Math.random() * 100 - 50],
-              x: [0, Math.random() * 100 - 50],
-              opacity: [0.2, 0.5, 0.2],
+            animate={{ 
+              y: [null, Math.random() * window.innerHeight],
+              x: [null, Math.random() * window.innerWidth],
             }}
-            transition={{
-              duration: Math.random() * 10 + 10,
+            transition={{ 
+              duration: Math.random() * 20 + 10,
               repeat: Infinity,
-              repeatType: "reverse",
+              repeatType: "mirror"
             }}
           />
         ))}
         
-        {/* Decorative neon lines */}
-        {Array.from({ length: 4 }).map((_, i) => (
+        {/* Moving light lines */}
+        {[...Array(6)].map((_, i) => (
           <motion.div
-            key={`line-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"
-            style={{
+            key={i}
+            className="absolute h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"
+            style={{ 
               width: Math.random() * 300 + 100,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              rotate: `${Math.random() * 360}deg`,
+              rotate: `${Math.random() * 360}deg`
             }}
-            animate={{
+            animate={{ 
               opacity: [0, 0.7, 0],
-              width: [0, Math.random() * 300 + 200, 0],
+              width: [0, Math.random() * 300 + 200, 0]
             }}
-            transition={{
+            transition={{ 
               duration: Math.random() * 5 + 5,
               repeat: Infinity,
               repeatType: "loop",
-              delay: i * 2,
+              delay: i * 2
             }}
           />
         ))}
       </div>
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-10">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-12">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             {t('certifications.title')}
@@ -227,122 +259,142 @@ const Certifications: React.FC = () => {
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
             {t('certifications.description')}
           </motion.p>
         </div>
 
-        {/* Horizontal Compact Filters */}
-        <motion.div 
-          className="mb-8 flex flex-wrap justify-center gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          {filterCategories.map((category) => (
-            <motion.button
-              key={category.value}
-              onClick={() => handleFilterChange(category.value)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
-                currentFilter === category.value 
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md' 
-                  : 'bg-white/5 text-muted-foreground hover:bg-white/10'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category.icon}
-              <span>{category.label}</span>
-            </motion.button>
-          ))}
-        </motion.div>
+        {/* Filters */}
+        <div className="mb-12">
+          <motion.div 
+            className="max-w-3xl mx-auto glass-morphism p-6 rounded-xl border border-purple-500/20 relative overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/5 via-cyan-500/5 to-pink-500/5 blur-xl rounded-xl"></div>
+            
+            <h3 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Filtrer par catégorie
+            </h3>
+            
+            <div className="grid gap-4">
+              {filterCategories.map((category, index) => (
+                <motion.div 
+                  key={index}
+                  className={`rounded-lg border border-${category.color}-500/20 overflow-hidden`}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className={`px-4 py-3 flex justify-between items-center bg-${category.color}-500/10 hover:bg-${category.color}-500/15 transition-all cursor-pointer`}>
+                    <div className="flex items-center gap-2">
+                      {category.icon}
+                      <span className="font-medium">{category.name}</span>
+                    </div>
+                    <ChevronDown className={`w-5 h-5 text-${category.color}-400`} />
+                  </div>
+                  
+                  <div className="px-4 py-3 bg-black/20 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {category.filters.map((filter) => (
+                      <motion.button
+                        key={filter}
+                        onClick={() => handleFilterChange(filter.toLowerCase())}
+                        className={`px-3 py-2 rounded-md text-sm transition-all ${
+                          currentFilter === filter.toLowerCase() 
+                            ? `bg-gradient-to-r from-${category.color}-500 to-${category.color === 'purple' ? 'pink' : category.color === 'cyan' ? 'blue' : 'purple'}-500 text-white shadow-lg` 
+                            : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                        }`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {filter}
+                      </motion.button>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {currentFilter && (
+              <motion.div 
+                className="mt-4 flex justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <button
+                  onClick={() => setCurrentFilter(null)}
+                  className="px-4 py-2 text-sm bg-white/10 hover:bg-white/15 rounded-lg flex items-center gap-2 transition-all"
+                >
+                  <span>Réinitialiser le filtre</span>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="w-4 h-4 border-t border-r border-purple-400 rounded-full"
+                  ></motion.div>
+                </button>
+              </motion.div>
+            )}
+          </motion.div>
+        </div>
 
-        {/* Certifications Cards Grid */}
+        {/* Certifications cards */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <AnimatePresence mode="sync">
-            {filteredCertifications.length > 0 ? (
-              filteredCertifications.map(cert => (
-                <motion.div 
-                  key={cert.id}
-                  className="relative group"
-                  variants={itemVariants}
-                  whileHover={{ y: -5 }}
-                  layout
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-cyan-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/30 hover:bg-black/40 transition-all">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
+          {filteredCertifications.length > 0 ? (
+            filteredCertifications.map(cert => (
+              <motion.div 
+                className="relative group"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                key={cert.id}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
+                  
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
+                      <Award className="h-5 w-5 text-pink-400" />
+                    </div>
                     
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-xl font-bold text-white">{cert.name}</h3>
-                        <Award className="h-5 w-5 text-pink-400" />
-                      </div>
-                      
-                      <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
-                      
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {cert.tags.slice(0, 3).map((tag, idx) => (
-                          <Badge 
-                            key={idx}
-                            variant="outline" 
-                            className="bg-white/5 text-xs border-purple-500/20"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                        {cert.tags.length > 3 && (
-                          <Badge 
-                            variant="outline" 
-                            className="bg-white/5 text-xs border-cyan-500/20"
-                          >
-                            +{cert.tags.length - 3}
-                          </Badge>
-                        )}
-                      </div>
-                      
-                      <div className="flex justify-between items-center text-xs">
-                        <div className="text-cyan-400 font-mono">{cert.date}</div>
-                        <div className="text-muted-foreground">{cert.organization}</div>
-                      </div>
+                    <p className="text-muted-foreground mb-4 text-sm">{cert.description}</p>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
+                      <div className="text-sm text-muted-foreground">{cert.organization}</div>
                     </div>
                   </div>
-                </motion.div>
-              ))
-            ) : (
-              <motion.div 
-                className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
-                <button
-                  onClick={() => setCurrentFilter('all')}
-                  className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
-                >
-                  Afficher toutes les certifications
-                </button>
+                </div>
               </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-        
-        {/* Neon effect decoration at the bottom */}
-        <motion.div 
-          className="mt-16 h-px w-full"
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+            ))
+          ) : (
+            <motion.div 
+              className="col-span-1 md:col-span-3 text-center py-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
+              <button
+                onClick={() => setCurrentFilter(null)}
+                className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+              >
+                Afficher toutes les certifications
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
