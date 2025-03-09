@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import ThreeScene from './ThreeScene';
 import { scrollToElement } from '../utils/transitions';
 import { useTranslation } from 'react-i18next';
