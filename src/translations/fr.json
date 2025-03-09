@@ -1,0 +1,84 @@
+
+{
+  "nav": {
+    "about": "À propos",
+    "projects": "Projets",
+    "experience": "Expérience", 
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Nassim El Haddad",
+    "subtitle": "Développeur Full Stack",
+    "description": "Je crée des applications web modernes, performantes et accessibles qui résolvent des problèmes concrets.",
+    "cta_projects": "Voir mes projets",
+    "cta_contact": "Me contacter",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "title": "À PROPOS DE MOI",
+    "subtitle": "Passionné par la création d'expériences web exceptionnelles",
+    "description": [
+      "Je suis un développeur full stack basé à Lyon, spécialisé dans la création d'applications web modernes et élégantes avec une attention particulière aux détails et à l'expérience utilisateur.",
+      "Avec plusieurs années d'expérience dans le développement web, j'ai travaillé sur divers projets allant des sites vitrines aux applications complexes avec des architectures sophistiquées.",
+      "Ma philosophie est centrée sur la création de solutions qui combinent esthétique et fonctionnalité, en utilisant les technologies les plus adaptées à chaque projet."
+    ]
+  },
+  "projects": {
+    "title": "MES PROJETS",
+    "subtitle": "Projets récents",
+    "description": "Une sélection de mes travaux récents, incluant des applications web, des sites et des expériences interactives.",
+    "filters": {
+      "all": "Tous",
+      "featured": "Mis en avant",
+      "categories": "Catégories",
+      "technologies": "Technologies"
+    },
+    "view_details": "Voir les détails",
+    "view_more": "Voir plus de projets sur GitHub",
+    "modal": {
+      "technologies": "Technologies",
+      "visit_site": "Visiter le site",
+      "view_code": "Voir le code",
+      "close": "Fermer"
+    }
+  },
+  "experience": {
+    "title": "MON PARCOURS",
+    "subtitle": "Expérience professionnelle",
+    "description": "Mon parcours professionnel et ma formation académique dans le domaine du développement web.",
+    "work": "Expérience professionnelle",
+    "education": "Formation",
+    "present": "Présent",
+    "view_linkedin": "Voir mon profil LinkedIn"
+  },
+  "contact": {
+    "title": "CONTACT",
+    "subtitle": "Travaillons ensemble",
+    "description": "Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter de votre idée.",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "sending": "Envoi en cours...",
+      "send": "Envoyer",
+      "success": "Message envoyé !",
+      "success_description": "Merci pour votre message. Je vous répondrai dès que possible."
+    },
+    "info": {
+      "title": "Coordonnées",
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Localisation"
+    },
+    "social": {
+      "title": "Suivez-moi"
+    }
+  },
+  "footer": {
+    "description": "Développeur web passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "rights": "Tous droits réservés.",
+    "back_to_top": "Retour en haut"
+  }
+}

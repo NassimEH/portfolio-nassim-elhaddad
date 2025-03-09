@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -8,30 +9,41 @@ import Experience from '../components/Experience';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ParticleBackground from '../components/ParticleBackground';
+import ThemeLanguageSwitch from '../components/ThemeLanguageSwitch';
 import { useRevealOnScroll, useParallax } from '../utils/transitions';
 import { useToast } from '@/hooks/use-toast';
-
-// ThreeJS needs to be installed
-<lov-add-dependency>three@latest</lov-add-dependency>
+import { useTranslation } from 'react-i18next';
+import { useSettingsStore } from '../store/useSettingsStore';
+import '../utils/i18n';
 
 const Index = () => {
   useRevealOnScroll();
   useParallax();
   
   const { toast } = useToast();
+  const { t } = useTranslation();
+  const theme = useSettingsStore(state => state.theme);
   
   useEffect(() => {
     // Show welcome toast
     toast({
-      title: "Bienvenue sur mon portfolio !",
-      description: "Explorez mes projets et découvrez mes compétences.",
+      title: t('hero.title'),
+      description: t('hero.description'),
     });
-  }, [toast]);
+  }, [toast, t]);
 
   return (
-    <div className="min-h-screen relative grid-bg">
+    <motion.div 
+      className={`min-h-screen relative grid-bg ${theme === 'light' ? 'light-theme' : ''}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
       {/* Background Effects */}
-      <ParticleBackground particleCount={50} />
+      <ParticleBackground particleCount={70} />
+      
+      {/* Theme & Language Switcher */}
+      <ThemeLanguageSwitch />
       
       {/* Fixed Navigation */}
       <Navbar />
@@ -47,7 +59,7 @@ const Index = () => {
       
       {/* Footer */}
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

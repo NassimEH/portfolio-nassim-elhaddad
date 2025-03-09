@@ -1,0 +1,84 @@
+
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience", 
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Nassim El Haddad",
+    "subtitle": "Full Stack Developer",
+    "description": "I create modern, performant, and accessible web applications that solve real-world problems.",
+    "cta_projects": "View my projects",
+    "cta_contact": "Contact me",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "title": "ABOUT ME",
+    "subtitle": "Passionate about creating exceptional web experiences",
+    "description": [
+      "I'm a full stack developer based in Lyon, specializing in creating modern and elegant web applications with attention to detail and user experience.",
+      "With several years of experience in web development, I've worked on various projects ranging from showcase websites to complex applications with sophisticated architectures.",
+      "My philosophy is centered on creating solutions that combine aesthetics and functionality, using the most suitable technologies for each project."
+    ]
+  },
+  "projects": {
+    "title": "MY PROJECTS",
+    "subtitle": "Recent Projects",
+    "description": "A selection of my recent work, including web applications, websites, and interactive experiences.",
+    "filters": {
+      "all": "All",
+      "featured": "Featured",
+      "categories": "Categories",
+      "technologies": "Technologies"
+    },
+    "view_details": "View Details",
+    "view_more": "View more projects on GitHub",
+    "modal": {
+      "technologies": "Technologies",
+      "visit_site": "Visit Site",
+      "view_code": "View Code",
+      "close": "Close"
+    }
+  },
+  "experience": {
+    "title": "MY JOURNEY",
+    "subtitle": "Professional Experience",
+    "description": "My professional and academic background in the field of web development.",
+    "work": "Work Experience",
+    "education": "Education",
+    "present": "Present",
+    "view_linkedin": "View my LinkedIn profile"
+  },
+  "contact": {
+    "title": "CONTACT",
+    "subtitle": "Let's Work Together",
+    "description": "Have a project in mind? Feel free to contact me to discuss your idea.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "sending": "Sending...",
+      "send": "Send",
+      "success": "Message sent!",
+      "success_description": "Thank you for your message. I will get back to you as soon as possible."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    },
+    "social": {
+      "title": "Follow Me"
+    }
+  },
+  "footer": {
+    "description": "Web developer passionate about creating exceptional user experiences and innovative technical solutions.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "back_to_top": "Back to top"
+  }
+}
