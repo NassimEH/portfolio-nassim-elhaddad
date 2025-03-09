@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -19,6 +19,7 @@ import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
 import ResumeSection from '../components/ResumeSection';
 import Certifications from '../components/Certifications';
+import CreativeShowcase from '../components/CreativeShowcase';
 
 const Index = () => {
   useRevealOnScroll();
@@ -28,6 +29,7 @@ const Index = () => {
   const { t } = useTranslation();
   const { theme, language, setTheme, setLanguage } = useSettingsStore();
   const [isLoading, setIsLoading] = useState(true);
+  const sectionsRef = useRef<HTMLDivElement>(null);
   
   // Initialize theme and language
   useEffect(() => {
@@ -55,6 +57,28 @@ const Index = () => {
     }
   }, [isLoading, toast, t]);
 
+  // Custom scroll behavior for fluid section transitions
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionsRef.current) {
+        const sections = sectionsRef.current.querySelectorAll('section');
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > 0;
+          
+          if (isVisible) {
+            section.classList.add('section-active');
+          } else {
+            section.classList.remove('section-active');
+          }
+        });
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-screen h-screen bg-background">
@@ -70,48 +94,43 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Effets de fond */}
+      {/* Background effects */}
       <ParticleBackground particleCount={70} />
       
-      {/* Thème et langue */}
+      {/* Theme and language switch */}
       <ThemeLanguageSwitch />
       
-      {/* Navigation fixe */}
+      {/* Fixed navigation */}
       <Navbar />
       
-      {/* Contenu principal */}
-      <main>
+      {/* Main content */}
+      <main ref={sectionsRef}>
         <Hero />
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+        <div className="section-transition">
           <About />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
-          <ResumeSection />
+        <div className="section-transition">
+          <CreativeShowcase />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
-          <Certifications />
-        </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+        <div className="section-transition">
           <Projects />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
-          <Testimonials />
+        <div className="section-transition">
+          <Certifications />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+        <div className="section-transition">
           <Experience />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+        <div className="section-transition">
+          <Testimonials />
+        </div>
+        <div className="section-transition">
           <Services />
         </div>
-        <div className="relative">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-10"></div>
+        <div className="section-transition">
+          <ResumeSection />
+        </div>
+        <div className="section-transition">
           <Contact />
         </div>
       </main>

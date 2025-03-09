@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight, Quote, MessageSquare, Calendar, Star, User, Building } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, MessageSquare, Calendar, Star, User, Building, ThumbsUp, Gift } from 'lucide-react';
 
 interface Testimonial {
   id: number;
@@ -13,6 +13,9 @@ interface Testimonial {
   text: string;
   date: string;
   project: string;
+  skills: string[];
+  highlight: string;
+  rating: number;
   color: string;
 }
 
@@ -26,6 +29,9 @@ const testimonials: Testimonial[] = [
     text: "Travailler avec ce développeur a été une expérience incroyable. Sa capacité à comprendre nos besoins et à livrer des solutions sur mesure a transformé notre présence en ligne. Je recommande ses services à quiconque cherche un développeur web de premier ordre.",
     date: "Juin 2023",
     project: "Refonte site e-commerce",
+    skills: ["React", "Node.js", "UI/UX Design"],
+    highlight: "Augmentation des conversions de 40% en 3 mois",
+    rating: 5,
     color: "from-purple-400 to-pink-500"
   },
   {
@@ -37,6 +43,9 @@ const testimonials: Testimonial[] = [
     text: "Un talent exceptionnel. Ce développeur a créé pour nous une application web qui a dépassé toutes nos attentes. Son expertise technique et sa créativité ont fait toute la différence dans notre projet.",
     date: "Mars 2023",
     project: "Application de gestion",
+    skills: ["Vue.js", "Firebase", "Tailwind CSS"],
+    highlight: "Temps de développement réduit de 30%",
+    rating: 5,
     color: "from-blue-500 to-cyan-400"
   },
   {
@@ -48,6 +57,9 @@ const testimonials: Testimonial[] = [
     text: "Nous avons eu la chance de travailler avec ce développeur sur plusieurs projets, et chaque fois, les résultats ont été spectaculaires. Sa compréhension des tendances actuelles et son souci du détail font de lui un partenaire de développement idéal.",
     date: "Octobre 2022",
     project: "Dashboard analytique",
+    skills: ["React", "D3.js", "API REST"],
+    highlight: "Visualisation de données complexes simplifiée",
+    rating: 4,
     color: "from-amber-400 to-orange-500"
   }
 ];
@@ -85,7 +97,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Témoignages
+            {t('testimonials.title')}
           </motion.h2>
           
           <motion.p 
@@ -95,7 +107,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Découvrez ce que mes clients disent de ma prestation et de mon travail
+            {t('testimonials.description')}
           </motion.p>
         </div>
         
@@ -124,7 +136,7 @@ const Testimonials: React.FC = () => {
                         <div className="mb-6">
                           <div className="flex items-center mb-4">
                             <MessageSquare className="w-5 h-5 text-cyan-400 mr-2" />
-                            <span className="text-sm text-cyan-400 font-medium">Témoignage client</span>
+                            <span className="text-sm text-cyan-400 font-medium">{t('testimonials.testimonial')}</span>
                           </div>
                           
                           <p className="text-xl italic text-muted-foreground leading-relaxed mb-6">
@@ -159,7 +171,7 @@ const Testimonials: React.FC = () => {
                       <div className="md:col-span-2 glass-morphism rounded-xl p-5 border border-white/10">
                         <div className="mb-4">
                           <h5 className={`text-lg font-medium mb-2 bg-gradient-to-r ${testimonial.color} bg-clip-text text-transparent`}>
-                            À propos du projet
+                            {t('testimonials.project_details')}
                           </h5>
                           <div className="flex justify-between mb-2">
                             <div className="flex items-center">
@@ -167,25 +179,41 @@ const Testimonials: React.FC = () => {
                               <span className="text-sm text-muted-foreground">{testimonial.date}</span>
                             </div>
                             <div className="flex">
-                              {[1, 2, 3, 4, 5].map((star) => (
-                                <motion.div 
-                                  key={star}
-                                  initial={{ opacity: 0, scale: 0 }}
-                                  animate={{ 
-                                    opacity: 1, 
-                                    scale: 1,
-                                    transition: { delay: 0.1 * star }
-                                  }}
-                                >
-                                  <div className={`w-4 h-4 ${testimonial.color} opacity-70`}>
-                                    <div className={`w-4 h-4 bg-gradient-to-r ${testimonial.color} rounded-full`}></div>
-                                  </div>
-                                </motion.div>
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-500/30'}`}
+                                  fill={i < testimonial.rating ? 'currentColor' : 'none'}
+                                />
                               ))}
                             </div>
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            <p>Projet: <span className="text-primary">{testimonial.project}</span></p>
+                            <p className="mb-2">{t('testimonials.project')}: <span className="text-primary">{testimonial.project}</span></p>
+                            
+                            {/* Project highlight */}
+                            <div className="flex items-center mb-3 p-2 rounded-lg bg-gradient-to-r from-green-500/10 to-cyan-500/10">
+                              <ThumbsUp className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
+                              <p className="text-green-300 text-xs">{testimonial.highlight}</p>
+                            </div>
+                            
+                            {/* Skills used */}
+                            <div className="mb-3">
+                              <p className="text-xs text-muted-foreground mb-2 flex items-center">
+                                <Gift className="w-3 h-3 mr-1 text-cyan-400" />
+                                {t('testimonials.skills_delivered')}:
+                              </p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {testimonial.skills.map((skill, i) => (
+                                  <span 
+                                    key={i} 
+                                    className={`text-xs px-2 py-0.5 rounded-full bg-gradient-to-r ${testimonial.color} bg-opacity-10 text-white`}
+                                  >
+                                    {skill}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
                           </div>
                         </div>
                         
@@ -197,7 +225,7 @@ const Testimonials: React.FC = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            Voir le projet
+                            {t('testimonials.view_project')}
                           </motion.button>
                         </div>
                       </div>
@@ -221,7 +249,7 @@ const Testimonials: React.FC = () => {
             </AnimatePresence>
           </div>
           
-          {/* Contrôles de navigation */}
+          {/* Navigation controls */}
           <div className="flex justify-between items-center mt-8">
             <motion.button
               className="p-2 rounded-full glass-morphism hover:bg-white/10 transition-all duration-300"

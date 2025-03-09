@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { contactInfo } from '../utils/projectData';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
-import { Send, Mail, MapPin, ArrowRight, Github, Linkedin, Check } from 'lucide-react';
+import { Send, Mail, MapPin, ArrowRight, Github, Linkedin, Check, MousePointer, MessageSquare, User } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +13,7 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isKonamiActive, setIsKonamiActive] = useState(false);
   const { toast } = useToast();
   const { t } = useTranslation();
   
@@ -44,8 +44,46 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
+  // Konami code easter egg
+  React.useEffect(() => {
+    let keys: string[] = [];
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      keys.push(e.key);
+      
+      // Keep only the last N keys, where N is the length of the Konami code
+      if (keys.length > konamiCode.length) {
+        keys = keys.slice(keys.length - konamiCode.length);
+      }
+      
+      // Check if the Konami code is triggered
+      if (keys.join('') === konamiCode.join('')) {
+        setIsKonamiActive(true);
+        toast({
+          title: "🎮 Konami Code Activated!",
+          description: "You've found a secret! Enjoy the colorful effects.",
+        });
+        
+        // Reset after some time
+        setTimeout(() => {
+          setIsKonamiActive(false);
+        }, 10000);
+        
+        // Reset the keys array
+        keys = [];
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [toast]);
+
   return (
-    <section id="contact" className="py-24 px-6 relative overflow-hidden">
+    <section id="contact" className={`py-24 px-6 relative overflow-hidden ${isKonamiActive ? 'konami-code-activated' : ''}`}>
       {/* Synthwave background effect */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-purple-600/20 to-transparent"></div>
@@ -115,39 +153,55 @@ const Contact: React.FC = () => {
                     exit={{ opacity: 0 }}
                   >
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium mb-2 flex items-center">
+                        <User className="w-4 h-4 mr-2 text-purple-400" />
                         {t('contact.name')}
                       </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
-                        placeholder={t('contact.name_placeholder')}
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
+                          placeholder={t('contact.name_placeholder')}
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-purple-400/50 font-mono">
+                          {t('contact.required')}
+                        </div>
+                      </div>
                     </div>
                     
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium mb-2 flex items-center">
+                        <Mail className="w-4 h-4 mr-2 text-purple-400" />
                         {t('contact.email')}
                       </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
-                        placeholder={t('contact.email_placeholder')}
-                      />
+                      <div className="relative">
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
+                          placeholder={t('contact.email_placeholder')}
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-purple-400/50 font-mono">
+                          {t('contact.required')}
+                        </div>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {t('contact.email_privacy')}
+                      </p>
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium mb-2 flex items-center">
+                        <MessageSquare className="w-4 h-4 mr-2 text-purple-400" />
                         {t('contact.message')}
                       </label>
                       <textarea
@@ -162,21 +216,28 @@ const Contact: React.FC = () => {
                       />
                     </div>
                     
-                    <motion.button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 disabled:opacity-70 transition-all duration-300 font-medium flex justify-center items-center"
-                      whileHover={{ translateY: -5, boxShadow: "0 10px 25px -5px rgba(168,85,247,0.4)" }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {isSubmitting ? (
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                      ) : null}
-                      {isSubmitting ? t('contact.sending') : t('contact.send')}
-                    </motion.button>
+                    <div className="pt-2">
+                      <motion.button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 disabled:opacity-70 transition-all duration-300 font-medium flex justify-center items-center"
+                        whileHover={{ translateY: -5, boxShadow: "0 10px 25px -5px rgba(168,85,247,0.4)" }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {isSubmitting ? (
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        ) : null}
+                        {isSubmitting ? t('contact.sending') : t('contact.send')}
+                      </motion.button>
+                      
+                      <div className="mt-4 text-xs text-center text-muted-foreground flex items-center justify-center">
+                        <MousePointer className="w-3 h-3 mr-1.5" />
+                        <span>{t('contact.easter_egg_hint')}</span>
+                      </div>
+                    </div>
                   </motion.form>
                 )}
               </AnimatePresence>
