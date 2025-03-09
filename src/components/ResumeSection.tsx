@@ -51,24 +51,33 @@ const ResumeSection: React.FC = () => {
   return (
     <section id="resume" className="py-16 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="glass-morphism p-10 rounded-2xl border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.15)] relative overflow-hidden">
+        {/* Title at the top */}
+        <motion.div 
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Mon CV
+          </motion.h2>
+        </motion.div>
+        
+        <div className="glass-morphism p-6 md:p-8 rounded-2xl border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.15)] relative overflow-hidden">
           {/* Background gradient effect */}
           <div className="absolute -inset-10 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-3xl rounded-full"></div>
           
-          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div>
-              <motion.h2 
-                className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                Mon CV
-              </motion.h2>
-              
+          <div className="relative grid grid-cols-1 md:grid-cols-8 gap-8 items-center">
+            <div className="md:col-span-5">
               <motion.p
-                className="text-lg text-muted-foreground mb-8"
+                className="text-lg text-muted-foreground mb-6"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -124,13 +133,13 @@ const ResumeSection: React.FC = () => {
               </div>
               
               {/* Easter egg */}
-              <div className="mt-10 text-xs text-muted-foreground italic opacity-50 cursor-help group">
+              <div className="mt-6 text-xs text-muted-foreground italic opacity-50 cursor-help group">
                 <span className="group-hover:text-cyan-400 transition-colors duration-300">Conseil: Utilisez le raccourci Konami Code sur la page d'accueil</span>
               </div>
             </div>
             
             <motion.div
-              className="relative"
+              className="md:col-span-3 relative"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -139,21 +148,21 @@ const ResumeSection: React.FC = () => {
               <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl">
                 {/* Mock CV design */}
                 <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-                <div className="absolute top-6 left-6 w-24 h-24 rounded-full bg-white/10"></div>
-                <div className="absolute top-8 right-6 w-32 h-3 rounded-full bg-white/10"></div>
-                <div className="absolute top-14 right-6 w-24 h-3 rounded-full bg-white/10"></div>
-                <div className="absolute top-40 left-6 w-40 h-4 rounded-full bg-white/10"></div>
+                <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-white/10"></div>
+                <div className="absolute top-8 right-6 w-24 h-2 rounded-full bg-white/10"></div>
+                <div className="absolute top-12 right-6 w-16 h-2 rounded-full bg-white/10"></div>
+                <div className="absolute top-24 left-6 w-32 h-3 rounded-full bg-white/10"></div>
                 
-                <div className="absolute top-52 left-6 right-6 space-y-3">
-                  <div className="w-full h-2 rounded-full bg-white/10"></div>
-                  <div className="w-full h-2 rounded-full bg-white/10"></div>
-                  <div className="w-3/4 h-2 rounded-full bg-white/10"></div>
+                <div className="absolute top-32 left-6 right-6 space-y-2">
+                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
+                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
+                  <div className="w-3/4 h-1.5 rounded-full bg-white/10"></div>
                 </div>
                 
-                <div className="absolute top-72 left-6 right-6 space-y-3">
-                  <div className="w-full h-2 rounded-full bg-white/10"></div>
-                  <div className="w-full h-2 rounded-full bg-white/10"></div>
-                  <div className="w-2/3 h-2 rounded-full bg-white/10"></div>
+                <div className="absolute top-44 left-6 right-6 space-y-2">
+                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
+                  <div className="w-full h-1.5 rounded-full bg-white/10"></div>
+                  <div className="w-2/3 h-1.5 rounded-full bg-white/10"></div>
                 </div>
                 
                 <motion.div 
@@ -166,27 +175,27 @@ const ResumeSection: React.FC = () => {
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                   whileHover={{ scale: 1.2, rotate: 10 }}
                 >
-                  <FileText className="w-12 h-12 text-cyan-400 opacity-80" />
+                  <FileText className="w-10 h-10 text-cyan-400 opacity-80" />
                 </motion.div>
               </div>
               
-              {/* Floating elements */}
+              {/* Small floating elements */}
               <motion.div 
-                className="absolute -top-5 -left-5 w-10 h-10 glass-morphism rounded-lg flex items-center justify-center"
-                animate={{ y: [0, -10, 0] }}
+                className="absolute -top-3 -left-3 w-8 h-8 glass-morphism rounded-lg flex items-center justify-center"
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
                 whileHover={{ scale: 1.2, rotate: 45 }}
               >
-                <FileText className="w-6 h-6 text-cyan-400" />
+                <FileText className="w-4 h-4 text-cyan-400" />
               </motion.div>
               
               <motion.div 
-                className="absolute -bottom-5 -right-5 w-10 h-10 glass-morphism rounded-lg flex items-center justify-center"
-                animate={{ y: [0, 10, 0] }}
+                className="absolute -bottom-3 -right-3 w-8 h-8 glass-morphism rounded-lg flex items-center justify-center"
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
                 whileHover={{ scale: 1.2, rotate: -45 }}
               >
-                <Download className="w-6 h-6 text-pink-400" />
+                <Download className="w-4 h-4 text-pink-400" />
               </motion.div>
             </motion.div>
           </div>

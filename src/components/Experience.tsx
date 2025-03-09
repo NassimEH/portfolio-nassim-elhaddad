@@ -50,7 +50,7 @@ const Experience: React.FC = () => {
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent"
             variants={titleVariants}
           >
             {t('experience.subtitle')}
@@ -115,7 +115,15 @@ const Experience: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <div className="text-lg font-medium text-blue-300">{exp.company}</div>
+                      <a 
+                        href={`https://www.google.com/search?q=${exp.company}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-lg font-medium text-blue-300 hover:text-blue-200 transition-colors flex items-center gap-1 w-fit"
+                      >
+                        {exp.company}
+                        <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-70" />
+                      </a>
                       <div className="text-sm text-muted-foreground">{exp.location}</div>
                     </div>
                     
@@ -191,7 +199,15 @@ const Experience: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <div className="text-lg font-medium text-purple-300">{edu.institution}</div>
+                      <a 
+                        href={`https://www.google.com/search?q=${edu.institution}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-lg font-medium text-purple-300 hover:text-purple-200 transition-colors flex items-center gap-1 w-fit"
+                      >
+                        {edu.institution}
+                        <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-70" />
+                      </a>
                       <div className="text-sm text-muted-foreground">{edu.location}</div>
                     </div>
                     
