@@ -15,6 +15,8 @@ import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '../store/useSettingsStore';
 import '../utils/i18n';
+import Testimonials from '../components/Testimonials';
+import Services from '../components/Services';
 
 const Index = () => {
   useRevealOnScroll();
@@ -22,10 +24,24 @@ const Index = () => {
   
   const { toast } = useToast();
   const { t } = useTranslation();
-  const theme = useSettingsStore(state => state.theme);
+  const { theme, language } = useSettingsStore();
+  
+  // Appliquer le changement de langue
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+  
+  // Appliquer le thème
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    } else {
+      document.documentElement.classList.remove('light-theme');
+    }
+  }, [theme]);
   
   useEffect(() => {
-    // Show welcome toast
+    // Afficher un toast de bienvenue
     toast({
       title: t('hero.title'),
       description: t('hero.description'),
@@ -34,25 +50,27 @@ const Index = () => {
 
   return (
     <motion.div 
-      className={`min-h-screen relative grid-bg ${theme === 'light' ? 'light-theme' : ''}`}
+      className={`min-h-screen relative ${theme === 'light' ? 'light-theme' : ''}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Background Effects */}
+      {/* Effets de fond */}
       <ParticleBackground particleCount={70} />
       
-      {/* Theme & Language Switcher */}
+      {/* Thème et langue */}
       <ThemeLanguageSwitch />
       
-      {/* Fixed Navigation */}
+      {/* Navigation fixe */}
       <Navbar />
       
-      {/* Main Content */}
+      {/* Contenu principal */}
       <main>
         <Hero />
         <About />
+        <Services />
         <Projects />
+        <Testimonials />
         <Experience />
         <Contact />
       </main>

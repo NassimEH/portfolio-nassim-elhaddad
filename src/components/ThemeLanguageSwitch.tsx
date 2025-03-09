@@ -11,7 +11,6 @@ const ThemeLanguageSwitch: React.FC = () => {
   
   const handleLanguageChange = (lang: 'fr' | 'en') => {
     setLanguage(lang);
-    i18n.changeLanguage(lang);
   };
   
   return (

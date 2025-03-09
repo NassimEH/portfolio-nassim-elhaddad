@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import ThreeScene from './ThreeScene';
 import { scrollToElement } from '../utils/transitions';
 import { useTranslation } from 'react-i18next';
-import { ArrowDown, Code, ExternalLink, Sparkles } from 'lucide-react';
+import { ArrowDown, Code, ExternalLink, Sparkles, Cpu, ZapIcon } from 'lucide-react';
 import { useSettingsStore } from '../store/useSettingsStore';
 
 const Hero: React.FC = () => {
@@ -41,23 +41,56 @@ const Hero: React.FC = () => {
   };
 
   const floatingIcons = [
-    { icon: <Code size={24} />, delay: 0, x: -120, y: -80 },
-    { icon: <Sparkles size={20} />, delay: 0.2, x: 150, y: -120 },
-    { icon: <ExternalLink size={18} />, delay: 0.4, x: -180, y: 60 }
+    { icon: <Code size={24} className="text-purple-400" />, delay: 0, x: -120, y: -80 },
+    { icon: <Sparkles size={20} className="text-pink-400" />, delay: 0.2, x: 150, y: -120 },
+    { icon: <Cpu size={22} className="text-cyan-400" />, delay: 0.3, x: -180, y: 60 },
+    { icon: <ZapIcon size={18} className="text-yellow-400" />, delay: 0.4, x: 190, y: 90 }
   ];
+  
+  // Easter egg - konami code
+  useEffect(() => {
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          // Easter egg trouvé!
+          document.body.classList.add('animated-gradient');
+          setTimeout(() => {
+            document.body.classList.remove('animated-gradient');
+          }, 5000);
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
-    <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Scene */}
+    <section id="hero" className={`relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 ${theme === 'light' ? 'bg-gradient-to-b from-gray-100 to-gray-200' : 'bg-gradient-to-b from-gray-900 to-black'}`}>
+      {/* Background Scene avec interactions */}
       <div className="absolute inset-0 z-0">
         <ThreeScene />
       </div>
+      
+      {/* Grille synthwave */}
+      <div className={`absolute inset-0 bg-grid-pattern opacity-10 ${theme === 'light' ? 'opacity-5' : 'opacity-10'}`}></div>
+      
+      {/* Lumières Synthwave */}
+      <div className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-purple-600/20 to-transparent"></div>
+      <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-cyan-500/20 to-transparent"></div>
       
       {/* Floating interactive elements */}
       {floatingIcons.map((item, index) => (
         <motion.div
           key={index}
-          className="absolute z-10 text-primary/50 parallax"
+          className="absolute z-10 parallax"
           initial={{ opacity: 0 }}
           animate={{ 
             opacity: [0, 0.7, 0.5],
@@ -75,6 +108,7 @@ const Hero: React.FC = () => {
             top: `calc(50% + ${item.y}px)`,
           }}
           data-speed={`0.${index + 1}`}
+          whileHover={{ scale: 1.5, rotate: 15 }}
         >
           {item.icon}
         </motion.div>
@@ -89,23 +123,23 @@ const Hero: React.FC = () => {
         animate="visible"
       >
         <motion.div 
-          className="inline-block mb-4 px-4 py-1 rounded-full neo-morphism backdrop-blur-sm"
+          className="inline-block mb-6 px-4 py-1 rounded-full glass-morphism backdrop-blur-sm border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
           variants={itemVariants}
         >
-          <p className="text-sm font-mono text-primary">
+          <p className="text-sm font-mono bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             {t('hero.subtitle')}
           </p>
         </motion.div>
         
         <motion.h1 
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
           variants={itemVariants}
         >
           {t('hero.title')}
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 text-balance"
+          className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 text-balance"
           variants={itemVariants}
         >
           {t('hero.description')}
@@ -117,8 +151,8 @@ const Hero: React.FC = () => {
         >
           <motion.button 
             onClick={() => scrollToElement('projects', 80)}
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 ease-cinematic font-medium transform hover:scale-[1.02] active:scale-[0.98]"
-            whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(59,130,246,0.5)" }}
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 ease-cinematic font-medium transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+            whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(168,85,247,0.7)" }}
             whileTap={{ scale: 0.98 }}
           >
             {t('hero.cta_projects')}
@@ -126,8 +160,8 @@ const Hero: React.FC = () => {
           
           <motion.button 
             onClick={() => scrollToElement('contact', 80)}
-            className="px-8 py-3 rounded-lg border border-white/10 glass-morphism transition-all duration-300 ease-cinematic font-medium transform hover:scale-[1.02] active:scale-[0.98]"
-            whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(255,255,255,0.2)" }}
+            className="px-8 py-3 rounded-lg border border-cyan-500/50 glass-morphism transition-all duration-300 ease-cinematic font-medium transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+            whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(34,211,238,0.5)" }}
             whileTap={{ scale: 0.98 }}
           >
             {t('hero.cta_contact')}
@@ -153,7 +187,7 @@ const Hero: React.FC = () => {
             onClick={() => scrollToElement('about', 80)}
           >
             <span className="text-sm text-muted-foreground mb-2">{t('hero.scroll')}</span>
-            <ArrowDown className="w-5 h-5 text-primary" />
+            <ArrowDown className="w-5 h-5 text-cyan-400" />
           </div>
         </motion.div>
       </motion.div>

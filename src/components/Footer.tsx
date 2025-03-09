@@ -1,127 +1,181 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { scrollToElement } from '../utils/transitions';
+import { useTranslation } from 'react-i18next';
+import { 
+  Mail, MapPin, Github, Linkedin, Twitter, Instagram, 
+  ChevronUp, Heart, Coffee, Code, Cpu 
+} from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
   const handleNavClick = (id: string) => {
     scrollToElement(id, 80);
   };
   
   const currentYear = new Date().getFullYear();
+  
+  const socialLinks = [
+    { icon: <Github className="w-5 h-5" />, url: "https://github.com/NassimEH", label: "GitHub" },
+    { icon: <Linkedin className="w-5 h-5" />, url: "https://www.linkedin.com/in/nassim-elhaddad/", label: "LinkedIn" },
+    { icon: <Twitter className="w-5 h-5" />, url: "#", label: "Twitter" },
+    { icon: <Instagram className="w-5 h-5" />, url: "#", label: "Instagram" }
+  ];
 
   return (
-    <footer className="py-12 px-6 bg-black/20 backdrop-blur-sm border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Logo & About */}
-          <div>
-            <a 
-              href="#hero" 
-              className="text-2xl font-medium tracking-tighter hover:text-primary transition-colors duration-300"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('hero');
+    <footer className="relative overflow-hidden">
+      {/* Background synthwave */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black to-background/80 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+      <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-purple-600/20 to-transparent pointer-events-none"></div>
+      
+      {/* Réseaux sociaux à grande échelle */}
+      <div className="max-w-7xl mx-auto pt-16 pb-8 px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+          {socialLinks.map((link, index) => (
+            <motion.a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center glass-morphism p-6 rounded-xl border border-purple-500/20 group"
+              whileHover={{ 
+                y: -10, 
+                boxShadow: "0 0 30px rgba(168,85,247,0.3)",
+                borderColor: "rgba(168,85,247,0.5)"
               }}
             >
-              Nassim<span className="text-primary font-bold">.</span>
-            </a>
+              <motion.div 
+                className="text-purple-400 mb-3 transition-transform"
+                animate={{ y: [0, -5, 0] }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 2,
+                  delay: index * 0.2
+                }}
+              >
+                {link.icon}
+              </motion.div>
+              <span className="text-lg font-medium group-hover:text-purple-400 transition-colors">{link.label}</span>
+            </motion.a>
+          ))}
+        </div>
+        
+        <div className="glass-morphism border border-cyan-500/20 rounded-2xl p-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Logo & About */}
+            <div>
+              <motion.a 
+                href="#hero" 
+                className="text-2xl font-medium tracking-tighter hover:text-primary transition-colors duration-300 flex items-center"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('hero');
+                }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+                  Portfolio
+                </span>
+                <span className="text-primary font-bold text-3xl ml-1">.</span>
+              </motion.a>
+              
+              <p className="mt-4 text-muted-foreground">
+                Développeur web passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.
+              </p>
+              
+              <div className="mt-6 flex items-center">
+                <div className="flex space-x-2">
+                  <Coffee className="h-4 w-4 text-pink-400" />
+                  <Code className="h-4 w-4 text-purple-400" />
+                  <Cpu className="h-4 w-4 text-cyan-400" />
+                </div>
+                <span className="ml-2 text-xs text-muted-foreground">Codé avec passion</span>
+              </div>
+            </div>
             
-            <p className="mt-4 text-muted-foreground">
-              Développeur web passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.
-            </p>
-          </div>
-          
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Navigation</h3>
-            <ul className="space-y-3">
-              {[
-                { name: 'À propos', id: 'about' },
-                { name: 'Projets', id: 'projects' },
-                { name: 'Expérience', id: 'experience' },
-                { name: 'Contact', id: 'contact' }
-              ].map((link) => (
-                <li key={link.id}>
-                  <a
-                    href={`#${link.id}`}
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-300 link-hover"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(link.id);
-                    }}
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Navigation</h3>
+              <ul className="space-y-3 grid grid-cols-2">
+                {[
+                  { name: 'Accueil', id: 'hero' },
+                  { name: 'À propos', id: 'about' },
+                  { name: 'Services', id: 'services' },
+                  { name: 'Projets', id: 'projects' },
+                  { name: 'Témoignages', id: 'testimonials' },
+                  { name: 'Expérience', id: 'experience' },
+                  { name: 'Contact', id: 'contact' }
+                ].map((link) => (
+                  <li key={link.id}>
+                    <a
+                      href={`#${link.id}`}
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-300 link-hover flex items-center"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(link.id);
+                      }}
+                    >
+                      <span className="w-1 h-1 bg-primary rounded-full mr-2"></span>
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Contact Info */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start text-muted-foreground">
+                  <Mail className="w-5 h-5 mr-3 text-cyan-400 flex-shrink-0 mt-1" />
+                  <a 
+                    href="mailto:nassim.elhaddad@example.com"
+                    className="hover:text-foreground transition-colors duration-300"
                   >
-                    {link.name}
+                    nassim.elhaddad@example.com
                   </a>
                 </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center text-muted-foreground">
-                <svg className="w-5 h-5 mr-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <a 
-                  href="mailto:nassim.elhaddad@example.com"
-                  className="hover:text-foreground transition-colors duration-300"
+                <li className="flex items-start text-muted-foreground">
+                  <MapPin className="w-5 h-5 mr-3 text-pink-400 flex-shrink-0 mt-1" />
+                  <span>Lyon, France</span>
+                </li>
+                <motion.li 
+                  className="mt-6 glass-morphism rounded-lg p-4 bg-gradient-to-br from-purple-500/10 to-pink-500/5"
+                  whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(168,85,247,0.2)" }}
                 >
-                  nassim.elhaddad@example.com
-                </a>
-              </li>
-              <li className="flex items-center text-muted-foreground">
-                <svg className="w-5 h-5 mr-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>Lyon, France</span>
-              </li>
-              <li className="flex mt-4 space-x-4">
-                <a 
-                  href="https://github.com/NassimEH" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                  aria-label="GitHub"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.836 2.807 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://www.linkedin.com/in/nassim-elhaddad/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                  aria-label="LinkedIn"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-              </li>
-            </ul>
+                  <p className="text-sm">
+                    Disponible pour de nouveaux projets freelance à partir de {new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
+                  </p>
+                </motion.li>
+              </ul>
+            </div>
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm">
-            &copy; {currentYear} Nassim El Haddad. Tous droits réservés.
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10">
+          <p className="text-muted-foreground text-sm flex items-center">
+            &copy; {currentYear} Portfolio. Tous droits réservés.
+            <motion.span 
+              className="ml-2 inline-flex items-center text-pink-400"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <Heart className="h-3 w-3 mr-1" />
+            </motion.span>
           </p>
           
           <div className="mt-4 md:mt-0">
-            <button 
+            <motion.button 
               onClick={() => handleNavClick('hero')}
-              className="flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="flex items-center px-4 py-2 text-sm glass-morphism rounded-full hover:bg-white/10 transition-all duration-300"
+              whileHover={{ y: -3, boxShadow: "0 10px 15px rgba(0,0,0,0.1)" }}
             >
               <span>Retour en haut</span>
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-              </svg>
-            </button>
+              <ChevronUp className="w-4 h-4 ml-2" />
+            </motion.button>
           </div>
         </div>
       </div>
