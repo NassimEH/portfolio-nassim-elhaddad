@@ -84,7 +84,7 @@ const Index = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-screen h-screen bg-background">
-        <div className="w-12 h-12 border-2 border-primary border-solid rounded-full border-t-transparent animate-spin"></div>
+        <div className="w-16 h-16 border-4 border-primary border-solid rounded-full border-t-transparent animate-spin"></div>
       </div>
     );
   }
@@ -96,7 +96,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <ParticleBackground particleCount={25} />
+      <ParticleBackground particleCount={35} />
       
       <ThemeLanguageSwitch />
       

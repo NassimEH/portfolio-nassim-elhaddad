@@ -1,72 +1,71 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 9%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.5rem;
+  }
+
+  .light-theme {
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 224 71% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 224 71% 4%;
 
-    --primary: 211 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 211 100% 50%;
-
-    --radius: 18px;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
   }
 
-  .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 211 100% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 211 100% 50%;
-  }
-
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&display=swap');
 
   * {
     @apply border-border selection:bg-primary/20 selection:text-primary;
@@ -81,20 +80,17 @@
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
-    font-weight: 300;
   }
   
-  /* Apply refined typography */
+  /* Apply the new fonts */
   h1, h2, h3, h4, h5, h6 {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
-    letter-spacing: -0.025em;
-    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
   }
   
-  p, a, button, input, textarea, select {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
-    font-weight: 300;
+  body, p, a, button, input, textarea, select {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
   }
 }
 
@@ -109,7 +105,7 @@
   }
 
   .glass-morphism {
-    @apply backdrop-blur-xl bg-white/10 border border-white/10 shadow-apple;
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
   }
   
   .neo-blur {
@@ -117,7 +113,7 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-br from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
   }
   
   .text-gradient-primary {
@@ -134,7 +130,7 @@
   
   /* Smooth section transitions */
   section {
-    @apply transition-all duration-700 ease-apple;
+    @apply transition-all duration-700 ease-cinematic;
   }
 
   /* Section transitions */
@@ -176,32 +172,73 @@
 
   /* Enhanced hover effects */
   .hover-lift {
-    @apply transition-all duration-300 ease-apple;
+    @apply transition-all duration-300 ease-cinematic;
   }
   
   .hover-lift:hover {
-    @apply transform -translate-y-1 shadow-md;
+    @apply transform -translate-y-1 shadow-lg;
   }
 
-  /* Simplified synthwave styles */
+  /* Enhanced synthwave styles */
   .synthwave-glow {
-    text-shadow: 0 0 5px currentColor;
+    text-shadow: 
+      0 0 5px rgba(236, 72, 153, 0.5),
+      0 0 10px rgba(236, 72, 153, 0.3),
+      0 0 15px rgba(236, 72, 153, 0.2),
+      0 0 20px rgba(236, 72, 153, 0.1);
+  }
+  
+  .synthwave-glow-text {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+    opacity: 0.9;
   }
   
   .synthwave-grid {
     background-size: 40px 40px;
     background-image:
-      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+      linear-gradient(to right, rgba(236, 72, 153, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(236, 72, 153, 0.1) 1px, transparent 1px);
   }
   
   .neon-border {
     @apply relative;
   }
   
-  /* Enhanced glass-morphism */
-  .apple-card {
-    @apply backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-apple;
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, rgba(236, 72, 153, 1), rgba(124, 58, 237, 1), rgba(34, 211, 238, 1), rgba(236, 72, 153, 1));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    animation: rotate 4s linear infinite;
+  }
+  
+  @keyframes rotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 130% 50%;
+    }
+  }
+  
+  /* Enhanced glass-morphism for synthwave */
+  .synthwave-card {
+    @apply backdrop-blur-xl bg-black/40 border border-pink-500/20;
+    box-shadow: 
+      0 0 10px rgba(236, 72, 153, 0.2),
+      0 0 20px rgba(124, 58, 237, 0.1),
+      inset 0 0 10px rgba(34, 211, 238, 0.1);
   }
 }
 
@@ -209,27 +246,62 @@
 .bg-grid-pattern {
   background-size: 50px 50px;
   background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Effet de neon pour les textes */
+.neon-text {
+  text-shadow: 
+    0 0 5px rgba(168, 85, 247, 0.5),
+    0 0 10px rgba(168, 85, 247, 0.3),
+    0 0 15px rgba(168, 85, 247, 0.2),
+    0 0 20px rgba(168, 85, 247, 0.1);
+}
+
+.neon-text-cyan {
+  text-shadow: 
+    0 0 5px rgba(34, 211, 238, 0.5),
+    0 0 10px rgba(34, 211, 238, 0.3),
+    0 0 15px rgba(34, 211, 238, 0.2),
+    0 0 20px rgba(34, 211, 238, 0.1);
+}
+
+.neon-text-pink {
+  text-shadow: 
+    0 0 5px rgba(236, 72, 153, 0.5),
+    0 0 10px rgba(236, 72, 153, 0.3),
+    0 0 15px rgba(236, 72, 153, 0.2),
+    0 0 20px rgba(236, 72, 153, 0.1);
 }
 
 /* Effet de ligne horizontale dégradé */
 .line-gradient {
   height: 1px;
   background: linear-gradient(90deg, 
-    rgba(0, 0, 0, 0) 0%, 
-    rgba(0, 0, 0, 0.2) 50%, 
-    rgba(0, 0, 0, 0) 100%
+    rgba(34, 211, 238, 0) 0%, 
+    rgba(34, 211, 238, 1) 50%, 
+    rgba(34, 211, 238, 0) 100%
   );
 }
 
-/* Dark mode override */
-.dark .line-gradient {
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(255, 255, 255, 0.1) 50%, 
-    rgba(255, 255, 255, 0) 100%
-  );
+/* Animations utility classes */
+.animated-gradient {
+  background: linear-gradient(-45deg, #a855f7, #ec4899, #22d3ee, #a855f7);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Text Link Hover Effect */
@@ -269,17 +341,42 @@
 
 /* Improved transitions for interactive elements */
 a, button {
-  @apply transition-all duration-300 ease-apple;
+  @apply transition-all duration-300 ease-cinematic;
 }
 
 /* Improved focus styles for accessibility */
 :focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-background;
 }
 
 /* Fluidité des scrolls */
 html.smooth-scroll {
   scroll-behavior: smooth;
+}
+
+/* Easter eggs */
+.konami-code-activated {
+  animation: rainbowEffect 5s linear infinite;
+}
+
+@keyframes rainbowEffect {
+  0% { background-color: rgba(255, 0, 0, 0.2); }
+  16.6% { background-color: rgba(255, 165, 0, 0.2); }
+  33.3% { background-color: rgba(255, 255, 0, 0.2); }
+  50% { background-color: rgba(0, 128, 0, 0.2); }
+  66.6% { background-color: rgba(0, 0, 255, 0.2); }
+  83.3% { background-color: rgba(75, 0, 130, 0.2); }
+  100% { background-color: rgba(238, 130, 238, 0.2); }
+}
+
+/* Animations supplémentaires */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Mobile-specific CSS */
@@ -384,32 +481,16 @@ body::after {
   z-index: 0;
 }
 
-/* Apple-style button */
-.apple-button {
-  @apply bg-primary text-white rounded-full px-5 py-2 font-medium transition-all duration-300;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+/* Improved konami code effect for easter egg */
+@keyframes synthwaveEffect {
+  0% { background-color: rgba(168, 85, 247, 0.1); }
+  20% { background-color: rgba(236, 72, 153, 0.1); }
+  40% { background-color: rgba(34, 211, 238, 0.1); }
+  60% { background-color: rgba(124, 58, 237, 0.1); }
+  80% { background-color: rgba(245, 158, 11, 0.1); }
+  100% { background-color: rgba(168, 85, 247, 0.1); }
 }
 
-.apple-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.apple-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Apple-style secondary button */
-.apple-button-secondary {
-  @apply bg-secondary text-foreground rounded-full px-5 py-2 font-medium transition-all duration-300;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.apple-button-secondary:hover {
-  background-color: hsl(var(--secondary) / 0.8);
-}
-
-.apple-button-secondary:active {
-  transform: translateY(1px);
+.konami-code-activated {
+  animation: synthwaveEffect 5s linear infinite;
 }
