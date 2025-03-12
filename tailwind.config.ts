@@ -60,8 +60,11 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'monospace'],
+				sans: ['"SF Pro Display"', 'Inter', 'system-ui', 'sans-serif'],
+				mono: ['"SF Mono"', 'monospace'],
+				serif: ['"New York"', 'Georgia', 'serif'],
+				display: ['"SF Pro Display"', 'system-ui', 'sans-serif'],
+				heading: ['"SF Pro Display"', 'system-ui', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {
@@ -130,6 +133,7 @@ export default {
 				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
 				'neo': '10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(255, 255, 255, 0.05)',
 				'inner-neo': 'inset 5px 5px 10px rgba(0, 0, 0, 0.2), inset -5px -5px 10px rgba(255, 255, 255, 0.05)',
+				'apple': '0 4px 20px rgba(0, 0, 0, 0.08)',
 			},
 		}
 	},

@@ -7,14 +7,14 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Nassim El Haddad",
+    "title": "NASSIM EL HADDAD",
     "subtitle": "Full Stack Developer",
     "description": "I create modern, performant, and accessible web applications that solve real-world problems.",
-    "cta_projects": "View my projects",
-    "cta_contact": "Contact me",
+    "cta_projects": "View Projects",
+    "cta_contact": "Get in Touch",
     "scroll": "Scroll",
-    "welcome": "Welcome to my portfolio!",
-    "toast_message": "Discover my projects and web development skills."
+    "welcome": "Welcome to my portfolio",
+    "toast_message": "Discover my projects and web development expertise."
   },
   "about": {
     "title": "ABOUT ME",
@@ -42,7 +42,7 @@
   },
   "projects": {
     "title": "MY PROJECTS",
-    "subtitle": "Recent Projects",
+    "subtitle": "Recent Work",
     "description": "A selection of my recent work, including web applications, websites, and interactive experiences.",
     "filters": {
       "all": "All",
@@ -66,12 +66,12 @@
     "work": "Work Experience",
     "education": "Education",
     "present": "Present",
-    "view_linkedin": "View my LinkedIn profile",
+    "view_linkedin": "View LinkedIn Profile",
     "awards": "Awards & Recognitions"
   },
   "testimonials": {
-    "title": "Testimonials",
-    "subtitle": "Discover what my clients and collaborators say about my work",
+    "title": "TESTIMONIALS",
+    "subtitle": "What clients and collaborators say",
     "description": "Feedback from people I've had the pleasure to work with",
     "label": "Testimonial",
     "project_label": "Project",
@@ -83,14 +83,14 @@
   "contact": {
     "title": "CONTACT",
     "subtitle": "Let's Work Together",
-    "form_title": "Send me a message",
+    "form_title": "Send a Message",
     "info": {
       "title": "Contact Information",
       "email": "Email",
       "location": "Location"
     },
     "social": {
-      "title": "Follow Me"
+      "title": "Connect"
     },
     "form": {
       "name": "Name",
@@ -104,7 +104,7 @@
       "email": "your.email@example.com",
       "message": "Describe your project or ask me a question..."
     },
-    "thank_you": "Thank you for your message!",
+    "thank_you": "Thank you for your message",
     "will_reply_soon": "I'll get back to you as soon as possible.",
     "required": "Required",
     "email_privacy": "Your email address will never be shared.",
