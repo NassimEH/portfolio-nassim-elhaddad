@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -96,7 +97,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Témoignages
+            {t('testimonials.title', 'Témoignages')}
           </motion.h2>
           
           <motion.p 
@@ -106,7 +107,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            {t('testimonials.description')}
+            {t('testimonials.subtitle', 'Découvrez ce que mes clients et collaborateurs disent de mon travail')}
           </motion.p>
         </div>
         
@@ -155,7 +156,7 @@ const Testimonials: React.FC = () => {
                         <div className="mb-6">
                           <div className="flex items-center mb-4">
                             <MessageSquare className="w-5 h-5 text-cyan-400 mr-2" />
-                            <span className="text-sm text-cyan-400 font-medium">{t('testimonials.testimonial')}</span>
+                            <span className="text-sm text-cyan-400 font-medium">{t('testimonials.label', 'Témoignage')}</span>
                           </div>
                           
                           <p className="text-xl italic text-muted-foreground leading-relaxed mb-6">
@@ -190,7 +191,7 @@ const Testimonials: React.FC = () => {
                       <div className="md:col-span-2 neo-blur rounded-xl p-5 border border-white/10">
                         <div className="mb-4">
                           <h5 className={`text-lg font-medium mb-2 bg-gradient-to-r ${testimonial.color} bg-clip-text text-transparent`}>
-                            Détails du projet
+                            {t('testimonials.project_details', 'Détails du projet')}
                           </h5>
                           
                           <div className="flex justify-between mb-2">
@@ -209,7 +210,7 @@ const Testimonials: React.FC = () => {
                             </div>
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            <p className="mb-2">{t('testimonials.project')}: <span className="text-primary">{testimonial.project}</span></p>
+                            <p className="mb-2">{t('testimonials.project_label', 'Projet')}: <span className="text-primary">{testimonial.project}</span></p>
                             
                             {/* Project highlight */}
                             <div className="flex items-center mb-3 p-2 rounded-lg bg-gradient-to-r from-green-500/10 to-cyan-500/10">
@@ -221,7 +222,7 @@ const Testimonials: React.FC = () => {
                             <div className="mb-3">
                               <p className="text-xs text-muted-foreground mb-2 flex items-center">
                                 <Gift className="w-3 h-3 mr-1 text-cyan-400" />
-                                {t('testimonials.skills_delivered')}:
+                                {t('testimonials.skills_delivered', 'Compétences utilisées')}:
                               </p>
                               <div className="flex flex-wrap gap-1.5">
                                 {testimonial.skills.map((skill, i) => (
@@ -245,7 +246,7 @@ const Testimonials: React.FC = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            {t('testimonials.view_project')}
+                            {t('testimonials.view_project', 'Voir le projet')}
                           </motion.button>
                         </div>
                       </div>

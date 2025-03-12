@@ -255,24 +255,24 @@ const Experience: React.FC = () => {
           </motion.div>
         </div>
         
-        {/* LinkedIn Link */}
+        {/* LinkedIn Link - Updated to Apple-like style */}
         <div className="mt-16 text-center">
           <motion.a 
             href="https://www.linkedin.com/in/nassim-elhaddad/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-4 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg shadow-blue-700/20"
+            className="group inline-flex items-center px-6 py-3 rounded-full bg-white/5 border border-blue-500/30 backdrop-blur-sm text-blue-400 hover:bg-white/10 transition-all duration-300"
             whileHover={{ 
-              scale: 1.05, 
-              boxShadow: "0px 0px 20px rgba(59,130,246,0.4)" 
+              scale: 1.02, 
+              boxShadow: "0px 0px 15px rgba(59,130,246,0.2)" 
             }}
             whileTap={{ scale: 0.98 }}
           >
-            <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 mr-3 text-blue-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
-            <span>{t('experience.view_linkedin')}</span>
-            <ExternalLink className="w-4 h-4 ml-2" />
+            <span className="font-medium">{t('experience.view_linkedin')}</span>
+            <ExternalLink className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transition-transform duration-300" />
           </motion.a>
         </div>
       </div>

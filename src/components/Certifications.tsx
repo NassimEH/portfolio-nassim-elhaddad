@@ -2,12 +2,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Award, Filter, Tag, Book, Code, Database, Server, FileText, Globe, CheckCircle2 } from 'lucide-react';
+import { Award, Filter, Tag, Book, Code, Database, Server, FileText, Globe, CheckCircle2, Building, ChevronDown } from 'lucide-react';
 
 interface Certification {
   id: number;
   name: string;
   organization: string;
+  logo?: string;
   date: string;
   description: string;
   category: string;
@@ -18,6 +19,7 @@ const certifications: Certification[] = [
     id: 1,
     name: "React Nanodegree",
     organization: "Udacity",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Udacity_logo.png",
     date: "2023",
     description: "A comprehensive program covering React, Redux, and React Native.",
     category: "frontend"
@@ -26,6 +28,7 @@ const certifications: Certification[] = [
     id: 2,
     name: "Node.js Developer Certification",
     organization: "Coursera",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/240px-Coursera-Logo_600x600.svg.png",
     date: "2022",
     description: "An in-depth course on building scalable APIs with Node.js and Express.",
     category: "backend"
@@ -34,6 +37,7 @@ const certifications: Certification[] = [
     id: 3,
     name: "AWS Certified Developer",
     organization: "Amazon Web Services",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1280px-Amazon_Web_Services_Logo.svg.png",
     date: "2021",
     description: "Certification demonstrating proficiency in developing and deploying applications on AWS.",
     category: "devops"
@@ -42,6 +46,7 @@ const certifications: Certification[] = [
     id: 4,
     name: "Google Cloud Professional Cloud Architect",
     organization: "Google",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/480px-Google_Cloud_logo.svg.png",
     date: "2023",
     description: "Certification demonstrating expertise in designing and managing cloud solutions on Google Cloud Platform.",
     category: "devops"
@@ -50,6 +55,7 @@ const certifications: Certification[] = [
     id: 5,
     name: "Certified Scrum Master",
     organization: "Scrum Alliance",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/ScrumAlliance_Logo_2021.png/320px-ScrumAlliance_Logo_2021.png",
     date: "2022",
     description: "Certification demonstrating knowledge of Scrum principles and practices.",
     category: "project_management"
@@ -58,6 +64,7 @@ const certifications: Certification[] = [
     id: 6,
     name: "Microsoft Certified Azure Solutions Architect Expert",
     organization: "Microsoft",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/480px-Microsoft_logo.svg.png",
     date: "2024",
     description: "Certification demonstrating expertise in designing and implementing solutions on Microsoft Azure.",
     category: "devops"
@@ -66,6 +73,7 @@ const certifications: Certification[] = [
     id: 7,
     name: "Full-Stack Web Development",
     organization: "OpenClassrooms",
+    logo: "https://upload.wikimedia.org/wikipedia/fr/0/0d/Logo_OpenClassrooms.png",
     date: "2023",
     description: "A comprehensive program covering both front-end and back-end web development technologies.",
     category: "fullstack"
@@ -74,6 +82,7 @@ const certifications: Certification[] = [
     id: 8,
     name: "Data Science Specialization",
     organization: "Coursera",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/240px-Coursera-Logo_600x600.svg.png",
     date: "2022",
     description: "A specialization in data science covering topics such as machine learning, data analysis, and data visualization.",
     category: "data_science"
@@ -82,6 +91,7 @@ const certifications: Certification[] = [
     id: 9,
     name: "UI/UX Design Specialization",
     organization: "Coursera",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/240px-Coursera-Logo_600x600.svg.png",
     date: "2021",
     description: "A specialization in UI/UX design covering topics such as user research, wireframing, and prototyping.",
     category: "design"
@@ -90,11 +100,15 @@ const certifications: Certification[] = [
     id: 10,
     name: "Mobile App Development with React Native",
     organization: "Udemy",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/2560px-Udemy_logo.svg.png",
     date: "2023",
     description: "A course on building cross-platform mobile applications with React Native.",
     category: "mobile"
   }
 ];
+
+// Extracting unique organizations for the filter
+const organizations = ['All', ...Array.from(new Set(certifications.map(cert => cert.organization)))];
 
 const filters = [
   { id: 'all', name: 'All', icon: <Filter className="w-4 h-4" /> },
@@ -110,8 +124,11 @@ const filters = [
 
 const Certifications: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [activeOrganization, setActiveOrganization] = useState<string>('All');
+  const [isOrgDropdownOpen, setIsOrgDropdownOpen] = useState<boolean>(false);
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   // Mouse position tracking for background effect
@@ -130,9 +147,21 @@ const Certifications: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const filteredCertifications = activeFilter === 'all'
-    ? certifications
-    : certifications.filter(cert => cert.category === activeFilter);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOrgDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const filteredCertifications = certifications
+    .filter(cert => activeFilter === 'all' || cert.category === activeFilter)
+    .filter(cert => activeOrganization === 'All' || cert.organization === activeOrganization);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -217,12 +246,13 @@ const Certifications: React.FC = () => {
 
         {/* Filters - Horizontal compact design */}
         <motion.div 
-          className="mb-10 flex justify-center"
+          className="mb-10 flex flex-col md:flex-row justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           viewport={{ once: true }}
         >
+          {/* Category filters */}
           <div className="glass-morphism p-3 rounded-full flex flex-wrap justify-center gap-2 border border-purple-500/20 max-w-3xl shadow-lg">
             {filters.map((filter) => (
               <motion.button
@@ -241,12 +271,55 @@ const Certifications: React.FC = () => {
               </motion.button>
             ))}
           </div>
+          
+          {/* Organization dropdown filter */}
+          <div className="relative" ref={dropdownRef}>
+            <motion.button
+              onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
+              className="px-4 py-3 rounded-xl text-sm flex items-center gap-2 glass-morphism border border-cyan-500/20 shadow-lg w-full md:w-auto min-w-[200px] justify-between"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center gap-2">
+                <Building className="w-4 h-4 text-cyan-400" />
+                <span>{activeOrganization}</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 transition-transform ${isOrgDropdownOpen ? 'rotate-180' : ''}`} />
+            </motion.button>
+            
+            {/* Dropdown menu */}
+            <AnimatePresence>
+              {isOrgDropdownOpen && (
+                <motion.div 
+                  className="absolute z-50 mt-2 w-full min-w-[200px] rounded-xl glass-morphism border border-cyan-500/20 shadow-xl backdrop-blur-lg bg-background/95 py-2"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                >
+                  {organizations.map((org) => (
+                    <button
+                      key={org}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-white/10 transition-colors ${
+                        activeOrganization === org ? 'text-cyan-400' : 'text-muted-foreground'
+                      }`}
+                      onClick={() => {
+                        setActiveOrganization(org);
+                        setIsOrgDropdownOpen(false);
+                      }}
+                    >
+                      {org}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
 
         {/* Certifications cards with filtered animation */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeFilter} // This forces re-render when filter changes
+            key={`${activeFilter}-${activeOrganization}`} // This forces re-render when filter changes
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}
             initial="hidden"
@@ -268,15 +341,30 @@ const Certifications: React.FC = () => {
                     
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
-                        <Award className="h-5 w-5 text-pink-400" />
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{cert.name}</h3>
+                        </div>
+                        <Award className="h-5 w-5 text-pink-400 ml-2 flex-shrink-0" />
+                      </div>
+                      
+                      {/* Organization with logo */}
+                      <div className="flex items-center mb-4">
+                        {cert.logo && (
+                          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 p-1 mr-3 flex items-center justify-center">
+                            <img 
+                              src={cert.logo} 
+                              alt={cert.organization} 
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <span className="text-sm text-cyan-400">{cert.organization}</span>
                       </div>
                       
                       <p className="text-muted-foreground mb-6 text-sm flex-grow">{cert.description}</p>
                       
                       <div className="mt-auto flex justify-between items-center">
                         <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
-                        <div className="text-sm text-muted-foreground">{cert.organization}</div>
                       </div>
                       
                       {/* Category badge */}
@@ -294,13 +382,23 @@ const Certifications: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <p className="text-muted-foreground">Aucune certification ne correspond à ce filtre.</p>
-                <button
-                  onClick={() => setActiveFilter('all')}
-                  className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
-                >
-                  Afficher toutes les certifications
-                </button>
+                <p className="text-muted-foreground">Aucune certification ne correspond à ces filtres.</p>
+                <div className="flex gap-2 justify-center mt-4">
+                  <button
+                    onClick={() => setActiveFilter('all')}
+                    className="px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                  >
+                    Réinitialiser les catégories
+                  </button>
+                  {activeOrganization !== 'All' && (
+                    <button
+                      onClick={() => setActiveOrganization('All')}
+                      className="px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                    >
+                      Réinitialiser les organisations
+                    </button>
+                  )}
+                </div>
               </motion.div>
             )}
           </motion.div>

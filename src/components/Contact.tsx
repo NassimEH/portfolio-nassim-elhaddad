@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { contactInfo } from '../utils/projectData';
@@ -127,7 +128,7 @@ const Contact: React.FC = () => {
             <div className="relative">
               <h3 className="text-2xl font-semibold mb-6 flex items-center">
                 <Send className="w-6 h-6 mr-3 text-purple-400" />
-                {t('contact.form_title')}
+                {t('contact.form_title', 'Envoyez-moi un message')}
               </h3>
               
               <AnimatePresence mode="wait">
@@ -141,8 +142,8 @@ const Contact: React.FC = () => {
                     <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-6">
                       <Check className="w-10 h-10 text-white" />
                     </div>
-                    <h4 className="text-2xl font-semibold mb-2">{t('contact.thank_you')}</h4>
-                    <p className="text-muted-foreground">{t('contact.will_reply_soon')}</p>
+                    <h4 className="text-2xl font-semibold mb-2">{t('contact.thank_you', 'Merci pour votre message !')}</h4>
+                    <p className="text-muted-foreground">{t('contact.will_reply_soon', 'Je vous répondrai dans les plus brefs délais.')}</p>
                   </motion.div>
                 ) : (
                   <motion.form 
@@ -155,7 +156,7 @@ const Contact: React.FC = () => {
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2 flex items-center">
                         <User className="w-4 h-4 mr-2 text-purple-400" />
-                        {t('contact.name')}
+                        {t('contact.form.name', 'Nom')}
                       </label>
                       <div className="relative">
                         <input
@@ -166,10 +167,10 @@ const Contact: React.FC = () => {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
-                          placeholder={t('contact.name_placeholder')}
+                          placeholder={t('contact.placeholders.name', 'Votre nom complet')}
                         />
                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-purple-400/50 font-mono">
-                          {t('contact.required')}
+                          {t('contact.required', 'Requis')}
                         </div>
                       </div>
                     </div>
@@ -177,7 +178,7 @@ const Contact: React.FC = () => {
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-2 flex items-center">
                         <Mail className="w-4 h-4 mr-2 text-purple-400" />
-                        {t('contact.email')}
+                        {t('contact.form.email', 'Email')}
                       </label>
                       <div className="relative">
                         <input
@@ -188,21 +189,21 @@ const Contact: React.FC = () => {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300"
-                          placeholder={t('contact.email_placeholder')}
+                          placeholder={t('contact.placeholders.email', 'votre.email@exemple.com')}
                         />
                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-purple-400/50 font-mono">
-                          {t('contact.required')}
+                          {t('contact.required', 'Requis')}
                         </div>
                       </div>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {t('contact.email_privacy')}
+                        {t('contact.email_privacy', 'Votre adresse e-mail ne sera jamais partagée.')}
                       </p>
                     </div>
                     
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium mb-2 flex items-center">
                         <MessageSquare className="w-4 h-4 mr-2 text-purple-400" />
-                        {t('contact.message')}
+                        {t('contact.form.message', 'Message')}
                       </label>
                       <textarea
                         id="message"
@@ -212,7 +213,7 @@ const Contact: React.FC = () => {
                         required
                         rows={5}
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300 resize-none"
-                        placeholder={t('contact.message_placeholder')}
+                        placeholder={t('contact.placeholders.message', 'Décrivez votre projet ou posez-moi une question...')}
                       />
                     </div>
                     
@@ -230,12 +231,12 @@ const Contact: React.FC = () => {
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
                         ) : null}
-                        {isSubmitting ? t('contact.sending') : t('contact.send')}
+                        {isSubmitting ? t('contact.form.sending', 'Envoi en cours...') : t('contact.form.send', 'Envoyer')}
                       </motion.button>
                       
                       <div className="mt-4 text-xs text-center text-muted-foreground flex items-center justify-center">
                         <MousePointer className="w-3 h-3 mr-1.5" />
-                        <span>{t('contact.easter_egg_hint')}</span>
+                        <span>{t('contact.easter_egg_hint', 'Psst, il y a un easter egg caché dans cette page !')}</span>
                       </div>
                     </div>
                   </motion.form>
@@ -257,7 +258,7 @@ const Contact: React.FC = () => {
               <div className="absolute -inset-10 bg-gradient-to-tl from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl rounded-full"></div>
               
               <div className="relative">
-                <h3 className="text-2xl font-semibold mb-6">{t('contact.info_title')}</h3>
+                <h3 className="text-2xl font-semibold mb-6">{t('contact.info.title', 'Informations de contact')}</h3>
                 
                 <div className="space-y-6">
                   <motion.div 
@@ -268,7 +269,7 @@ const Contact: React.FC = () => {
                       <Mail className="w-6 h-6 text-cyan-400" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.email_label')}</h4>
+                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.info.email', 'Email')}</h4>
                       <a 
                         href={`mailto:${contactInfo.email}`} 
                         className="text-lg hover:text-cyan-400 transition-colors duration-300"
@@ -286,7 +287,7 @@ const Contact: React.FC = () => {
                       <MapPin className="w-6 h-6 text-pink-400" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.location_label')}</h4>
+                      <h4 className="text-sm font-semibold text-muted-foreground mb-1">{t('contact.info.location', 'Localisation')}</h4>
                       <p className="text-lg">{contactInfo.location}</p>
                     </div>
                   </motion.div>
@@ -299,7 +300,7 @@ const Contact: React.FC = () => {
               <div className="absolute -inset-10 bg-gradient-to-bl from-purple-500/10 via-pink-500/5 to-transparent blur-3xl rounded-full"></div>
               
               <div className="relative">
-                <h3 className="text-2xl font-semibold mb-6">{t('contact.follow_title')}</h3>
+                <h3 className="text-2xl font-semibold mb-6">{t('contact.social.title', 'Suivez-moi')}</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <motion.a 
@@ -330,7 +331,7 @@ const Contact: React.FC = () => {
                   className="flex items-center justify-between mt-6 px-4 py-3 rounded-lg glass-morphism hover:bg-white/10 transition-colors group"
                   whileHover={{ x: 5 }}
                 >
-                  <span className="text-sm">{t('contact.view_all_profiles')}</span>
+                  <span className="text-sm">{t('contact.view_all_profiles', 'Voir tous mes profils')}</span>
                   <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
                 </motion.a>
                 
@@ -345,7 +346,7 @@ const Contact: React.FC = () => {
                   >
                     <div className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white flex items-center justify-center transition-all duration-300 z-10 relative">
                       <Linkedin className="w-5 h-5 mr-2" />
-                      <span className="font-medium">Connectons-nous sur LinkedIn</span>
+                      <span className="font-medium">{t('contact.connect_linkedin', 'Connectons-nous sur LinkedIn')}</span>
                       <span className="ml-2 opacity-60">→</span>
                     </div>
                     
