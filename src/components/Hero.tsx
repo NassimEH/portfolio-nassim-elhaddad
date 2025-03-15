@@ -1,124 +1,16 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import ThreeScene from './ThreeScene';
 import { scrollToElement } from '../utils/transitions';
 import { useTranslation } from 'react-i18next';
-import { ArrowDown, Code, ExternalLink, Sparkles, Cpu, ZapIcon } from 'lucide-react';
+import { ArrowDown, Code, Sparkles, Cpu, ZapIcon } from 'lucide-react';
 import { useSettingsStore } from '../store/useSettingsStore';
-import { useToast } from '@/hooks/use-toast';
-
-// Define planet types
-interface Planet {
-  id: number;
-  size: number;
-  color: string;
-  initialPosition: { x: number; y: number };
-  message?: string;
-}
 
 const Hero: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const theme = useSettingsStore(state => state.theme);
-  const { toast } = useToast();
-  
-  // Interactive planets
-  const [planets, setPlanets] = useState<Planet[]>([
-    { 
-      id: 1, 
-      size: 60, 
-      color: 'from-purple-500 to-blue-600', 
-      initialPosition: { x: -150, y: 100 },
-      message: '✨ Bienvenue dans mon univers digital !'
-    },
-    { 
-      id: 2, 
-      size: 40, 
-      color: 'from-pink-500 to-red-500', 
-      initialPosition: { x: 200, y: -120 },
-      message: '🚀 Explorez mes projets pour découvrir mes compétences !'
-    },
-    { 
-      id: 3, 
-      size: 80, 
-      color: 'from-cyan-400 to-blue-500', 
-      initialPosition: { x: 180, y: 150 },
-      message: '💡 Essayez le code Konami: ↑↑↓↓←→←→BA'
-    },
-    { 
-      id: 4, 
-      size: 30, 
-      color: 'from-yellow-400 to-orange-500', 
-      initialPosition: { x: -180, y: -80 }
-    },
-  ]);
-  
-  const [activeMessage, setActiveMessage] = useState<string | null>(null);
-  
-  // Planet movement with mouse
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 10 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 10 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [mouseX, mouseY]);
-  
-  const showPlanetMessage = (planet: Planet) => {
-    if (planet.message) {
-      setActiveMessage(planet.message);
-      setTimeout(() => {
-        setActiveMessage(null);
-      }, 3000);
-      
-      toast({
-        title: "Message secret découvert !",
-        description: planet.message,
-        variant: "default",
-      });
-    }
-  };
-  
-  useEffect(() => {
-    // Animate the text on load
-    const textElement = textRef.current;
-    if (textElement) {
-      textElement.classList.add('animate-slide-up');
-    }
-    
-    // Random planet movement animation
-    const interval = setInterval(() => {
-      const randomPlanetIndex = Math.floor(Math.random() * planets.length);
-      
-      setPlanets(prev => 
-        prev.map((planet, idx) => 
-          idx === randomPlanetIndex 
-            ? {
-                ...planet,
-                initialPosition: {
-                  x: planet.initialPosition.x + (Math.random() * 40 - 20),
-                  y: planet.initialPosition.y + (Math.random() * 40 - 20)
-                }
-              }
-            : planet
-        )
-      );
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
   
   // Animation variants
   const containerVariants = {
@@ -185,79 +77,6 @@ const Hero: React.FC = () => {
       {/* Lumières Synthwave */}
       <div className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-purple-600/20 to-transparent"></div>
       <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-cyan-500/20 to-transparent"></div>
-      
-      {/* Interactive Planets */}
-      {planets.map((planet, index) => {
-        // Calculate position based on mouse and initial position
-        const planetX = useTransform(
-          smoothMouseX,
-          [0, window.innerWidth],
-          [planet.initialPosition.x - 20, planet.initialPosition.x + 20]
-        );
-        
-        const planetY = useTransform(
-          smoothMouseY,
-          [0, window.innerHeight],
-          [planet.initialPosition.y - 20, planet.initialPosition.y + 20]
-        );
-        
-        return (
-          <motion.div
-            key={planet.id}
-            className={`absolute z-20 rounded-full cursor-pointer bg-gradient-to-br ${planet.color} shadow-lg`}
-            style={{ 
-              width: planet.size, 
-              height: planet.size,
-              x: planetX,
-              y: planetY,
-              left: `calc(50% + ${planet.initialPosition.x}px)`,
-              top: `calc(50% + ${planet.initialPosition.y}px)`,
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1,
-              rotate: [0, 360],
-            }}
-            transition={{ 
-              duration: 20,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: index * 0.2,
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              boxShadow: "0 0 20px rgba(255,255,255,0.5)", 
-            }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => showPlanetMessage(planet)}
-            drag
-            dragConstraints={{
-              top: -200,
-              right: 200,
-              bottom: 200,
-              left: -200,
-            }}
-          >
-            <div className="absolute inset-2 rounded-full bg-white/10 backdrop-blur-sm"></div>
-            <div className="absolute inset-0 rounded-full border border-white/20"></div>
-          </motion.div>
-        );
-      })}
-      
-      {/* Secret Message Display */}
-      <AnimatePresence>
-        {activeMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.8 }}
-            className="absolute z-30 top-1/4 left-1/2 transform -translate-x-1/2 px-6 py-4 rounded-lg bg-gradient-to-r from-purple-600/90 to-pink-600/90 backdrop-blur-md text-white shadow-[0_0_30px_rgba(168,85,247,0.5)] border border-white/20"
-          >
-            {activeMessage}
-          </motion.div>
-        )}
-      </AnimatePresence>
       
       {/* Floating interactive elements */}
       {floatingIcons.map((item, index) => (
