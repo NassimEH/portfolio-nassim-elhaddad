@@ -8,7 +8,7 @@
   },
   "hero": {
     "title": "Nassim El Haddad",
-    "subtitle": "Full Stack Developer",
+    "subtitle": "Cybersecurity Engineer Student at Télécom SudParis (Institut Polytechnique de Paris)",
     "description": "I create modern, performant, and accessible web applications that solve real-world problems.",
     "cta_projects": "View my projects",
     "cta_contact": "Contact me",
@@ -18,11 +18,11 @@
   },
   "about": {
     "title": "ABOUT ME",
-    "subtitle": "Passionate about creating exceptional web experiences",
+    "subtitle": "Passionate about cybersecurity and web development",
     "description": [
-      "I'm a full stack developer based in Lyon, specializing in creating modern and elegant web applications with attention to detail and user experience.",
-      "With several years of experience in web development, I've worked on various projects ranging from showcase websites to complex applications with sophisticated architectures.",
-      "My philosophy is centered on creating solutions that combine aesthetics and functionality, using the most suitable technologies for each project."
+      "I'm a cybersecurity engineering student at Télécom SudParis, Institut Polytechnique de Paris, with a particular interest in network security and web development.",
+      "Throughout my journey, I've gained skills in programming, computer security, and system administration, which I apply in both personal and professional projects.",
+      "My philosophy is centered on creating solutions that combine security, performance, and user experience."
     ]
   },
   "certifications": {
@@ -62,7 +62,7 @@
   "experience": {
     "title": "MY JOURNEY",
     "subtitle": "Professional Experience",
-    "description": "My professional and academic background in the field of web development.",
+    "description": "My professional and academic background in cybersecurity and web development.",
     "work": "Work Experience",
     "education": "Education",
     "present": "Present",
@@ -72,13 +72,7 @@
   "testimonials": {
     "title": "Testimonials",
     "subtitle": "Discover what my clients and collaborators say about my work",
-    "description": "Feedback from people I've had the pleasure to work with",
-    "label": "Testimonial",
-    "project_label": "Project",
-    "project_details": "Project Details",
-    "skills_delivered": "Skills Used",
-    "view_project": "View Project",
-    "testimonial": "Testimonial"
+    "description": "Feedback from people I've had the pleasure to work with"
   },
   "contact": {
     "title": "CONTACT",
@@ -113,7 +107,7 @@
     "connect_linkedin": "Let's connect on LinkedIn"
   },
   "footer": {
-    "description": "Web developer passionate about creating exceptional user experiences and innovative technical solutions.",
+    "description": "Cybersecurity engineering student passionate about creating exceptional user experiences and innovative technical solutions.",
     "navigation": "Navigation",
     "contact": "Contact",
     "rights": "All rights reserved.",

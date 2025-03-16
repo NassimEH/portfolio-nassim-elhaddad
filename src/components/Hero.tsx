@@ -119,7 +119,7 @@ const Hero: React.FC = () => {
           variants={itemVariants}
         >
           <p className="text-sm font-mono bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            {t('hero.subtitle')}
+            Ingénieur Cybersécurité en études à Télécom SudParis (Institut Polytechnique de Paris)
           </p>
         </motion.div>
         

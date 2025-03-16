@@ -1,12 +1,96 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { experiences, education } from '../utils/projectData';
 import { useTranslation } from 'react-i18next';
 import { Briefcase, GraduationCap, ExternalLink, Award, Calendar, MapPin } from 'lucide-react';
 
 const Experience: React.FC = () => {
   const { t } = useTranslation();
+  
+  // Define experiences based on CV
+  const experiences = [
+    {
+      id: 1,
+      title: "Apprentice - Cybersecurity Engineer",
+      company: "Siemens",
+      location: "Paris, France",
+      startDate: "September 2024",
+      endDate: "",
+      logo: "/logos/siemens.png",
+      description: [
+        "Supported the industrialization of cybersecurity in Siemens Mobility products.",
+        "Formalized project management processes within multidisciplinary projects.",
+        "Promoted the tool used among various users and ensured proper configuration maintenance.",
+        "Set up and utilized infrastructures for cybersecurity audits of systems.",
+        "Contributed to the testing of complex equipment and systems."
+      ],
+      technologies: ["Cybersecurity", "Project Management", "Audit", "Systems Testing"]
+    },
+    {
+      id: 2,
+      title: "Intern - Developer",
+      company: "Netopsia",
+      location: "Paris, France (Hybrid)",
+      startDate: "April 2024",
+      endDate: "June 2024",
+      logo: "/logos/netopsia.png",
+      description: [
+        "Migrated legacy systems to newer architectures, ensuring performance optimization.",
+        "Developed and debugged custom scripts for network automation.",
+        "Provided documentation for future maintenance and scalability of systems."
+      ],
+      technologies: ["Network Automation", "Legacy Migration", "Documentation", "Performance Optimization"]
+    },
+    {
+      id: 3,
+      title: "Freelance - Web developer and SEO editor",
+      company: "Chauff'Heure VIP",
+      location: "Paris, France",
+      startDate: "October 2022",
+      endDate: "November 2022",
+      logo: "/logos/chauffheure.png",
+      description: [
+        "Fixed minor bugs on the company's website.",
+        "Wrote articles using the WordPress CMS, optimized SEO using the Yoast plugin.",
+        "Managed web performance using audit tools."
+      ],
+      technologies: ["WordPress", "SEO", "Web Performance", "Content Writing"]
+    }
+  ];
+  
+  // Define education based on CV
+  const education = [
+    {
+      id: 1,
+      degree: "Engineer's degree in Computer science and Networks",
+      institution: "Telecom SudParis",
+      location: "Palaiseau, France",
+      startDate: "2024",
+      endDate: "2027",
+      logo: "/logos/telecom.png",
+      description: "Engineering studies with a focus on Computer science and Networks at Telecom SudParis, part of Institut Polytechnique de Paris."
+    },
+    {
+      id: 2,
+      degree: "Bachelor's degree",
+      institution: "Université Paris-Est Créteil (Paris 12)",
+      location: "Créteil, France",
+      startDate: "2022",
+      endDate: "2024",
+      logo: "/logos/upec.png",
+      description: "Bachelor's degree in Computer Science."
+    },
+    {
+      id: 3,
+      degree: "High School Diploma",
+      institution: "Lycée La Mare Carrée",
+      location: "Moissy-Cramayel, France",
+      startDate: "2019",
+      endDate: "2022",
+      logo: "/logos/lycee.png",
+      description: "High School diploma with focuses on mathematics and computer science."
+    }
+  ];
   
   const titleVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -229,24 +313,6 @@ const Experience: React.FC = () => {
                     
                     {edu.description && (
                       <p className="text-muted-foreground">{edu.description}</p>
-                    )}
-                    
-                    {/* Add awards or recognitions if available */}
-                    {edu.awards && (
-                      <div className="mt-4 p-3 rounded-lg bg-purple-500/10">
-                        <div className="flex items-center mb-2">
-                          <Award className="w-4 h-4 text-purple-400 mr-2" />
-                          <span className="text-sm font-medium text-purple-300">{t('experience.awards')}</span>
-                        </div>
-                        <ul className="text-sm text-muted-foreground space-y-1">
-                          {edu.awards.map((award, i) => (
-                            <li key={i} className="flex items-start">
-                              <span className="text-purple-500 mr-2">•</span>
-                              {award}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
                     )}
                   </motion.div>
                 </motion.div>

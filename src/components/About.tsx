@@ -1,9 +1,8 @@
-
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '../utils/projectData';
 import { useTranslation } from 'react-i18next';
-import { Code, Music, Dumbbell, Network, Share2, LightbulbIcon, PenTool, Cpu, FileText, Download, Eye, Check } from 'lucide-react';
+import { Code, Music, Dumbbell, Network, Share2, LightbulbIcon, PenTool, Gamepad, FileText, Download, Eye, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 // Define interest categories
@@ -34,15 +33,15 @@ const About: React.FC = () => {
     { 
       icon: <Code className="w-8 h-8 text-purple-400" />, 
       title: "Développement", 
-      description: "Passionné par la création d'applications web et mobiles modernes avec les dernières technologies du marché. J'explore constamment de nouvelles méthodes pour optimiser le code et créer des expériences utilisateur fluides et intuitives.",
-      technologies: ["JavaScript", "React", "Node.js", "TypeScript", "Tailwind CSS"],
+      description: "J'aime programmer à mes heures perdues et tous mes projets de développement sont disponibles sur mon GitHub. Je prends plaisir à explorer de nouvelles technologies et à créer des solutions innovantes.",
+      technologies: ["Java", "Python", "C", "React", "TypeScript"],
       color: "purple",
       bgGradient: "from-purple-500/20 to-purple-500/5"
     },
     { 
       icon: <Dumbbell className="w-8 h-8 text-pink-400" />, 
       title: "Musculation", 
-      description: "La musculation est pour moi une discipline qui forge non seulement le corps mais aussi l'esprit. Cet entraînement régulier m'a appris la persévérance, la discipline et la détermination - des qualités que j'applique également dans mes projets professionnels.",
+      description: "La musculation est pour moi une discipline qui forge non seulement le corps mais aussi l'esprit. Je compte créer des ebooks sur la musculation traitant différents thèmes pour partager mes connaissances et expériences dans ce domaine.",
       technologies: ["Fitness", "Hypertrophie", "Nutrition", "Préparation physique", "Force"],
       color: "pink",
       bgGradient: "from-pink-500/20 to-pink-500/5"
@@ -66,7 +65,7 @@ const About: React.FC = () => {
     { 
       icon: <Share2 className="w-8 h-8 text-green-400" />, 
       title: "Marketing", 
-      description: "Le marketing digital est essentiel pour donner de la visibilité aux projets web. J'aime comprendre les stratégies qui permettent de toucher les bonnes audiences et d'optimiser la conversion des utilisateurs.",
+      description: "Le marketing digital est essentiel pour donner de la visibilité aux projets web. J'ai acquis plusieurs expériences dans ce domaine grâce à des stages et des missions freelances, ce qui me permet de comprendre les stratégies pour toucher les bonnes audiences.",
       technologies: ["SEO", "Analytics", "Content Marketing", "Social Media", "Email Marketing"],
       color: "green",
       bgGradient: "from-green-500/20 to-green-500/5"
@@ -88,10 +87,10 @@ const About: React.FC = () => {
       bgGradient: "from-blue-500/20 to-blue-500/5"
     },
     { 
-      icon: <Cpu className="w-8 h-8 text-red-400" />, 
-      title: "Hardware", 
-      description: "Ma curiosité pour le matériel informatique m'aide à mieux comprendre les limites et possibilités techniques des plateformes pour lesquelles je développe. Cela me permet d'optimiser mes applications pour différents types d'appareils.",
-      technologies: ["Assemblage PC", "Overclocking", "ARM", "Microcontrôleurs", "GPU"],
+      icon: <Gamepad className="w-8 h-8 text-red-400" />, 
+      title: "Jeux Vidéos", 
+      description: "Je suis passionné par les jeux vidéo, tant pour y jouer que pour en créer. Cette passion m'a permis de développer une compréhension approfondie des mécaniques de jeu et de l'interaction utilisateur, que j'applique dans mes projets.",
+      technologies: ["Game Design", "Unity", "C#", "Développement de jeux", "3D"],
       color: "red",
       bgGradient: "from-red-500/20 to-red-500/5"
     },

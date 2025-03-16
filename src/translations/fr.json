@@ -8,7 +8,7 @@
   },
   "hero": {
     "title": "Nassim El Haddad",
-    "subtitle": "Développeur Full Stack",
+    "subtitle": "Ingénieur Cybersécurité en études à Télécom SudParis",
     "description": "Je crée des applications web modernes, performantes et accessibles qui résolvent des problèmes concrets.",
     "cta_projects": "Voir mes projets",
     "cta_contact": "Me contacter",
@@ -18,11 +18,11 @@
   },
   "about": {
     "title": "À PROPOS DE MOI",
-    "subtitle": "Passionné par la création d'expériences web exceptionnelles",
+    "subtitle": "Passionné par la cybersécurité et le développement web",
     "description": [
-      "Je suis un développeur full stack basé à Lyon, spécialisé dans la création d'applications web modernes et élégantes avec une attention particulière aux détails et à l'expérience utilisateur.",
-      "Avec plusieurs années d'expérience dans le développement web, j'ai travaillé sur divers projets allant des sites vitrines aux applications complexes avec des architectures sophistiquées.",
-      "Ma philosophie est centrée sur la création de solutions qui combinent esthétique et fonctionnalité, en utilisant les technologies les plus adaptées à chaque projet."
+      "Je suis un étudiant en ingénierie cybersécurité à Télécom SudParis, Institut Polytechnique de Paris, avec un intérêt particulier pour la sécurité des réseaux et le développement web.",
+      "Durant mon parcours, j'ai acquis des compétences en programmation, en sécurité informatique et en administration système, que j'applique dans des projets personnels et professionnels.",
+      "Ma philosophie est centrée sur la création de solutions qui combinent sécurité, performance et expérience utilisateur."
     ]
   },
   "certifications": {
@@ -62,7 +62,7 @@
   "experience": {
     "title": "MON PARCOURS",
     "subtitle": "Expérience professionnelle",
-    "description": "Mon parcours professionnel et ma formation académique dans le domaine du développement web.",
+    "description": "Mon parcours professionnel et ma formation académique dans le domaine de la cybersécurité et du développement web.",
     "work": "Expérience professionnelle",
     "education": "Formation",
     "present": "Présent",
@@ -97,7 +97,7 @@
     }
   },
   "footer": {
-    "description": "Développeur web passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.",
+    "description": "Étudiant ingénieur en cybersécurité passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.",
     "navigation": "Navigation",
     "contact": "Contact",
     "rights": "Tous droits réservés.",

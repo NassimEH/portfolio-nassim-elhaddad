@@ -31,8 +31,8 @@ const ResumeSection: React.FC = () => {
       
       // Create a link element and trigger download
       const link = document.createElement('a');
-      link.href = '/resume.pdf'; // This would be your actual resume PDF
-      link.download = 'cv-2023.pdf';
+      link.href = '/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png'; // Using the uploaded CV
+      link.download = 'cv-nassim-elhaddad.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -40,7 +40,7 @@ const ResumeSection: React.FC = () => {
   };
   
   const viewCV = () => {
-    window.open('/resume.pdf', '_blank');
+    window.open('/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png', '_blank');
     
     toast({
       title: "Aperçu du CV",
@@ -85,7 +85,7 @@ const ResumeSection: React.FC = () => {
           <div className="absolute -inset-10 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-3xl rounded-full"></div>
           
           <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-8">
+            <div className="md:col-span-7">
               <motion.p
                 className="text-lg text-muted-foreground mb-6"
                 initial={{ opacity: 0, x: -20 }}
@@ -143,15 +143,19 @@ const ResumeSection: React.FC = () => {
             </div>
             
             <motion.div
-              className="md:col-span-4 relative"
+              className="md:col-span-5 relative"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
               <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl flex items-center justify-center group">
-                {/* Mock CV icon */}
-                <FileText className="w-20 h-20 text-cyan-400/70 group-hover:scale-110 transition-transform duration-300" />
+                {/* Display the CV image */}
+                <img 
+                  src="/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png"
+                  alt="CV Nassim El Haddad"
+                  className="w-full h-full object-contain p-2"
+                />
                 
                 {/* Effet de néon en hover */}
                 <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-cyan-500/30 transition-colors duration-300"></div>
