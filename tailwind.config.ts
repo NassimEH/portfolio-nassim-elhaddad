@@ -62,6 +62,7 @@ export default {
 			fontFamily: {
 				sans: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
 				mono: ['SF Mono', 'monospace'],
+				headline: ['Space Grotesk', 'system-ui', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {

@@ -16,7 +16,7 @@ const Experience: React.FC = () => {
       location: "Paris, France",
       startDate: "September 2024",
       endDate: "",
-      logo: "/logos/siemens.png",
+      logo: "/lovable-uploads/b03fcafd-dcb3-4699-bd21-07aa0a170746.png",
       description: [
         "Supported the industrialization of cybersecurity in Siemens Mobility products.",
         "Formalized project management processes within multidisciplinary projects.",
@@ -33,7 +33,7 @@ const Experience: React.FC = () => {
       location: "Paris, France (Hybrid)",
       startDate: "April 2024",
       endDate: "June 2024",
-      logo: "/logos/netopsia.png",
+      logo: "/lovable-uploads/0752b7ad-cc95-4761-bb39-56d6ea8253e0.png",
       description: [
         "Migrated legacy systems to newer architectures, ensuring performance optimization.",
         "Developed and debugged custom scripts for network automation.",
@@ -48,7 +48,7 @@ const Experience: React.FC = () => {
       location: "Paris, France",
       startDate: "October 2022",
       endDate: "November 2022",
-      logo: "/logos/chauffheure.png",
+      logo: "/lovable-uploads/2da10e39-695e-4977-bf8f-a29fb711aa0b.png",
       description: [
         "Fixed minor bugs on the company's website.",
         "Wrote articles using the WordPress CMS, optimized SEO using the Yoast plugin.",
@@ -67,7 +67,7 @@ const Experience: React.FC = () => {
       location: "Palaiseau, France",
       startDate: "2024",
       endDate: "2027",
-      logo: "/logos/telecom.png",
+      logo: "/lovable-uploads/48042697-212b-4742-b92a-f939a1c11a92.png",
       description: "Engineering studies with a focus on Computer science and Networks at Telecom SudParis, part of Institut Polytechnique de Paris."
     },
     {
@@ -77,7 +77,7 @@ const Experience: React.FC = () => {
       location: "Créteil, France",
       startDate: "2022",
       endDate: "2024",
-      logo: "/logos/upec.png",
+      logo: "/lovable-uploads/faf6c4ab-5656-42b7-ba95-3c6edbe70eb0.png",
       description: "Bachelor's degree in Computer Science."
     },
     {
@@ -87,7 +87,7 @@ const Experience: React.FC = () => {
       location: "Moissy-Cramayel, France",
       startDate: "2019",
       endDate: "2022",
-      logo: "/logos/lycee.png",
+      logo: "/lovable-uploads/ad741a26-ddd7-4412-80a6-096b56f7bb86.png",
       description: "High School diploma with focuses on mathematics and computer science."
     }
   ];
@@ -279,7 +279,7 @@ const Experience: React.FC = () => {
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div className="flex items-center">
                         {edu.logo && (
-                          <div className="w-10 h-10 rounded-full glass-morphism flex items-center justify-center mr-3 overflow-hidden">
+                          <div className="w-10 h-10 rounded-full glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/80">
                             <img 
                               src={edu.logo} 
                               alt={edu.institution} 

@@ -65,7 +65,42 @@
     --ring: 221.2 83.2% 53.3%;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&display=swap');
+  
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'SF Mono';
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/SFMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
 
   * {
     @apply border-border selection:bg-primary/20 selection:text-primary;
@@ -89,8 +124,25 @@
   }
   
   body, p, a, button, input, textarea, select {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'SF Pro Display', sans-serif;
     font-weight: 400;
+  }
+  
+  /* Styles spécifiques pour les projets et sections autre que header */
+  .project-title, .section-content, .card-text {
+    font-family: 'SF Pro Display', sans-serif;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+  
+  /* Style pour le CV */
+  .cv-section {
+    font-family: 'SF Pro Display', sans-serif;
+  }
+  
+  /* Style pour le code ou les détails techniques */
+  .code, .tech-details {
+    font-family: 'SF Mono', monospace;
   }
 }
 

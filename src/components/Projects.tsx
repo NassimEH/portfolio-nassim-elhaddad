@@ -114,7 +114,7 @@ const Projects: React.FC = () => {
           </motion.h2>
           
           <motion.p 
-            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
+            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 font-light leading-relaxed"
             variants={titleVariants}
           >
             {t('projects.description')}
@@ -171,7 +171,9 @@ const Projects: React.FC = () => {
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categories.map((category: CategoryInfo) => (
+                {categories
+                  .filter(category => category.id !== 'data_science') // Exclure la catégorie "Data Science"
+                  .map((category: CategoryInfo) => (
                   <div key={category.id} className="relative">
                     <motion.button
                       onClick={() => toggleCategoryMenu(category.id)}
@@ -257,8 +259,8 @@ const Projects: React.FC = () => {
                   <div className="p-6 relative group">
                     <div className="absolute -right-2 -top-2 w-24 h-24 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition-colors duration-300">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">{project.description}</p>
+                    <h3 className="text-xl font-medium tracking-tight mb-2 group-hover:text-cyan-400 transition-colors duration-300">{project.title}</h3>
+                    <p className="text-muted-foreground mb-4 line-clamp-2 text-sm font-light">{project.description}</p>
                     
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.technologies.slice(0, 3).map((tech) => (
