@@ -10,7 +10,7 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ParticleBackground from '../components/ParticleBackground';
 import ThemeLanguageSwitch from '../components/ThemeLanguageSwitch';
-import NeonTransition from '../components/NeonTransition';
+import ResumeSection from '../components/ResumeSection';
 import { useRevealOnScroll, useParallax } from '../utils/transitions';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
@@ -105,33 +105,35 @@ const Index = () => {
       <main ref={sectionsRef}>
         <Hero />
         
-        <NeonTransition />
-        
-        <div className="section-transition">
-          <About />
+        <div className="smooth-transition">
+          <ResumeSection />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
           <Experience />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
+          <About />
+        </div>
+        
+        <div className="smooth-transition">
           <Projects />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
           <Certifications />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
           <Testimonials />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
           <Services />
         </div>
         
-        <div className="section-transition">
+        <div className="smooth-transition">
           <Contact />
         </div>
       </main>

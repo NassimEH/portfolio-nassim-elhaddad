@@ -3,92 +3,207 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Briefcase, GraduationCap, ExternalLink, Award, Calendar, MapPin } from 'lucide-react';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 const Experience: React.FC = () => {
   const { t } = useTranslation();
+  const { language } = useSettingsStore();
   
-  // Define experiences based on CV
+  // Define experiences based on CV with French translations
   const experiences = [
     {
       id: 1,
-      title: "Apprentice - Cybersecurity Engineer",
+      title: {
+        en: "Apprentice - Cybersecurity Engineer",
+        fr: "Apprenti - Ingénieur en Cybersécurité"
+      },
       company: "Siemens",
-      location: "Paris, France",
-      startDate: "September 2024",
-      endDate: "",
+      location: {
+        en: "Paris, France",
+        fr: "Paris, France"
+      },
+      startDate: {
+        en: "September 2024",
+        fr: "Septembre 2024"
+      },
+      endDate: {
+        en: "",
+        fr: ""
+      },
       logo: "/lovable-uploads/b03fcafd-dcb3-4699-bd21-07aa0a170746.png",
-      description: [
-        "Supported the industrialization of cybersecurity in Siemens Mobility products.",
-        "Formalized project management processes within multidisciplinary projects.",
-        "Promoted the tool used among various users and ensured proper configuration maintenance.",
-        "Set up and utilized infrastructures for cybersecurity audits of systems.",
-        "Contributed to the testing of complex equipment and systems."
-      ],
-      technologies: ["Cybersecurity", "Project Management", "Audit", "Systems Testing"]
+      description: {
+        en: [
+          "Supporting the industrialization of cybersecurity in Siemens Mobility products.",
+          "Formalizing project management processes within multidisciplinary projects.",
+          "Promoting the tool used among various users and ensuring proper configuration maintenance.",
+          "Setting up and utilizing infrastructures for cybersecurity audits of systems.",
+          "Contributing to the testing of complex equipment and systems."
+        ],
+        fr: [
+          "Soutien à l'industrialisation de la cybersécurité dans les produits Siemens Mobility.",
+          "Formalisation des processus de gestion de projet au sein de projets multidisciplinaires.",
+          "Promotion de l'outil utilisé auprès de divers utilisateurs et maintenance de la configuration.",
+          "Mise en place et utilisation d'infrastructures pour les audits de cybersécurité des systèmes.",
+          "Contribution aux tests d'équipements et de systèmes complexes."
+        ]
+      },
+      technologies: {
+        en: ["Cybersecurity", "Project Management", "Audit", "Systems Testing"],
+        fr: ["Cybersécurité", "Gestion de Projet", "Audit", "Tests de Systèmes"]
+      }
     },
     {
       id: 2,
-      title: "Intern - Developer",
+      title: {
+        en: "Intern - Developer",
+        fr: "Stagiaire - Développeur"
+      },
       company: "Netopsia",
-      location: "Paris, France (Hybrid)",
-      startDate: "April 2024",
-      endDate: "June 2024",
+      location: {
+        en: "Paris, France (Hybrid)",
+        fr: "Paris, France (Hybride)"
+      },
+      startDate: {
+        en: "April 2024",
+        fr: "Avril 2024"
+      },
+      endDate: {
+        en: "June 2024",
+        fr: "Juin 2024"
+      },
       logo: "/lovable-uploads/0752b7ad-cc95-4761-bb39-56d6ea8253e0.png",
-      description: [
-        "Migrated legacy systems to newer architectures, ensuring performance optimization.",
-        "Developed and debugged custom scripts for network automation.",
-        "Provided documentation for future maintenance and scalability of systems."
-      ],
-      technologies: ["Network Automation", "Legacy Migration", "Documentation", "Performance Optimization"]
+      description: {
+        en: [
+          "Migrating legacy systems to newer architectures, ensuring performance optimization.",
+          "Developing and debugging custom scripts for network automation.",
+          "Providing documentation for future maintenance and scalability of systems."
+        ],
+        fr: [
+          "Migration de systèmes existants vers des architectures plus récentes, garantissant l'optimisation des performances.",
+          "Développement et débogage de scripts personnalisés pour l'automatisation du réseau.",
+          "Fourniture de documentation pour la maintenance future et l'évolutivité des systèmes."
+        ]
+      },
+      technologies: {
+        en: ["Network Automation", "Legacy Migration", "Documentation", "Performance Optimization"],
+        fr: ["Automatisation Réseau", "Migration de Systèmes", "Documentation", "Optimisation de Performance"]
+      }
     },
     {
       id: 3,
-      title: "Freelance - Web developer and SEO editor",
+      title: {
+        en: "Freelance - Web developer and SEO editor",
+        fr: "Freelance - Développeur Web et rédacteur SEO"
+      },
       company: "Chauff'Heure VIP",
-      location: "Paris, France",
-      startDate: "October 2022",
-      endDate: "November 2022",
+      location: {
+        en: "Paris, France",
+        fr: "Paris, France"
+      },
+      startDate: {
+        en: "October 2022",
+        fr: "Octobre 2022"
+      },
+      endDate: {
+        en: "November 2022",
+        fr: "Novembre 2022"
+      },
       logo: "/lovable-uploads/2da10e39-695e-4977-bf8f-a29fb711aa0b.png",
-      description: [
-        "Fixed minor bugs on the company's website.",
-        "Wrote articles using the WordPress CMS, optimized SEO using the Yoast plugin.",
-        "Managed web performance using audit tools."
-      ],
-      technologies: ["WordPress", "SEO", "Web Performance", "Content Writing"]
+      description: {
+        en: [
+          "Fixed minor bugs on the company's website.",
+          "Wrote articles using the WordPress CMS, optimized SEO using the Yoast plugin.",
+          "Managed web performance using audit tools."
+        ],
+        fr: [
+          "Correction de bugs mineurs sur le site web de l'entreprise.",
+          "Rédaction d'articles à l'aide du CMS WordPress, optimisation du référencement à l'aide du plugin Yoast.",
+          "Gestion des performances web à l'aide d'outils d'audit."
+        ]
+      },
+      technologies: {
+        en: ["WordPress", "SEO", "Web Performance", "Content Writing"],
+        fr: ["WordPress", "SEO", "Performance Web", "Rédaction de Contenu"]
+      }
     }
   ];
   
-  // Define education based on CV
+  // Define education based on CV with French translations
   const education = [
     {
       id: 1,
-      degree: "Engineer's degree in Computer science and Networks",
+      degree: {
+        en: "Engineer's degree in Computer science and Networks",
+        fr: "Diplôme d'ingénieur en Informatique et Réseaux"
+      },
       institution: "Telecom SudParis",
-      location: "Palaiseau, France",
-      startDate: "2024",
-      endDate: "2027",
+      location: {
+        en: "Palaiseau, France",
+        fr: "Palaiseau, France"
+      },
+      startDate: {
+        en: "2024",
+        fr: "2024"
+      },
+      endDate: {
+        en: "2027",
+        fr: "2027"
+      },
       logo: "/lovable-uploads/48042697-212b-4742-b92a-f939a1c11a92.png",
-      description: "Engineering studies with a focus on Computer science and Networks at Telecom SudParis, part of Institut Polytechnique de Paris."
+      description: {
+        en: "Engineering studies with a focus on Computer science and Networks at Telecom SudParis, part of Institut Polytechnique de Paris.",
+        fr: "Études d'ingénieur avec une spécialisation en Informatique et Réseaux à Telecom SudParis, membre de l'Institut Polytechnique de Paris."
+      }
     },
     {
       id: 2,
-      degree: "Bachelor's degree",
+      degree: {
+        en: "Bachelor's degree",
+        fr: "Licence"
+      },
       institution: "Université Paris-Est Créteil (Paris 12)",
-      location: "Créteil, France",
-      startDate: "2022",
-      endDate: "2024",
+      location: {
+        en: "Créteil, France",
+        fr: "Créteil, France"
+      },
+      startDate: {
+        en: "2022",
+        fr: "2022"
+      },
+      endDate: {
+        en: "2024",
+        fr: "2024"
+      },
       logo: "/lovable-uploads/faf6c4ab-5656-42b7-ba95-3c6edbe70eb0.png",
-      description: "Bachelor's degree in Computer Science."
+      description: {
+        en: "Bachelor's degree in Computer Science.",
+        fr: "Licence en Informatique."
+      }
     },
     {
       id: 3,
-      degree: "High School Diploma",
+      degree: {
+        en: "High School Diploma",
+        fr: "Baccalauréat"
+      },
       institution: "Lycée La Mare Carrée",
-      location: "Moissy-Cramayel, France",
-      startDate: "2019",
-      endDate: "2022",
+      location: {
+        en: "Moissy-Cramayel, France",
+        fr: "Moissy-Cramayel, France"
+      },
+      startDate: {
+        en: "2019",
+        fr: "2019"
+      },
+      endDate: {
+        en: "2022",
+        fr: "2022"
+      },
       logo: "/lovable-uploads/ad741a26-ddd7-4412-80a6-096b56f7bb86.png",
-      description: "High School diploma with focuses on mathematics and computer science."
+      description: {
+        en: "High School diploma with focuses on mathematics and computer science.",
+        fr: "Baccalauréat avec spécialités mathématiques et informatique."
+      }
     }
   ];
   
@@ -189,19 +304,19 @@ const Experience: React.FC = () => {
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div className="flex items-center">
                         {exp.logo && (
-                          <div className="w-10 h-10 rounded-full glass-morphism flex items-center justify-center mr-3 overflow-hidden">
+                          <div className="w-12 h-12 rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/5">
                             <img 
                               src={exp.logo} 
                               alt={exp.company} 
-                              className="w-8 h-8 object-contain"
+                              className="w-10 h-10 object-contain"
                             />
                           </div>
                         )}
-                        <h4 className="text-xl font-medium">{exp.title}</h4>
+                        <h4 className="text-xl font-medium">{language === 'fr' ? exp.title.fr : exp.title.en}</h4>
                       </div>
                       <div className="text-sm font-mono text-blue-400 flex items-center">
                         <Calendar className="w-3.5 h-3.5 mr-1.5" />
-                        {exp.startDate} - {exp.endDate || t('experience.present')}
+                        {language === 'fr' ? exp.startDate.fr : exp.startDate.en} - {(language === 'fr' ? exp.endDate.fr : exp.endDate.en) || t('experience.present')}
                       </div>
                     </div>
                     
@@ -217,18 +332,18 @@ const Experience: React.FC = () => {
                       </a>
                       <div className="text-sm text-muted-foreground flex items-center mt-1">
                         <MapPin className="w-3.5 h-3.5 mr-1.5 text-pink-400" />
-                        {exp.location}
+                        {language === 'fr' ? exp.location.fr : exp.location.en}
                       </div>
                     </div>
                     
                     <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-4">
-                      {exp.description.map((item, i) => (
+                      {(language === 'fr' ? exp.description.fr : exp.description.en).map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
                     
                     <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
+                      {(language === 'fr' ? exp.technologies.fr : exp.technologies.en).map((tech) => (
                         <span 
                           key={tech} 
                           className="text-xs px-2 py-1 rounded-full bg-blue-500/10 text-blue-300"
@@ -279,19 +394,19 @@ const Experience: React.FC = () => {
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div className="flex items-center">
                         {edu.logo && (
-                          <div className="w-10 h-10 rounded-full glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/80">
+                          <div className="w-12 h-12 rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/10">
                             <img 
                               src={edu.logo} 
                               alt={edu.institution} 
-                              className="w-8 h-8 object-contain"
+                              className="w-10 h-10 object-contain"
                             />
                           </div>
                         )}
-                        <h4 className="text-xl font-medium">{edu.degree}</h4>
+                        <h4 className="text-xl font-medium">{language === 'fr' ? edu.degree.fr : edu.degree.en}</h4>
                       </div>
                       <div className="text-sm font-mono text-purple-400 flex items-center">
                         <Calendar className="w-3.5 h-3.5 mr-1.5" />
-                        {edu.startDate} - {edu.endDate}
+                        {language === 'fr' ? edu.startDate.fr : edu.startDate.en} - {language === 'fr' ? edu.endDate.fr : edu.endDate.en}
                       </div>
                     </div>
                     
@@ -307,12 +422,12 @@ const Experience: React.FC = () => {
                       </a>
                       <div className="text-sm text-muted-foreground flex items-center mt-1">
                         <MapPin className="w-3.5 h-3.5 mr-1.5 text-pink-400" />
-                        {edu.location}
+                        {language === 'fr' ? edu.location.fr : edu.location.en}
                       </div>
                     </div>
                     
                     {edu.description && (
-                      <p className="text-muted-foreground">{edu.description}</p>
+                      <p className="text-muted-foreground">{language === 'fr' ? edu.description.fr : edu.description.en}</p>
                     )}
                   </motion.div>
                 </motion.div>
@@ -321,7 +436,7 @@ const Experience: React.FC = () => {
           </motion.div>
         </div>
         
-        {/* LinkedIn Link - Updated to Apple-like style */}
+        {/* LinkedIn Link */}
         <div className="mt-16 text-center">
           <motion.a 
             href="https://www.linkedin.com/in/nassim-elhaddad/" 

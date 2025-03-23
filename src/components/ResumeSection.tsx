@@ -31,7 +31,7 @@ const ResumeSection: React.FC = () => {
       
       // Create a link element and trigger download
       const link = document.createElement('a');
-      link.href = '/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png'; // Using the uploaded CV
+      link.href = '/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png'; // Use the original CV
       link.download = 'cv-nassim-elhaddad.pdf';
       document.body.appendChild(link);
       link.click();
@@ -43,8 +43,8 @@ const ResumeSection: React.FC = () => {
     window.open('/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png', '_blank');
     
     toast({
-      title: "Aperçu du CV",
-      description: "Ouverture du CV dans un nouvel onglet",
+      title: t('resume.view'),
+      description: t('resume.opening'),
     });
   };
   
@@ -150,7 +150,7 @@ const ResumeSection: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl flex items-center justify-center group">
-                {/* Display the CV image */}
+                {/* Display the original CV image */}
                 <img 
                   src="/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png"
                   alt="CV Nassim El Haddad"

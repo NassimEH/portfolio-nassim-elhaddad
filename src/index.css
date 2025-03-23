@@ -185,22 +185,34 @@
     @apply transition-all duration-700 ease-cinematic;
   }
 
-  /* Section transitions */
-  section {
+  /* Improved section transitions */
+  .smooth-transition {
     position: relative;
     z-index: 1;
   }
 
-  section::after {
+  .smooth-transition::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 150px;
+    height: 100px;
     background: linear-gradient(to top, hsl(var(--background)), transparent);
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+  }
+
+  .smooth-transition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, hsl(var(--background)), transparent);
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Mobile optimizations */
@@ -455,28 +467,8 @@ html.smooth-scroll {
   position: relative;
 }
 
-.section-transition::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(to top, hsl(var(--background)), transparent);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.section-transition::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(to bottom, hsl(var(--background)), transparent);
-  z-index: 1;
-  pointer-events: none;
+.section-transition::after, .section-transition::before {
+  display: none;
 }
 
 /* Fix for color issues on the sides */
@@ -503,37 +495,7 @@ body::after {
   right: 0;
 }
 
-/* Enhanced section transitions */
-.section-transition {
-  position: relative;
-  z-index: 1;
-}
-
-.section-transition::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  background: linear-gradient(to top, hsl(var(--background)), transparent);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.section-transition::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  background: linear-gradient(to bottom, hsl(var(--background)), transparent);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Improved konami code effect for easter egg */
+/* Enhanced konami code effect for easter egg */
 @keyframes synthwaveEffect {
   0% { background-color: rgba(168, 85, 247, 0.1); }
   20% { background-color: rgba(236, 72, 153, 0.1); }
