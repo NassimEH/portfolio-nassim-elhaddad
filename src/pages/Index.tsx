@@ -19,6 +19,7 @@ import '../utils/i18n';
 import Testimonials from '../components/Testimonials';
 import Services from '../components/Services';
 import Certifications from '../components/Certifications';
+import ResumeSection from '../components/ResumeSection';
 
 const Index = () => {
   useRevealOnScroll();
@@ -121,6 +122,10 @@ const Index = () => {
         
         <div className="section-transition">
           <Experience />
+        </div>
+        
+        <div className="section-transition">
+          <ResumeSection />
         </div>
         
         <div className="section-transition">

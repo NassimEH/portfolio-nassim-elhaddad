@@ -21,7 +21,7 @@
     "subtitle": "Passionate about cybersecurity and web development",
     "description": [
       "I'm a cybersecurity engineering student at Télécom SudParis, Institut Polytechnique de Paris, with a particular interest in network security and web development.",
-      "Throughout my journey, I've gained skills in programming, computer security, and system administration, which I apply in both personal and professional projects.",
+      "I enjoy programming in my free time and all my development projects are available on my GitHub. I'm proficient in Java, Python, C, React, and TypeScript.",
       "My philosophy is centered on creating solutions that combine security, performance, and user experience."
     ]
   },
@@ -71,7 +71,7 @@
   },
   "testimonials": {
     "title": "Testimonials",
-    "subtitle": "Discover what my clients and collaborators say about my work",
+    "subtitle": "Discover what my collaborators say about my work",
     "description": "Feedback from people I've had the pleasure to work with"
   },
   "contact": {
@@ -118,5 +118,16 @@
     "theme_changed": "Theme changed",
     "dark_theme": "Dark theme activated",
     "light_theme": "Light theme activated"
+  },
+  "resume": {
+    "title": "My Resume",
+    "subtitle": "Download my resume to discover my complete professional background",
+    "description": "Discover my professional background, technical skills, and experience by downloading my complete resume.",
+    "view": "View Resume",
+    "download": "Download Resume",
+    "downloading": "Downloading...",
+    "downloaded": "Downloaded",
+    "toast_downloaded": "Resume downloaded",
+    "toast_description": "Thank you for your interest in my background!"
   }
 }

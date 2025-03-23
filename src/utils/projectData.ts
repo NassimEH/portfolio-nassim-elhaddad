@@ -17,6 +17,7 @@ export type ProjectCategory =
   | 'data_science'
   | 'design'
   | 'devops'
+  | 'software_development'
   | 'other';
 
 export interface CategoryInfo {
@@ -53,8 +54,15 @@ export const categories: CategoryInfo[] = [
     id: 'design',
     name: 'Design & Présentation',
     nameEn: 'Design & Presentation',
-    technologies: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'PDF'],
+    technologies: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'PDF', 'Blender', 'PowerPoint'],
     color: 'from-pink-500 to-rose-400'
+  },
+  {
+    id: 'software_development',
+    name: 'Développement Logiciel',
+    nameEn: 'Software Development',
+    technologies: ['Java', 'C', 'C++', 'Python', 'Qt'],
+    color: 'from-orange-500 to-amber-400'
   },
   {
     id: 'devops',
@@ -73,95 +81,156 @@ export const categories: CategoryInfo[] = [
 ];
 
 export const projects: Project[] = [
+  // Web Development Projects
   {
     id: 1,
-    title: "Nassim E-commerce",
-    description: "A modern e-commerce platform built with React and Node.js, featuring a responsive design and seamless checkout experience.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+    title: "WeListen",
+    description: "Une plateforme web interactive pour découvrir et partager de la musique, avec des recommandations basées sur les goûts des utilisateurs.",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "Spotify API"],
     category: 'web_development',
-    githubUrl: "https://github.com/NassimEH/e-commerce-app",
-    demoUrl: "https://nassim-shop.vercel.app",
+    githubUrl: "https://github.com/NassimEH/WeListen",
+    demoUrl: "https://welisten-demo.vercel.app",
     featured: true,
   },
   {
     id: 2,
-    title: "Portfolio Website",
-    description: "An elegant portfolio website featuring interactive elements, smooth animations, and a responsive design.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Three.js"],
+    title: "CinemaHome",
+    description: "Application web pour créer une expérience cinéma à domicile, incluant une bibliothèque de films et des recommandations personnalisées.",
+    technologies: ["Vue.js", "Node.js", "Firebase", "TheMovieDB API"],
     category: 'web_development',
-    githubUrl: "https://github.com/NassimEH/portfolio",
+    githubUrl: "https://github.com/NassimEH/CinemaHome",
     featured: true,
   },
   {
     id: 3,
-    title: "Task Management App",
-    description: "A productivity application for managing tasks and projects with collaboration features.",
-    technologies: ["React", "Redux", "Firebase", "Material UI"],
+    title: "WebZTP",
+    description: "Outil web pour la gestion des paramètres ZTP (Zero Touch Provisioning) pour le déploiement automatisé d'équipements réseau.",
+    technologies: ["HTML", "CSS", "JavaScript", "Python", "Docker", "SQLite"],
     category: 'web_development',
-    githubUrl: "https://github.com/NassimEH/task-manager",
+    githubUrl: "https://github.com/NassimEH/WebZTP",
     featured: true,
   },
   {
     id: 4,
-    title: "Weather Dashboard",
-    description: "A weather application that provides real-time forecasts and historical weather data visualization.",
-    technologies: ["JavaScript", "Chart.js", "Weather API", "CSS"],
+    title: "Threecot",
+    description: "Site web utilisant Three.js pour créer des visualisations 3D interactives et immersives pour des applications éducatives.",
+    technologies: ["JavaScript", "Three.js", "WebGL", "HTML/CSS"],
     category: 'web_development',
-    githubUrl: "https://github.com/NassimEH/weather-app",
+    githubUrl: "https://github.com/NassimEH/Threecot",
     featured: false,
   },
+  
+  // Mobile Development Projects
   {
     id: 5,
-    title: "Recipe Finder",
-    description: "A web application for discovering and saving recipes with filtering options by ingredients and dietary restrictions.",
-    technologies: ["React", "Node.js", "MongoDB", "Food API"],
-    category: 'web_development',
-    githubUrl: "https://github.com/NassimEH/recipe-finder",
+    title: "Morpion Solitaire",
+    description: "Application mobile du jeu Morpion Solitaire, un jeu de réflexion basé sur le placement stratégique de marques sur une grille.",
+    technologies: ["React Native", "JavaScript", "Redux"],
+    category: 'mobile_development',
+    githubUrl: "https://github.com/NassimEH/MorpionSolitaire",
     featured: false,
   },
+  
+  // Design & Presentation Projects
   {
     id: 6,
-    title: "Social Media Dashboard",
-    description: "An analytics dashboard for tracking social media performance across multiple platforms.",
-    technologies: ["Vue.js", "D3.js", "Social Media APIs", "Vuetify"],
-    category: 'data_science',
-    githubUrl: "https://github.com/NassimEH/social-dashboard",
+    title: "Wireframes Netopsia",
+    description: "Conception de wireframes pour les applications et sites web de Netopsia, centrés sur l'expérience utilisateur et l'accessibilité.",
+    technologies: ["Figma", "Adobe XD"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/NetopsiaDesigns",
     featured: false,
   },
   {
     id: 7,
-    title: "Mobile Food Delivery App",
-    description: "A cross-platform mobile application for food ordering and delivery tracking.",
-    technologies: ["React Native", "Firebase", "Stripe", "Google Maps API"],
-    category: 'mobile_development',
-    githubUrl: "https://github.com/NassimEH/food-delivery-app",
+    title: "Designs Photoshop",
+    description: "Collection de designs et d'illustrations créés avec Photoshop pour divers projets personnels et professionnels.",
+    technologies: ["Photoshop", "Illustrator"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/PhotoshopProjects",
     featured: false,
   },
   {
     id: 8,
-    title: "Data Visualization Tool",
-    description: "A tool for creating interactive data visualizations from various data sources.",
-    technologies: ["D3.js", "React", "Python", "pandas"],
-    category: 'data_science',
-    githubUrl: "https://github.com/NassimEH/data-viz-tool",
+    title: "Modèles 3D Blender",
+    description: "Modèles 3D créés avec Blender, incluant un mug, une chambre et une Gameboy, démontrant mes compétences en modélisation 3D.",
+    technologies: ["Blender", "3D Modeling"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/BlenderModels",
     featured: false,
   },
   {
     id: 9,
-    title: "Company Branding Kit",
-    description: "A comprehensive branding kit for a fictional tech startup, including logo, style guide, and marketing materials.",
-    technologies: ["Figma", "Illustrator", "Photoshop"],
+    title: "Présentation Télétravail",
+    description: "Présentation approfondie sur les enjeux et opportunités du télétravail dans les entreprises modernes.",
+    technologies: ["PowerPoint", "Canva"],
     category: 'design',
-    githubUrl: "https://github.com/NassimEH/branding-kit",
+    githubUrl: "https://github.com/NassimEH/WorkFromHomePresentation",
     featured: false,
   },
   {
     id: 10,
-    title: "Cloud Deployment Pipeline",
-    description: "An automated CI/CD pipeline for deploying applications to various cloud platforms.",
-    technologies: ["Docker", "Kubernetes", "AWS", "Jenkins"],
-    category: 'devops',
-    githubUrl: "https://github.com/NassimEH/cloud-pipeline",
+    title: "Présentation Créativité et Musique",
+    description: "Exploration des liens entre la créativité et la musique, et comment ils influencent notre façon de penser et de travailler.",
+    technologies: ["PowerPoint", "Canva"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/CreativityMusicPresentation",
+    featured: false,
+  },
+  {
+    id: 11,
+    title: "Présentation Femmes en Entreprise",
+    description: "Analyse de la place des femmes dans le monde de l'entreprise et des défis à surmonter pour atteindre l'égalité professionnelle.",
+    technologies: ["PowerPoint", "Canva"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/WomenInBusinessPresentation",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "Présentation Hypertrophie Musculaire",
+    description: "Étude scientifique de l'hypertrophie musculaire, des mécanismes biologiques et des méthodes d'entraînement optimales.",
+    technologies: ["PowerPoint", "Canva", "PDF"],
+    category: 'design',
+    githubUrl: "https://github.com/NassimEH/MuscleHypertrophyPresentation",
+    featured: false,
+  },
+  
+  // Software Development Projects
+  {
+    id: 13,
+    title: "Le Donjon Infini",
+    description: "Jeu de rôle de style donjon avec génération procédurale de niveaux, offrant une expérience de jeu différente à chaque partie.",
+    technologies: ["Java", "Swing", "Object-Oriented Programming"],
+    category: 'software_development',
+    githubUrl: "https://github.com/NassimEH/InfiniteDungeon",
+    featured: true,
+  },
+  {
+    id: 14,
+    title: "Bataille Navale",
+    description: "Implémentation du jeu classique de la bataille navale avec une interface graphique et la possibilité de jouer contre l'ordinateur.",
+    technologies: ["C", "SDL"],
+    category: 'software_development',
+    githubUrl: "https://github.com/NassimEH/Battleship",
+    featured: false,
+  },
+  {
+    id: 15,
+    title: "Tableur",
+    description: "Application de type tableur avec fonctionnalités de calcul, formatage et visualisation de données similaires à Excel.",
+    technologies: ["Python", "Qt", "Pandas"],
+    category: 'software_development',
+    githubUrl: "https://github.com/NassimEH/SpreadsheetApp",
+    featured: false,
+  },
+  {
+    id: 16,
+    title: "Diagrammes Dynamiques",
+    description: "Outil de création de diagrammes dynamiques pour visualiser et analyser des données complexes en temps réel.",
+    technologies: ["JavaScript", "D3.js", "SVG"],
+    category: 'software_development',
+    githubUrl: "https://github.com/NassimEH/DynamicDiagrams",
     featured: false,
   }
 ];
@@ -181,48 +250,50 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 1,
-    title: "Développeur Full Stack",
-    company: "Keplr",
-    logo: "https://media.licdn.com/dms/image/C4E0BAQHULu9h6xzCLQ/company-logo_100_100/0/1656587365514?e=1718236800&v=beta&t=3bWV53XkyghnWNwNbV_HshZdPiXmBGwdstWMbHK_gFA",
-    location: "Lyon, Auvergne-Rhône-Alpes, France",
-    startDate: "mai 2023",
-    endDate: null,
+    title: "Apprentice - Cybersecurity Engineer",
+    company: "Siemens",
+    logo: "/logos/siemens.png",
+    location: "Paris, France",
+    startDate: "September 2024",
+    endDate: "August 2027",
     description: [
-      "Développement front-end et back-end pour des applications médicales",
-      "Utilisation de React, Node.js, et bases de données SQL",
-      "Implémentation de fonctionnalités d'accessibilité et optimisation des performances"
+      "Supported the industrialization of cybersecurity in Siemens Mobility products.",
+      "Formalized project management processes within multidisciplinary projects.",
+      "Promoted the tool used among various users and ensured proper configuration maintenance.",
+      "Set up and utilized infrastructures for cybersecurity audits of systems.",
+      "Contributed to the testing of complex equipment and systems."
     ],
-    technologies: ["JavaScript", "React", "Node.js", "SQL", "TypeScript"]
+    technologies: ["Cybersecurity", "Project Management", "Audit", "Systems Testing"]
   },
   {
     id: 2,
-    title: "Développeur Web",
-    company: "Freelance",
-    logo: "https://media.licdn.com/dms/image/D4E35AQH7j6v7x9xswg/profile-framedphoto-shrink_100_100/0/1686245975841?e=1715986800&v=beta&t=7N4v1o8ot93-6qHoUHllAEwPsyTKJLrDY1hTNpZ68zU",
-    location: "Lyon, France",
-    startDate: "septembre 2021",
-    endDate: "avril 2023",
+    title: "Intern - Developer",
+    company: "Netopsia",
+    logo: "/logos/netopsia.png",
+    location: "Paris, France (Hybrid)",
+    startDate: "April 2024",
+    endDate: "June 2024",
     description: [
-      "Création de sites web et applications pour divers clients",
-      "Développement front-end avec React et Vue.js",
-      "Mise en place de systèmes de gestion de contenu personnalisés"
+      "Migrated legacy systems to newer architectures, ensuring performance optimization.",
+      "Developed and debugged custom scripts for network automation.",
+      "Provided documentation for future maintenance and scalability of systems."
     ],
-    technologies: ["JavaScript", "React", "Vue.js", "HTML/CSS", "WordPress"]
+    technologies: ["Network Automation", "Legacy Migration", "Documentation", "Performance Optimization"]
   },
   {
     id: 3,
-    title: "Développeur Web Junior",
-    company: "Agence Web",
-    logo: "https://media.licdn.com/dms/image/C4D0BAQGexnfBxeEG-g/company-logo_100_100/0/1630621204188?e=1718236800&v=beta&t=RjJ-C_3jvMNh28i2MjtkdOxiQK-87zYvW1bs-bhWbzA",
-    location: "Lyon, France",
-    startDate: "janvier 2021",
-    endDate: "août 2021",
+    title: "Freelance - Web developer and SEO editor",
+    company: "Chauff'Heure VIP",
+    logo: "/logos/chauffheure.png",
+    location: "Paris, France",
+    startDate: "October 2022",
+    endDate: "November 2022",
     description: [
-      "Participation au développement de sites web pour clients B2B",
-      "Maintenance et mise à jour de sites existants",
-      "Collaboration avec designers et chefs de projet"
+      "Fixed minor bugs on the company's website.",
+      "Wrote articles using the WordPress CMS, optimized SEO using the Yoast plugin.",
+      "Managed web performance using audit tools."
     ],
-    technologies: ["JavaScript", "PHP", "HTML/CSS", "WordPress", "MySQL"]
+    technologies: ["WordPress", "SEO", "Web Performance", "Content Writing"]
   }
 ];
 
@@ -235,31 +306,39 @@ export interface Education {
   startDate: string;
   endDate: string;
   description?: string;
-  awards?: string[]; // Added awards property as optional
+  awards?: string[];
 }
 
 export const education: Education[] = [
   {
     id: 1,
-    degree: "Master en Développement Web",
-    institution: "Université Claude Bernard Lyon 1",
-    logo: "https://media.licdn.com/dms/image/C4D0BAQFqRQtofSAT-g/company-logo_100_100/0/1631343364290?e=1718236800&v=beta&t=S3CQK77LORBMaRWIdziwXvUKwwZFKjJ-8N-IUgE9Q68",
-    location: "Lyon, France",
-    startDate: "septembre 2019",
-    endDate: "juin 2021",
-    description: "Spécialisation en développement d'applications web modernes et technologies cloud.",
-    awards: ["Prix d'excellence académique", "Mention spéciale pour le projet de fin d'études"]
+    degree: "Engineer's degree in Computer science and Networks",
+    institution: "Telecom SudParis",
+    logo: "/logos/telecom.png",
+    location: "Palaiseau, France",
+    startDate: "2024",
+    endDate: "2027",
+    description: "Engineering studies with a focus on Computer science and Networks at Telecom SudParis, part of Institut Polytechnique de Paris."
   },
   {
     id: 2,
-    degree: "Licence en Informatique",
-    institution: "Université Lyon 2",
-    logo: "https://media.licdn.com/dms/image/C4E0BAQEiNNkAIDK5Ww/company-logo_100_100/0/1631367645776?e=1718236800&v=beta&t=QG_Tq9bWIoDnIKTR6WgL8j1Ywm3qDcyYh0-g3u_35zs",
-    location: "Lyon, France",
-    startDate: "septembre 2016",
-    endDate: "juin 2019",
-    description: "Formation complète en informatique avec focus sur les algorithmes et structures de données.",
-    awards: ["Bourse d'excellence", "Premier prix hackathon étudiant"]
+    degree: "Bachelor's degree",
+    institution: "Université Paris-Est Créteil (Paris 12)",
+    logo: "/logos/upec.png",
+    location: "Créteil, France",
+    startDate: "2022",
+    endDate: "2024",
+    description: "Bachelor's degree in Computer Science."
+  },
+  {
+    id: 3,
+    degree: "High School Diploma",
+    institution: "Lycée La Mare Carrée",
+    logo: "/logos/lycee.png",
+    location: "Moissy-Cramayel, France",
+    startDate: "2019",
+    endDate: "2022",
+    description: "High School diploma with focuses on mathematics and computer science."
   }
 ];
 
@@ -270,8 +349,8 @@ export interface Skill {
 
 export const skills: Skill[] = [
   {
-    category: "Langages",
-    items: ["JavaScript", "TypeScript", "HTML", "CSS", "PHP", "Python", "SQL"]
+    category: "Langages de programmation",
+    items: ["Java", "Python", "C", "HTML", "CSS", "JavaScript", "TypeScript", "PHP", "SQL", "Bash"]
   },
   {
     category: "Frontend",
@@ -279,22 +358,78 @@ export const skills: Skill[] = [
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "Laravel", "Django", "REST API", "GraphQL"]
+    items: ["Node.js", "Express", "Django", "REST API"]
   },
   {
     category: "Bases de données",
-    items: ["MongoDB", "MySQL", "PostgreSQL", "Firebase"]
+    items: ["MongoDB", "MySQL", "PostgreSQL", "Firebase", "SQLite"]
   },
   {
-    category: "DevOps & Outils",
-    items: ["Git", "Docker", "CI/CD", "AWS", "Webpack", "Vite", "npm/yarn"]
+    category: "Outils & Technologies",
+    items: ["Git", "Docker", "Linux", "Windows", "VSCode", "Wireshark", "Office 365", "PowerBI", "StarUML", "WordPress", "Drupal"]
+  },
+  {
+    category: "Langues",
+    items: ["Français (Natif)", "Arabe (Natif)", "Anglais (Niveau professionnel)", "Espagnol (Notions)"]
+  },
+  {
+    category: "Réseaux",
+    items: ["IP", "Ethernet", "TCP", "UDP", "DNS", "VLAN", "NAT", "FTP", "VPN", "TCP/IP", "OSI"]
   }
 ];
 
 export const contactInfo = {
-  email: "nassim.elhaddad@example.com",
-  phone: "+33 6 12 34 56 78",
-  location: "Lyon, France",
+  email: "elhaddad.nassimpro@gmail.com",
+  phone: "+33 6 99 50 90 52",
+  location: "Paris, France",
   linkedin: "https://www.linkedin.com/in/nassim-elhaddad/",
   github: "https://github.com/NassimEH"
 };
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  position: string;
+  company: string;
+  image?: string;
+  text: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  date: string;
+  source: 'linkedin' | 'personal' | 'other';
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Jean Dupont",
+    position: "Senior Developer",
+    company: "Tech Solutions",
+    image: "/testimonials/person1.png",
+    text: "Nassim est un développeur talentueux avec une grande capacité d'adaptation. Son travail sur notre projet a été exemplaire, et sa connaissance technique a été un atout majeur pour notre équipe.",
+    rating: 5,
+    date: "Juin 2023",
+    source: 'linkedin'
+  },
+  {
+    id: 2,
+    name: "Marie Lambert",
+    position: "Project Manager",
+    company: "Digital Innovations",
+    image: "/testimonials/person2.png",
+    text: "J'ai eu le plaisir de travailler avec Nassim sur plusieurs projets. Sa rigueur, son sens de l'initiative et sa capacité à résoudre des problèmes complexes sont impressionnants.",
+    rating: 5,
+    date: "Mars 2023",
+    source: 'linkedin'
+  },
+  {
+    id: 3,
+    name: "Thomas Mercier",
+    position: "CTO",
+    company: "WebSphere",
+    image: "/testimonials/person3.png",
+    text: "Nassim a fait preuve d'une expertise remarquable en cybersécurité lors de notre collaboration. Son approche méthodique et sa passion pour la sécurité en font un atout pour n'importe quelle équipe.",
+    rating: 4,
+    date: "Janvier 2023",
+    source: 'linkedin'
+  }
+];

@@ -21,7 +21,7 @@
     "subtitle": "Passionné par la cybersécurité et le développement web",
     "description": [
       "Je suis un étudiant en ingénierie cybersécurité à Télécom SudParis, Institut Polytechnique de Paris, avec un intérêt particulier pour la sécurité des réseaux et le développement web.",
-      "Durant mon parcours, j'ai acquis des compétences en programmation, en sécurité informatique et en administration système, que j'applique dans des projets personnels et professionnels.",
+      "J'aime programmer à mes heures perdues et tous mes projets de développement sont disponibles sur mon GitHub. Je maîtrise les langages Java, Python, C, React et TypeScript.",
       "Ma philosophie est centrée sur la création de solutions qui combinent sécurité, performance et expérience utilisateur."
     ]
   },
@@ -66,7 +66,13 @@
     "work": "Expérience professionnelle",
     "education": "Formation",
     "present": "Présent",
-    "view_linkedin": "Voir mon profil LinkedIn"
+    "view_linkedin": "Voir mon profil LinkedIn",
+    "awards": "Prix et Reconnaissances"
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "subtitle": "Découvrez ce que mes collaborateurs disent de mon travail",
+    "description": "Commentaires de personnes avec qui j'ai eu le plaisir de travailler"
   },
   "contact": {
     "title": "CONTACT",
@@ -108,5 +114,16 @@
     "theme_changed": "Thème modifié",
     "dark_theme": "Thème sombre activé",
     "light_theme": "Thème clair activé"
+  },
+  "resume": {
+    "title": "Mon CV",
+    "subtitle": "Téléchargez mon CV pour découvrir mon parcours professionnel complet",
+    "description": "Découvrez mon parcours professionnel, mes compétences techniques et mon expérience en téléchargeant mon CV complet.",
+    "view": "Consulter le CV",
+    "download": "Télécharger le CV",
+    "downloading": "Téléchargement...",
+    "downloaded": "Téléchargé",
+    "toast_downloaded": "CV téléchargé",
+    "toast_description": "Merci de votre intérêt pour mon parcours !"
   }
 }

@@ -25,13 +25,13 @@ const ResumeSection: React.FC = () => {
       }, 3000);
       
       toast({
-        title: "CV téléchargé",
-        description: "Merci de votre intérêt pour mon parcours !",
+        title: t('resume.toast_downloaded'),
+        description: t('resume.toast_description'),
       });
       
       // Create a link element and trigger download
       const link = document.createElement('a');
-      link.href = '/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png'; // Using the uploaded CV
+      link.href = '/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png'; // Using the uploaded CV
       link.download = 'cv-nassim-elhaddad.pdf';
       document.body.appendChild(link);
       link.click();
@@ -40,7 +40,7 @@ const ResumeSection: React.FC = () => {
   };
   
   const viewCV = () => {
-    window.open('/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png', '_blank');
+    window.open('/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png', '_blank');
     
     toast({
       title: "Aperçu du CV",
@@ -66,7 +66,7 @@ const ResumeSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Mon CV
+            {t('resume.title')}
           </motion.h2>
           
           <motion.p
@@ -76,7 +76,7 @@ const ResumeSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Téléchargez mon CV pour découvrir mon parcours professionnel complet
+            {t('resume.subtitle')}
           </motion.p>
         </motion.div>
         
@@ -93,7 +93,7 @@ const ResumeSection: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Découvrez mon parcours professionnel, mes compétences techniques et mon expérience en téléchargeant mon CV complet.
+                {t('resume.description')}
               </motion.p>
               
               <div className="flex flex-wrap gap-4">
@@ -108,7 +108,7 @@ const ResumeSection: React.FC = () => {
                   onClick={viewCV}
                 >
                   <Eye className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
-                  <span>Consulter le CV</span>
+                  <span>{t('resume.view')}</span>
                 </motion.button>
                 
                 <motion.button
@@ -125,17 +125,17 @@ const ResumeSection: React.FC = () => {
                   {isDownloading ? (
                     <>
                       <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Téléchargement...</span>
+                      <span>{t('resume.downloading')}</span>
                     </>
                   ) : hasDownloaded ? (
                     <>
                       <Check className="w-5 h-5" />
-                      <span>Téléchargé</span>
+                      <span>{t('resume.downloaded')}</span>
                     </>
                   ) : (
                     <>
                       <Download className="w-5 h-5" />
-                      <span>Télécharger le CV</span>
+                      <span>{t('resume.download')}</span>
                     </>
                   )}
                 </motion.button>
@@ -152,7 +152,7 @@ const ResumeSection: React.FC = () => {
               <div className="w-full aspect-[3/4] glass-morphism rounded-lg relative overflow-hidden border border-white/10 shadow-xl flex items-center justify-center group">
                 {/* Display the CV image */}
                 <img 
-                  src="/lovable-uploads/f5c547e4-1b70-4571-807f-fae5419e8a0c.png"
+                  src="/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png"
                   alt="CV Nassim El Haddad"
                   className="w-full h-full object-contain p-2"
                 />
