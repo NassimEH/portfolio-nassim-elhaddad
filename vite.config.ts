@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Utilisez un point pour les chemins relatifs sur GitHub Pages
+  // Configuration essentielle pour GitHub Pages - utilise le chemin relatif
   base: "./",
   server: {
     host: "::",
@@ -23,9 +23,15 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Assurez-vous que les ressources sont correctement liées
+    // Optimisations pour GitHub Pages
     assetsDir: "assets",
     sourcemap: false,
     outDir: "dist",
+    // Amélioration du chemin des assets pour éviter les 404
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      }
+    },
   },
 }));

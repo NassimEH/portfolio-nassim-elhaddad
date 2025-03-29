@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import ThreeScene from './ThreeScene';
@@ -173,7 +174,7 @@ const Hero: React.FC = () => {
               scale: 0.98 
             }}
           >
-            {t('hero.cta_projects')}
+            Voir mes projets
           </motion.button>
           
           <motion.button
@@ -187,7 +188,7 @@ const Hero: React.FC = () => {
               scale: 0.98 
             }}
           >
-            {t('hero.cta_contact')}
+            Me contacter
           </motion.button>
         </motion.div>
         
@@ -209,7 +210,7 @@ const Hero: React.FC = () => {
             className="flex flex-col items-center cursor-pointer" 
             onClick={() => scrollToElement('about', 80)}
           >
-            <span className="text-sm text-muted-foreground mb-2">{t('hero.scroll')}</span>
+            <span className="text-sm text-muted-foreground mb-2">Défiler</span>
             <ArrowDown className="w-5 h-5 text-cyan-400" />
           </div>
         </motion.div>

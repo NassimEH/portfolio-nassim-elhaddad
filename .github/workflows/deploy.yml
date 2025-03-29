@@ -4,7 +4,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # or master, depending on your default branch name
+      - main # ou master, selon le nom de votre branche principale
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -12,10 +12,10 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -38,6 +38,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Copy .nojekyll file
+        run: cp .nojekyll ./dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
