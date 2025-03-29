@@ -6,8 +6,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Base path DOIT être "./" pour GitHub Pages
-  base: "./portfolio-nassim-elhaddad",
+  // Base path doit être le nom du repo pour GitHub Pages
+  base: "/portfolio-nassim-elhaddad/",
   server: {
     host: "::",
     port: 8080,
@@ -26,11 +26,11 @@ export default defineConfig(({ mode }) => ({
     assetsDir: "assets",
     sourcemap: false,
     outDir: "dist",
-    // Désactiver la division en chunks pour éviter les problèmes de chemins
+    // Configuration des chemins de sortie pour GitHub Pages
     rollupOptions: {
       output: {
         manualChunks: undefined,
-        // S'assurer que tous les assets ont des chemins relatifs
+        // Assurez-vous que tous les assets ont des chemins corrects
         assetFileNames: "assets/[name].[hash].[ext]",
         chunkFileNames: "assets/[name].[hash].js",
         entryFileNames: "assets/[name].[hash].js"
