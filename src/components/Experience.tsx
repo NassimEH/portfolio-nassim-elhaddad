@@ -59,7 +59,7 @@ const Experience: React.FC = () => {
       en: "June 2024",
       fr: "Juin 2024"
     },
-    logo: "https://www.dim-materre.fr/wp-content/uploads/2017/05/g8xwqH_z_400x400.png",
+    logo: "https://www.netopsia.com/wp-content/uploads/2020/07/favicon-netopsia.png",
     description: {
       en: ["Migrating legacy systems to newer architectures, ensuring performance optimization.", "Developing and debugging custom scripts for network automation.", "Providing documentation for future maintenance and scalability of systems."],
       fr: ["Migration de systèmes existants vers des architectures plus récentes, garantissant l'optimisation des performances.", "Développement et débogage de scripts personnalisés pour l'automatisation du réseau.", "Fourniture de documentation pour la maintenance future et l'évolutivité des systèmes."]
@@ -142,7 +142,7 @@ const Experience: React.FC = () => {
       en: "2024",
       fr: "2024"
     },
-    logo: "/lovable-uploads/faf6c4ab-5656-42b7-ba95-3c6edbe70eb0.png",
+    logo: "https://www.dim-materre.fr/wp-content/uploads/2017/05/g8xwqH_z_400x400.png",
     description: {
       en: "Bachelor's University of Technology degree in Computer Science.",
       fr: "BUT (Bachelor Universitaire de Technologie) en Informatique."
@@ -166,7 +166,7 @@ const Experience: React.FC = () => {
       en: "2022",
       fr: "2022"
     },
-    logo: "/lovable-uploads/ad741a26-ddd7-4412-80a6-096b56f7bb86.png",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo8jzG9-KLK263Ice576JG6y5vYoNxl4V0qg&s",
     description: {
       en: "High School diploma with focuses on mathematics and computer science.",
       fr: "Baccalauréat avec spécialités mathématiques et informatique."
