@@ -122,7 +122,7 @@ export const projects: Project[] = [
     technologies: ["Python"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/WordToPDF-code",
-    imageUrl: "/lovable-uploads/335713a1-1ce0-4507-896e-7416565317f2.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFjMKMKqhIypQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734800313736?e=1743868800&v=beta&t=PMGHza0Ss1HheWjQ8fhPCpKCUw1sQ4oLrbt_v7Rfwxw",
     featured: false,
     date: "Décembre 2024"
   },
@@ -308,7 +308,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Tableur-Java",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFJy3YiKByWIg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898987167?e=1743868800&v=beta&t=4ZGZ0URVvLF1q8V5E8c-cIpAbLH8x9xhpqsfEuDxevU",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
     featured: true,
     date: "Février 2024"
   },
