@@ -199,6 +199,7 @@ export const projects: Project[] = [
     technologies: ["Blender"],
     category: 'design',
     githubUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGjZ_bL_TEveA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1727533250474?e=1743868800&v=beta&t=GJoMohDlMv1ey_mtgDeKZHPmqbBfZCxPLaOWVLzXQq4",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGjZ_bL_TEveA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1727533250474?e=1743868800&v=beta&t=GJoMohDlMv1ey_mtgDeKZHPmqbBfZCxPLaOWVLzXQq4",
     featured: false,
     date: "Septembre 2024"
   },
@@ -219,6 +220,7 @@ export const projects: Project[] = [
     technologies: ["Python"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Snake-Python",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFj4vDPJ_ramw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1721505320259?e=1743868800&v=beta&t=ZGTIboZXoiYhGOs999JJIw_M--ZfUCLk_3lsRal6WPM",
     featured: false,
     date: "Juillet 2024"
   },
@@ -229,6 +231,7 @@ export const projects: Project[] = [
     technologies: ["Python"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/TicTacToe-Python",
+    imageUrl : "https://media.licdn.com/dms/image/v2/D4E2DAQFj3iRGfsshvA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1721572462846?e=1743868800&v=beta&t=5vWyRPd3_UfEJvTk7h4KjLMr9Iln7d9dLNzNEjnSjiY",
     featured: false,
     date: "Juillet 2024"
   },
@@ -239,6 +242,7 @@ export const projects: Project[] = [
     technologies: ["Photoshop", "Design graphique"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Design-Photoshop",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQHEb6lZGh3XFw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720988611347?e=1743868800&v=beta&t=GaxlyL0tFTxeIWE7iL39xAXxgvk5zT00fBdMpoupuI4",
     featured: false,
     date: "Juin 2024"
   },
@@ -249,6 +253,7 @@ export const projects: Project[] = [
     technologies: ["Rédaction"],
     category: 'other',
     githubUrl: "https://github.com/NassimEH/Memoire-Professionnel-BUT2",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGaZHh7bgLj5A/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1722010654671?e=1743868800&v=beta&t=PilrJQ7y2SfsuJOM2qt6TBBnfnTY9DbNIXsKaOVrWbY",
     featured: false,
     date: "Juin 2024"
   },
@@ -259,6 +264,7 @@ export const projects: Project[] = [
     technologies: ["Figma", "UI/UX", "Ergonomie informatique", "WCAG"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Wireframe-Figma",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGR4qeGSRyXQg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720902478234?e=1743868800&v=beta&t=OW7do4PvgXcau-zIlNLGI9xftAqkPkqAqznJ_CDtNTc",
     featured: false,
     date: "Mai 2024"
   },
@@ -269,6 +275,7 @@ export const projects: Project[] = [
     technologies: ["CSS", "RiotJS", "API TMDB", "HTML"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/Site-Web-Cinema",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGFNcJuYQLbLQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720901110505?e=1743868800&v=beta&t=skXBA-S_sINiny4sXTBlWPetBav4r_WJM0WhbF7Wy48",
     featured: false,
     date: "Avril 2024"
   },
@@ -279,6 +286,7 @@ export const projects: Project[] = [
     technologies: ["Android Java", "Java", "Android Studio"],
     category: 'mobile_development',
     githubUrl: "https://github.com/NassimEH/Morpion-Solitaire",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQHAtOFGddQVmQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900932033?e=1743868800&v=beta&t=i0sdK6angb17vDgq2bXk1IukTc5xrEsNulqnM-_Ga4Y",
     featured: true,
     date: "Avril 2024"
   },
@@ -289,6 +297,7 @@ export const projects: Project[] = [
     technologies: ["PowerPoint", "Communication orale"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Hypertrophie-Powerpoint",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEsQAeEY1IXHQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898376392?e=1743868800&v=beta&t=Xv-ks4i88VsPG7x8BdSiha0gqeGIk1-QNB49XSIymzA",
     featured: false,
     date: "Mars 2024"
   },
@@ -299,6 +308,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Tableur-Java",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFJy3YiKByWIg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898987167?e=1743868800&v=beta&t=4ZGZ0URVvLF1q8V5E8c-cIpAbLH8x9xhpqsfEuDxevU",
     featured: true,
     date: "Février 2024"
   },
@@ -309,6 +319,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing", "UI/UX"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Diagrammes-Java",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
     featured: false,
     date: "Décembre 2023"
   },
@@ -319,6 +330,7 @@ export const projects: Project[] = [
     technologies: ["HTML", "CSS", "JavaScript", "UI/UX", "Ergonomie informatique"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/Site-Web-Ergonomique",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGnPiHEhYc5MA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720901374751?e=1743868800&v=beta&t=0zWObAB6a0763f2FdBUBl1ET2tWQ6oy7vf-G4Gp_nys",
     featured: false,
     date: "Octobre 2023"
   },
@@ -339,6 +351,7 @@ export const projects: Project[] = [
     technologies: ["Windows", "Linux"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Dual-Boot",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGEl4k24_v3hw/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1722689320400?e=1743868800&v=beta&t=rRuOPxh7IeOwYZGMtv402R4DKSrYRNNcwdcnV6uOFnc",
     featured: false,
     date: "Février 2023"
   },
@@ -349,6 +362,7 @@ export const projects: Project[] = [
     technologies: ["PHP", "HTML", "CSS"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/Site-Web-Threecot",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEAeQbQUOAlXA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900642097?e=1743868800&v=beta&t=woMfV4JzbLsjjFX-A4M6KFsz1HbpEC7pB91qXQs5AlU",
     featured: false,
     date: "Février 2023"
   },
@@ -359,6 +373,7 @@ export const projects: Project[] = [
     technologies: ["C"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Bataille-Navale",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGhBH2qySzzJQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898045454?e=1743868800&v=beta&t=VTrzgMHLtUjRIbb8lfUzzlWZvUWZSIrl-DiQMgceOEI",
     featured: false,
     date: "Décembre 2022"
   }
