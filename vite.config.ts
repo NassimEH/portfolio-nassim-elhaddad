@@ -6,7 +6,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "./", // This ensures assets are loaded correctly in GitHub Pages
+  // Utilisez un point pour les chemins relatifs sur GitHub Pages
+  base: "./",
   server: {
     host: "::",
     port: 8080,
@@ -20,5 +21,11 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    // Assurez-vous que les ressources sont correctement liées
+    assetsDir: "assets",
+    sourcemap: false,
+    outDir: "dist",
   },
 }));
