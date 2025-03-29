@@ -1,4 +1,3 @@
-
 {
   "nav": {
     "about": "About",
@@ -26,19 +25,14 @@
     ]
   },
   "certifications": {
-    "title": "MY CERTIFICATIONS",
-    "subtitle": "Learning path and skill validations",
-    "description": "Discover my technical and professional certifications obtained from recognized organizations.",
-    "categories": {
-      "all": "All",
-      "development": "Development",
-      "design": "Design",
-      "devops": "DevOps",
-      "management": "Management"
-    },
-    "issuer": "Issued by",
-    "date": "Date",
-    "view_credential": "View credential"
+    "title": "Certifications",
+    "description": "Discover my professional certifications and training",
+    "all_orgs": "All organizations",
+    "no_results": "No results found for the selected filters",
+    "reset_categories": "Reset categories",
+    "reset_organizations": "Reset organizations",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "projects": {
     "title": "MY PROJECTS",

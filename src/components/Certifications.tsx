@@ -1,8 +1,7 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Award, Filter, Tag, Book, Code, Database, Server, FileText, Globe, CheckCircle2, Building, ChevronDown, Shield, Lightbulb, UserPlus, LineChart, Mail, Video, CreditCard, GraduationCap, MessageSquare, Presentation, Smartphone } from 'lucide-react';
+import { Award, Filter, Tag, Book, Code, Database, Server, FileText, Globe, CheckCircle2, Building, ChevronDown, Shield, Lightbulb, UserPlus, LineChart, Mail, Video, CreditCard, GraduationCap, MessageSquare, Presentation, Smartphone, ChevronRight } from 'lucide-react';
 
 interface Certification {
   id: number;
@@ -17,7 +16,6 @@ interface Certification {
   displayName?: string;
 }
 
-// Logos des organisations
 const organizationLogos = {
   'LinkedIn': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png',
   'Microsoft': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/480px-Microsoft_logo.svg.png',
@@ -634,10 +632,8 @@ const certifications: Certification[] = [
   }
 ];
 
-// Extracting unique organizations for the filter
 const organizations = ['All', ...Array.from(new Set(certifications.map(cert => cert.organization)))];
 
-// Updated filters with more relevant categories
 const filters = [
   { id: 'all', name: 'Tous', nameEn: 'All', icon: <Filter className="w-4 h-4" /> },
   { id: 'cybersecurity', name: 'Cybersécurité', nameEn: 'Cybersecurity', icon: <Shield className="w-4 h-4" /> },
@@ -663,12 +659,12 @@ const Certifications: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [activeOrganization, setActiveOrganization] = useState<string>('All');
   const [isOrgDropdownOpen, setIsOrgDropdownOpen] = useState<boolean>(false);
+  const [showAll, setShowAll] = useState<boolean>(false);
   const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // Mouse position tracking for background effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
@@ -684,7 +680,6 @@ const Certifications: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -700,11 +695,14 @@ const Certifications: React.FC = () => {
     .filter(cert => activeFilter === 'all' || cert.category === activeFilter)
     .filter(cert => activeOrganization === 'All' || cert.organization === activeOrganization)
     .sort((a, b) => {
-      // Parse dates for comparison - assuming format is "Month Year" or similar
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-      return dateB.getTime() - dateA.getTime(); // Most recent first
+      return dateB.getTime() - dateA.getTime();
     });
+
+  const displayedCertifications = showAll
+    ? filteredCertifications
+    : filteredCertifications.slice(0, 6);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -730,7 +728,6 @@ const Certifications: React.FC = () => {
 
   return (
     <section id="certifications" className="py-24 relative overflow-hidden" ref={containerRef}>
-      {/* Background interactive effects */}
       <div 
         className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/80 to-background"
         style={{
@@ -741,7 +738,6 @@ const Certifications: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         
-        {/* Moving particles - reduced count for better performance */}
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
@@ -787,7 +783,6 @@ const Certifications: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Filter section - More compact design */}
         <motion.div 
           className="mb-10 flex flex-col gap-4"
           initial={{ opacity: 0, y: 20 }}
@@ -795,9 +790,7 @@ const Certifications: React.FC = () => {
           transition={{ duration: 0.4 }}
           viewport={{ once: true }}
         >
-          {/* Filter layout with category horizontally scrollable and organization as small dropdown */}
           <div className="flex items-center justify-between gap-4">
-            {/* Category filters - horizontal scrollable */}
             <div className="glass-morphism p-2 rounded-full overflow-x-auto flex gap-2 border border-purple-500/20 shadow-lg scrollbar-none flex-grow">
               <div className="flex min-w-max px-1">
                 {filters.map((filter) => (
@@ -819,7 +812,6 @@ const Certifications: React.FC = () => {
               </div>
             </div>
             
-            {/* Organization dropdown filter - more compact */}
             <div className="relative" ref={dropdownRef}>
               <motion.button
                 onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
@@ -834,7 +826,6 @@ const Certifications: React.FC = () => {
                 <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${isOrgDropdownOpen ? 'rotate-180' : ''}`} />
               </motion.button>
               
-              {/* Dropdown menu */}
               <AnimatePresence>
                 {isOrgDropdownOpen && (
                   <motion.div 
@@ -864,18 +855,17 @@ const Certifications: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Certifications cards grid with filtered animation */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${activeFilter}-${activeOrganization}`} 
+            key={`${activeFilter}-${activeOrganization}-${showAll}`} 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           >
-            {filteredCertifications.length > 0 ? (
-              filteredCertifications.map(cert => (
+            {displayedCertifications.length > 0 ? (
+              displayedCertifications.map(cert => (
                 <motion.div 
                   className="relative group"
                   variants={itemVariants}
@@ -897,7 +887,6 @@ const Certifications: React.FC = () => {
                         <Award className="h-4 w-4 text-pink-400 ml-1 flex-shrink-0" />
                       </div>
                       
-                      {/* Organization with logo */}
                       <div className="flex items-center mb-3">
                         {cert.logo && (
                           <div className="w-7 h-7 rounded-full overflow-hidden bg-white/10 p-1 mr-2 flex items-center justify-center flex-shrink-0">
@@ -906,7 +895,6 @@ const Certifications: React.FC = () => {
                               alt={cert.organization}
                               className="w-full h-full object-contain"
                               onError={(e) => {
-                                // Fallback if image fails to load
                                 (e.target as HTMLImageElement).src = 'https://via.placeholder.com/30?text=' + cert.organization.charAt(0);
                               }}
                             />
@@ -922,7 +910,6 @@ const Certifications: React.FC = () => {
                       <div className="mt-auto flex justify-between items-center">
                         <div className="text-xs text-cyan-400 font-mono">{cert.date}</div>
                         
-                        {/* Category badge moved to bottom right */}
                         <div className="px-2 py-0.5 rounded-full text-xxs bg-black/50 border border-pink-500/30 text-pink-300">
                           {i18n.language === 'fr' 
                             ? filters.find(f => f.id === cert.category)?.name 
@@ -962,7 +949,25 @@ const Certifications: React.FC = () => {
           </motion.div>
         </AnimatePresence>
         
-        {/* Floating decoration elements */}
+        {filteredCertifications.length > 6 && (
+          <motion.div 
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <motion.button
+              onClick={() => setShowAll(!showAll)}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full glass-morphism border border-purple-500/20 text-purple-300 hover:bg-white/10 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>{showAll ? t('certifications.show_less') : t('certifications.show_more')}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${showAll ? 'rotate-180' : ''}`} />
+            </motion.button>
+          </motion.div>
+        )}
+        
         <motion.div 
           className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-purple-500/10 blur-3xl"
           animate={{ 

@@ -1,136 +1,100 @@
-
 {
-  "nav": {
+  "navbar": {
+    "home": "Accueil",
     "about": "À propos",
     "projects": "Projets",
-    "experience": "Expérience", 
+    "experience": "Expérience",
     "contact": "Contact"
   },
   "hero": {
-    "title": "NASSIM EL HADDAD",
-    "subtitle": "Ingénieur Cybersécurité en études à Télécom SudParis",
-    "description": "Bienvenue dans mon portfolio !",
-    "cta_projects": "Voir mes projets",
-    "cta_contact": "Me contacter",
-    "scroll": "Scroll",
-    "welcome": "Bienvenue sur mon portfolio !",
-    "toast_message": "Découvrez mes projets et compétences en développement web."
+    "title": "Salut, je suis Nassim El Haddad",
+    "subtitle": "Ingénieur en Informatique et Cybersécurité",
+    "description": "Je suis un ingénieur passionné par la création de solutions innovantes et sécurisées. Bienvenue sur mon portfolio !",
+    "contact_button": "Contactez-moi",
+    "view_projects": "Voir mes projets",
+    "welcome": "Bienvenue !",
+    "toast_message": "Merci de visiter mon portfolio."
   },
   "about": {
-    "title": "À PROPOS DE MOI",
-    "subtitle": "Passionné par la cybersécurité et le développement web",
-    "description": [
-      "Je suis un étudiant en ingénierie cybersécurité à Télécom SudParis, Institut Polytechnique de Paris, avec un intérêt particulier pour la sécurité des réseaux et le développement web.",
-      "J'aime programmer à mes heures perdues et tous mes projets de développement sont disponibles sur mon GitHub. Je maîtrise les langages Java, Python, C, React et TypeScript.",
-      "Ma philosophie est centrée sur la création de solutions qui combinent sécurité, performance et expérience utilisateur."
+    "title": "À propos de moi",
+    "subtitle": "Un développeur passionné avec un penchant pour la cybersécurité",
+    "description": "Je suis un ingénieur en informatique et cybersécurité avec une passion pour la création de solutions innovantes et sécurisées. J'ai de l'expérience dans le développement web, la cybersécurité et la gestion de projets. Je suis toujours à la recherche de nouvelles opportunités pour apprendre et grandir.",
+    "skills_title": "Mes compétences",
+    "skills_description": "Voici quelques-unes de mes compétences clés :",
+    "interests_title": "Mes intérêts",
+    "interests_description": "En dehors du travail, j'aime :",
+    "interests": [
+      "Voyager et découvrir de nouvelles cultures",
+      "Lire des livres et des articles sur la technologie",
+      "Faire de la randonnée et explorer la nature",
+      "Regarder des films et des séries télévisées",
+      "Écouter de la musique et jouer d'instruments"
     ]
   },
-  "certifications": {
-    "title": "MES CERTIFICATIONS",
-    "subtitle": "Parcours d'apprentissage et validations de compétences",
-    "description": "Découvrez mes certifications techniques et professionnelles obtenues auprès d'organisations reconnues.",
-    "categories": {
-      "all": "Toutes",
-      "development": "Développement",
-      "design": "Design",
-      "devops": "DevOps",
-      "management": "Management"
-    },
-    "issuer": "Délivré par",
-    "date": "Date",
-    "view_credential": "Voir le certificat"
-  },
   "projects": {
-    "title": "MES PROJETS",
-    "subtitle": "Projets récents",
-    "description": "Une sélection de mes travaux récents, incluant des applications web, des sites et des expériences interactives.",
-    "filters": {
-      "all": "Tous",
-      "featured": "Mis en avant",
-      "categories": "Catégories",
-      "technologies": "Technologies"
-    },
-    "view_details": "Voir les détails",
-    "view_more": "Voir plus de projets sur GitHub",
-    "modal": {
-      "technologies": "Technologies",
-      "visit_site": "Visiter le site",
-      "view_code": "Voir le code",
-      "close": "Fermer",
-      "date": "Date"
-    },
-    "no_projects": "Aucun projet ne correspond à ces filtres. Veuillez essayer d'autres critères."
+    "title": "Mes projets",
+    "subtitle": "Voici quelques-uns de mes projets récents",
+    "description": "J'ai travaillé sur divers projets, allant du développement web à la cybersécurité. Voici quelques-uns de mes projets récents :",
+    "view_more": "Voir plus",
+    "view_code": "Voir le code"
   },
   "experience": {
-    "title": "MON PARCOURS",
-    "subtitle": "Expérience professionnelle",
-    "description": "Mon parcours professionnel et ma formation académique dans le domaine de la cybersécurité et du développement web.",
+    "title": "Expérience",
+    "subtitle": "Mon parcours professionnel et académique",
+    "description": "Voici un aperçu de mon expérience professionnelle et de mon parcours académique :",
     "work": "Expérience professionnelle",
     "education": "Formation",
-    "present": "Présent",
-    "view_linkedin": "Voir mon profil LinkedIn",
-    "awards": "Prix et Reconnaissances"
+    "present": "Aujourd'hui",
+    "view_linkedin": "Voir mon profil LinkedIn"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "N'hésitez pas à me contacter !",
+    "description": "Si vous avez des questions ou si vous souhaitez discuter d'une opportunité, n'hésitez pas à me contacter :",
+    "form_name": "Nom",
+    "form_email": "Email",
+    "form_message": "Message",
+    "form_submit": "Envoyer",
+    "form_success": "Votre message a été envoyé avec succès !",
+    "form_error": "Une erreur s'est produite lors de l'envoi du message."
+  },
+  "footer": {
+    "copyright": "© 2024 Nassim El Haddad. Tous droits réservés."
+  },
+  "theme_switch": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "language_switch": {
+    "fr": "Français",
+    "en": "Anglais"
   },
   "testimonials": {
     "title": "Témoignages",
     "subtitle": "Témoignages de professeurs et collaborateurs",
-    "label": "Témoignage",
-    "description": "Commentaires de personnes avec qui j'ai eu le plaisir de travailler",
-    "project_details": "Détails du projet",
-    "project_label": "Projet",
-    "skills_delivered": "Compétences utilisées",
-    "view_project": "Voir le projet"
+    "label": "Témoignage"
   },
-  "contact": {
-    "title": "CONTACT",
-    "subtitle": "Travaillons ensemble",
-    "description": "Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter de votre idée.",
-    "form": {
-      "name": "Nom",
-      "email": "Email",
-      "message": "Message",
-      "sending": "Envoi en cours...",
-      "send": "Envoyer",
-      "success": "Message envoyé !",
-      "success_description": "Merci pour votre message. Je vous répondrai dès que possible."
-    },
-    "info": {
-      "title": "Coordonnées",
-      "email": "Email",
-      "phone": "Téléphone",
-      "location": "Localisation"
-    },
-    "social": {
-      "title": "Suivez-moi"
-    },
-    "placeholders": {
-      "name": "Votre nom complet",
-      "email": "votre.email@exemple.com",
-      "message": "Décrivez votre projet ou posez-moi une question..."
-    }
+  "services": {
+    "title": "Services",
+    "subtitle": "Ce que je peux faire pour vous",
+    "description": "Je propose une gamme de services pour vous aider à atteindre vos objectifs.",
+    "service1_title": "Développement Web",
+    "service1_description": "Création de sites web modernes et responsives.",
+    "service2_title": "Cybersécurité",
+    "service2_description": "Protection de vos systèmes et données contre les menaces.",
+    "service3_title": "Gestion de Projet",
+    "service3_description": "Gestion efficace de vos projets pour atteindre vos objectifs."
   },
-  "footer": {
-    "description": "Étudiant ingénieur en cybersécurité passionné par la création d'expériences utilisateur exceptionnelles et de solutions techniques innovantes.",
-    "navigation": "Navigation",
-    "contact": "Contact",
-    "rights": "Tous droits réservés.",
-    "back_to_top": "Retour en haut"
+  "certifications": {
+    "title": "Certifications",
+    "description": "Découvrez mes certifications et formations professionnelles",
+    "all_orgs": "Toutes les entreprises",
+    "no_results": "Aucun résultat trouvé pour les filtres sélectionnés",
+    "reset_categories": "Réinitialiser les catégories",
+    "reset_organizations": "Réinitialiser les organisations",
+    "show_more": "Voir plus",
+    "show_less": "Voir moins"
   },
-  "toast": {
-    "language_changed": "Langue modifiée",
-    "theme_changed": "Thème modifié",
-    "dark_theme": "Thème sombre activé",
-    "light_theme": "Thème clair activé"
-  },
-  "resume": {
-    "title": "Mon CV",
-    "subtitle": "Téléchargez mon CV pour découvrir mon parcours professionnel complet",
-    "description": "Découvrez mon parcours professionnel, mes compétences techniques et mon expérience en téléchargeant mon CV complet.",
-    "view": "Consulter le CV",
-    "download": "Télécharger le CV",
-    "downloading": "Téléchargement...",
-    "downloaded": "Téléchargé",
-    "toast_downloaded": "CV téléchargé",
-    "toast_description": "Merci de votre intérêt pour mon parcours !"
-  }
+  "no_results": "Aucun résultat"
 }
