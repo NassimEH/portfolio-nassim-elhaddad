@@ -742,7 +742,7 @@ const Certifications: React.FC = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         
         {/* Moving particles - reduced count for better performance */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-purple-500/50"
@@ -787,83 +787,88 @@ const Certifications: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Filters - Horizontal compact design */}
+        {/* Filter section - More compact design */}
         <motion.div 
-          className="mb-10 flex flex-col md:flex-row justify-center gap-4"
+          className="mb-10 flex flex-col gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           viewport={{ once: true }}
         >
-          {/* Category filters */}
-          <div className="glass-morphism p-3 rounded-full flex flex-wrap justify-center gap-2 border border-purple-500/20 max-w-3xl shadow-lg">
-            {filters.map((filter) => (
-              <motion.button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-all ${
-                  activeFilter === filter.id
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
-                    : 'bg-white/5 text-muted-foreground hover:bg-white/10'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {filter.icon}
-                <span>{i18n.language === 'fr' ? filter.name : filter.nameEn}</span>
-              </motion.button>
-            ))}
-          </div>
-          
-          {/* Organization dropdown filter */}
-          <div className="relative" ref={dropdownRef}>
-            <motion.button
-              onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
-              className="px-4 py-3 rounded-xl text-sm flex items-center gap-2 glass-morphism border border-cyan-500/20 shadow-lg w-full md:w-auto min-w-[200px] justify-between"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="flex items-center gap-2">
-                <Building className="w-4 h-4 text-cyan-400" />
-                <span>{activeOrganization}</span>
+          {/* Filter layout with category horizontally scrollable and organization as small dropdown */}
+          <div className="flex items-center justify-between gap-4">
+            {/* Category filters - horizontal scrollable */}
+            <div className="glass-morphism p-2 rounded-full overflow-x-auto flex gap-2 border border-purple-500/20 shadow-lg scrollbar-none flex-grow">
+              <div className="flex min-w-max px-1">
+                {filters.map((filter) => (
+                  <motion.button
+                    key={filter.id}
+                    onClick={() => setActiveFilter(filter.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs flex items-center whitespace-nowrap gap-1.5 transition-all mx-0.5 ${
+                      activeFilter === filter.id
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
+                        : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {filter.icon}
+                    <span className="truncate">{i18n.language === 'fr' ? filter.name : filter.nameEn}</span>
+                  </motion.button>
+                ))}
               </div>
-              <ChevronDown className={`w-4 h-4 transition-transform ${isOrgDropdownOpen ? 'rotate-180' : ''}`} />
-            </motion.button>
+            </div>
             
-            {/* Dropdown menu */}
-            <AnimatePresence>
-              {isOrgDropdownOpen && (
-                <motion.div 
-                  className="absolute z-50 mt-2 w-full min-w-[200px] rounded-xl glass-morphism border border-cyan-500/20 shadow-xl backdrop-blur-lg bg-background/95 py-2"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                >
-                  {organizations.map((org) => (
-                    <button
-                      key={org}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-white/10 transition-colors ${
-                        activeOrganization === org ? 'text-cyan-400' : 'text-muted-foreground'
-                      }`}
-                      onClick={() => {
-                        setActiveOrganization(org);
-                        setIsOrgDropdownOpen(false);
-                      }}
-                    >
-                      {org}
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Organization dropdown filter - more compact */}
+            <div className="relative" ref={dropdownRef}>
+              <motion.button
+                onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
+                className="px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 glass-morphism border border-cyan-500/20 shadow-lg w-auto max-w-[160px] justify-between"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="flex items-center gap-1.5 truncate">
+                  <Building className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+                  <span className="truncate">{activeOrganization === 'All' ? t('certifications.all_orgs') : activeOrganization}</span>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${isOrgDropdownOpen ? 'rotate-180' : ''}`} />
+              </motion.button>
+              
+              {/* Dropdown menu */}
+              <AnimatePresence>
+                {isOrgDropdownOpen && (
+                  <motion.div 
+                    className="absolute z-50 right-0 mt-2 w-48 rounded-xl glass-morphism border border-cyan-500/20 shadow-xl backdrop-blur-lg bg-background/95 py-2 max-h-60 overflow-y-auto scrollbar-none"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    {organizations.map((org) => (
+                      <button
+                        key={org}
+                        className={`w-full text-left px-4 py-1.5 text-xs hover:bg-white/10 transition-colors ${
+                          activeOrganization === org ? 'text-cyan-400' : 'text-muted-foreground'
+                        }`}
+                        onClick={() => {
+                          setActiveOrganization(org);
+                          setIsOrgDropdownOpen(false);
+                        }}
+                      >
+                        <span className="line-clamp-1">{org}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
 
-        {/* Certifications cards with filtered animation */}
+        {/* Certifications cards grid with filtered animation */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${activeFilter}-${activeOrganization}`} // This forces re-render when filter changes
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            key={`${activeFilter}-${activeOrganization}`} 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -874,49 +879,55 @@ const Certifications: React.FC = () => {
                 <motion.div 
                   className="relative group"
                   variants={itemVariants}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -3 }}
                   key={cert.id}
                   layout
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative rounded-xl overflow-hidden border border-white/10 backdrop-blur-sm bg-black/50 hover:bg-black/60 transition-all h-full">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"></div>
                     
-                    <div className="p-6 flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                    <div className="p-4 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex-1 pr-2">
+                          <h3 className="text-base font-bold line-clamp-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                             {i18n.language === 'fr' ? cert.name : cert.nameEn || cert.name}
                           </h3>
                         </div>
-                        <Award className="h-5 w-5 text-pink-400 ml-2 flex-shrink-0" />
+                        <Award className="h-4 w-4 text-pink-400 ml-1 flex-shrink-0" />
                       </div>
                       
                       {/* Organization with logo */}
-                      <div className="flex items-center mb-4">
+                      <div className="flex items-center mb-3">
                         {cert.logo && (
-                          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 p-1 mr-3 flex items-center justify-center">
+                          <div className="w-7 h-7 rounded-full overflow-hidden bg-white/10 p-1 mr-2 flex items-center justify-center flex-shrink-0">
                             <img 
                               src={cert.logo} 
-                              alt={cert.organization} 
+                              alt={cert.organization}
                               className="w-full h-full object-contain"
+                              onError={(e) => {
+                                // Fallback if image fails to load
+                                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/30?text=' + cert.organization.charAt(0);
+                              }}
                             />
                           </div>
                         )}
-                        <span className="text-sm text-cyan-400">{cert.organization}</span>
+                        <span className="text-xs text-cyan-400 line-clamp-1">{cert.organization}</span>
                       </div>
                       
                       {cert.description && (
-                        <p className="text-muted-foreground mb-6 text-sm flex-grow">{cert.description}</p>
+                        <p className="text-muted-foreground mb-3 text-xs line-clamp-3 flex-grow">{cert.description}</p>
                       )}
                       
                       <div className="mt-auto flex justify-between items-center">
-                        <div className="text-sm text-cyan-400 font-mono">{cert.date}</div>
-                      </div>
-                      
-                      {/* Category badge */}
-                      <div className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs bg-black/50 border border-pink-500/30 text-pink-300">
-                        {filters.find(f => f.id === cert.category)?.name || cert.category}
+                        <div className="text-xs text-cyan-400 font-mono">{cert.date}</div>
+                        
+                        {/* Category badge moved to bottom right */}
+                        <div className="px-2 py-0.5 rounded-full text-xxs bg-black/50 border border-pink-500/30 text-pink-300">
+                          {i18n.language === 'fr' 
+                            ? filters.find(f => f.id === cert.category)?.name 
+                            : filters.find(f => f.id === cert.category)?.nameEn || cert.category}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -924,7 +935,7 @@ const Certifications: React.FC = () => {
               ))
             ) : (
               <motion.div 
-                className="col-span-1 md:col-span-3 text-center py-12"
+                className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -933,14 +944,14 @@ const Certifications: React.FC = () => {
                 <div className="flex gap-2 justify-center mt-4">
                   <button
                     onClick={() => setActiveFilter('all')}
-                    className="px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                    className="px-3 py-1.5 bg-white/10 hover:bg-white/15 rounded-lg text-xs"
                   >
                     {t('certifications.reset_categories')}
                   </button>
                   {activeOrganization !== 'All' && (
                     <button
                       onClick={() => setActiveOrganization('All')}
-                      className="px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg text-sm"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/15 rounded-lg text-xs"
                     >
                       {t('certifications.reset_organizations')}
                     </button>
