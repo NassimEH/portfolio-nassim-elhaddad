@@ -71,8 +71,13 @@
   },
   "testimonials": {
     "title": "Testimonials",
-    "subtitle": "Discover what my collaborators say about my work",
-    "description": "Feedback from people I've had the pleasure to work with"
+    "subtitle": "Testimonials from professors and collaborators",
+    "label": "Testimonial",
+    "description": "Feedback from people I've had the pleasure to work with",
+    "project_details": "Project Details",
+    "project_label": "Project",
+    "skills_delivered": "Skills used",
+    "view_project": "View Project"
   },
   "contact": {
     "title": "CONTACT",

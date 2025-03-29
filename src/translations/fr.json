@@ -71,8 +71,13 @@
   },
   "testimonials": {
     "title": "Témoignages",
-    "subtitle": "Découvrez ce que mes collaborateurs disent de mon travail",
-    "description": "Commentaires de personnes avec qui j'ai eu le plaisir de travailler"
+    "subtitle": "Témoignages de professeurs et collaborateurs",
+    "label": "Témoignage",
+    "description": "Commentaires de personnes avec qui j'ai eu le plaisir de travailler",
+    "project_details": "Détails du projet",
+    "project_label": "Projet",
+    "skills_delivered": "Compétences utilisées",
+    "view_project": "Voir le projet"
   },
   "contact": {
     "title": "CONTACT",

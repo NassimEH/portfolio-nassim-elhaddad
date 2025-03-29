@@ -2,19 +2,15 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight, Quote, MessageSquare, Calendar, Star, User, Building, ThumbsUp, Gift } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, MessageSquare, Calendar, Star, User, Building, ThumbsUp } from 'lucide-react';
 
 interface Testimonial {
   id: number;
   name: string;
   position: string;
-  company: string;
   avatar: string;
   text: string;
   date: string;
-  project: string;
-  skills: string[];
-  highlight: string;
   rating: number;
   color: string;
 }
@@ -22,45 +18,43 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sophie Martin",
-    position: "Directrice Marketing",
-    company: "TechVision",
-    avatar: "https://randomuser.me/api/portraits/women/32.jpg",
-    text: "Une collaboration exceptionnelle qui a transformé notre présence digitale. La vision créative et l'expertise technique ont permis de dépasser nos attentes et d'atteindre des résultats impressionnants.",
-    date: "Juin 2023",
-    project: "Refonte plateforme e-commerce",
-    skills: ["React", "Node.js", "UI/UX Design"],
-    highlight: "Augmentation des conversions de 40% en 3 mois",
+    name: "Martin Roussel TEDONGMO LEKPA",
+    position: "Production Engineer",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    text: "Étudiant très sérieux que j'ai eu à l'UPEC. Très assidu pendant le cours autour des différents types de virtualisation, il est opérationnel pour vous accompagner en entreprise sur des sujets d'actualité comme : la conteneurisation et l'observabilité.",
+    date: "4 février 2025",
     rating: 5,
     color: "from-purple-400 to-pink-500"
   },
   {
     id: 2,
-    name: "Thomas Dubois",
-    position: "CEO",
-    company: "StartupFlow",
+    name: "François-Xavier Priour",
+    position: "Freelance Translator",
     avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-    text: "Un talent visionnaire qui a su comprendre et concrétiser nos besoins. La qualité du code et la fluidité de l'interface ont révolutionné notre façon de travailler au quotidien.",
-    date: "Mars 2023",
-    project: "Application SaaS",
-    skills: ["Vue.js", "Firebase", "Tailwind CSS"],
-    highlight: "Temps de développement réduit de 30%",
+    text: "J'ai eu le plaisir d'enseigner l'anglais à Nassim à l'Université Paris-Est Créteil. Je garde le souvenir d'un étudiant motivé, vif, curieux, agréable, avec un très bon niveau d'anglais qui sera sans aucun doute un atout professionnel non négligeable.",
+    date: "21 janvier 2025",
     rating: 5,
     color: "from-blue-500 to-cyan-400"
   },
   {
     id: 3,
-    name: "Emma Chen",
-    position: "Directrice Produit",
-    company: "InnovateLab",
+    name: "Marie-Hélène Renaud",
+    position: "Professeur agrégé de Lettres modernes à l'Université Paris Est Créteil - UFR Sciences et Technologie",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    text: "Une approche à la fois technique et créative qui a donné vie à notre vision. La capacité à traduire des concepts complexes en solutions élégantes fait toute la différence dans nos projets.",
-    date: "Octobre 2022",
-    project: "Dashboard analytique",
-    skills: ["React", "D3.js", "API REST"],
-    highlight: "Visualisation de données optimisée et intuitive",
+    text: "Nassim El Haddad a suivi mes cours d'Expression-Communication (EC) et de Projet Personnel Professionnel (PPP) de BUT2 Informatique en 2023-2024. C'était un étudiant sérieux et attentif, capable d'une réflexion approfondie et doté de très bonnes compétences en expression française. C'est donc très volontiers que je le recommande, tant pour une poursuite d'études que pour un recrutement en entreprise.",
+    date: "2 janvier 2025",
     rating: 5,
     color: "from-amber-400 to-orange-500"
+  },
+  {
+    id: 4,
+    name: "Théo Moussaoui",
+    position: "J'accompagne la création de produits tech 🚀",
+    avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+    text: "Nassim a fait partie des étudiants avec lesquels j'ai beaucoup apprécié travailler en tant qu'enseignant. Pragmatique, réfléchi et consciencieux, je suis confiant sur sa capacité à apporter de la valeur professionnellement !",
+    date: "27 décembre 2024",
+    rating: 5,
+    color: "from-green-400 to-emerald-500"
   }
 ];
 
@@ -83,7 +77,7 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden" ref={testimonialsRef}>
-      {/* Background synthwave */}
+      {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/80 transition-colors duration-1000"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
       <div className="absolute top-0 w-full h-24 bg-gradient-to-b from-cyan-600/20 to-transparent transition-opacity duration-1000"></div>
@@ -107,7 +101,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            {t('testimonials.subtitle', 'Découvrez ce que mes clients et collaborateurs disent de mon travail')}
+            {t('testimonials.subtitle', 'Témoignages de professeurs et collaborateurs')}
           </motion.p>
         </div>
         
@@ -130,36 +124,23 @@ const Testimonials: React.FC = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-5 rounded-2xl`}></div>
                     
-                    {/* Add a synthwave grid to the background */}
+                    {/* Add a subtle grid to the background */}
                     <div className="absolute inset-0 overflow-hidden rounded-2xl">
                       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
                       <div className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-pink-500/10 to-transparent"></div>
-                      
-                      {/* Horizontal grid lines */}
-                      {[...Array(5)].map((_, i) => (
-                        <div 
-                          key={i} 
-                          className="absolute w-full h-px"
-                          style={{ 
-                            background: `linear-gradient(90deg, transparent 0%, rgba(236, 72, 153, ${0.03 + i * 0.01}) 50%, transparent 100%)`,
-                            bottom: `${i * 15}px`,
-                            opacity: 0.3
-                          }}
-                        ></div>
-                      ))}
                     </div>
                     
                     <Quote className="absolute top-6 left-6 h-10 w-10 text-cyan-500/20" />
                     
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-                      <div className="md:col-span-3">
+                    <div className="grid grid-cols-1 gap-6">
+                      <div>
                         <div className="mb-6">
                           <div className="flex items-center mb-4">
                             <MessageSquare className="w-5 h-5 text-cyan-400 mr-2" />
                             <span className="text-sm text-cyan-400 font-medium">{t('testimonials.label', 'Témoignage')}</span>
                           </div>
                           
-                          <p className="text-xl italic text-muted-foreground leading-relaxed mb-6">
+                          <p className="text-xl italic text-muted-foreground leading-relaxed mb-6 font-light">
                             "{testimonial.text}"
                           </p>
                         </div>
@@ -176,94 +157,22 @@ const Testimonials: React.FC = () => {
                           </div>
                           
                           <div>
-                            <h4 className="text-xl font-semibold flex items-center">
+                            <h4 className="text-xl font-medium flex items-center">
                               <User className="w-4 h-4 mr-2 text-indigo-400" />
                               {testimonial.name}
                             </h4>
-                            <p className="text-muted-foreground flex items-center">
+                            <p className="text-muted-foreground flex items-center font-light">
                               <Building className="w-4 h-4 mr-2 text-pink-400" />
-                              {testimonial.position}, <span className="text-cyan-400 ml-1">{testimonial.company}</span>
+                              {testimonial.position}
+                            </p>
+                            <p className="text-sm text-muted-foreground font-light flex items-center mt-1">
+                              <Calendar className="w-3 h-3 mr-1 text-cyan-400" />
+                              {testimonial.date}
                             </p>
                           </div>
                         </div>
                       </div>
-                      
-                      <div className="md:col-span-2 neo-blur rounded-xl p-5 border border-white/10">
-                        <div className="mb-4">
-                          <h5 className={`text-lg font-medium mb-2 bg-gradient-to-r ${testimonial.color} bg-clip-text text-transparent`}>
-                            {t('testimonials.project_details', 'Détails du projet')}
-                          </h5>
-                          
-                          <div className="flex justify-between mb-2">
-                            <div className="flex items-center">
-                              <Calendar className="w-4 h-4 mr-2 text-purple-400" />
-                              <span className="text-sm text-muted-foreground">{testimonial.date}</span>
-                            </div>
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-500/30'}`}
-                                  fill={i < testimonial.rating ? 'currentColor' : 'none'}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            <p className="mb-2">{t('testimonials.project_label', 'Projet')}: <span className="text-primary">{testimonial.project}</span></p>
-                            
-                            {/* Project highlight */}
-                            <div className="flex items-center mb-3 p-2 rounded-lg bg-gradient-to-r from-green-500/10 to-cyan-500/10">
-                              <ThumbsUp className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-                              <p className="text-green-300 text-xs">{testimonial.highlight}</p>
-                            </div>
-                            
-                            {/* Skills used */}
-                            <div className="mb-3">
-                              <p className="text-xs text-muted-foreground mb-2 flex items-center">
-                                <Gift className="w-3 h-3 mr-1 text-cyan-400" />
-                                {t('testimonials.skills_delivered', 'Compétences utilisées')}:
-                              </p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {testimonial.skills.map((skill, i) => (
-                                  <span 
-                                    key={i} 
-                                    className={`text-xs px-2 py-0.5 rounded-full bg-gradient-to-r ${testimonial.color} bg-opacity-10 text-white`}
-                                  >
-                                    {skill}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className={`w-full h-1 bg-gradient-to-r ${testimonial.color} rounded-full mb-4`}></div>
-                        
-                        <div className="flex justify-center mt-4">
-                          <motion.button
-                            className={`px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r ${testimonial.color} text-white`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {t('testimonials.view_project', 'Voir le projet')}
-                          </motion.button>
-                        </div>
-                      </div>
                     </div>
-                    
-                    {/* Decorative elements */}
-                    <motion.div 
-                      className="absolute -bottom-3 -right-3 w-20 h-20 rounded-full bg-gradient-to-tl from-cyan-500/20 to-transparent"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    ></motion.div>
-                    
-                    <motion.div 
-                      className="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-transparent"
-                      animate={{ rotate: -360 }}
-                      transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                    ></motion.div>
                   </motion.div>
                 )
               ))}
