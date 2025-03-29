@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -123,6 +124,10 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      // Add custom easing functions
+      transitionTimingFunction: {
+        'cinematic': 'cubic-bezier(0.27, 0.42, 0.46, 0.97)',
       },
     },
   },
