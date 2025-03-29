@@ -31,7 +31,7 @@ const Experience: React.FC = () => {
       en: "",
       fr: ""
     },
-    logo: "https://www.google.com/imgres?q=siemens&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D100063521363084&imgrefurl=https%3A%2F%2Fwww.facebook.com%2FSiemensFranceCarriere%2F&docid=B6upVVnmauSc_M&tbnid=ObFHpZnl6XgPiM&vet=12ahUKEwjL6sWOxq-MAxXHUqQEHU3PL1kQM3oECFIQAA..i&w=1024&h=1023&hcb=2&ved=2ahUKEwjL6sWOxq-MAxXHUqQEHU3PL1kQM3oECFIQAA",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt_nHA76YPCLpgIWCwBRT6oQPF30y2awHzMA&s",
     description: {
       en: ["Supporting the industrialization of cybersecurity in Siemens Mobility products.", "Formalizing project management processes within multidisciplinary projects.", "Promoting the tool used among various users and ensuring proper configuration maintenance.", "Setting up and utilizing infrastructures for cybersecurity audits of systems.", "Contributing to the testing of complex equipment and systems."],
       fr: ["Soutien à l'industrialisation de la cybersécurité dans les produits Siemens Mobility.", "Formalisation des processus de gestion de projet au sein de projets multidisciplinaires.", "Promotion de l'outil utilisé auprès de divers utilisateurs et maintenance de la configuration.", "Mise en place et utilisation d'infrastructures pour les audits de cybersécurité des systèmes.", "Contribution aux tests d'équipements et de systèmes complexes."]
