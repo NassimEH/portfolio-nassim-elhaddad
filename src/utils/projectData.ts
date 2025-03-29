@@ -1,4 +1,3 @@
-
 export interface Project {
   id: number;
   title: string;
@@ -81,7 +80,6 @@ export const categories: CategoryInfo[] = [
 ];
 
 export const projects: Project[] = [
-  // Web Development Projects
   {
     id: 1,
     title: "WeListen",
@@ -120,7 +118,6 @@ export const projects: Project[] = [
     featured: false,
   },
   
-  // Mobile Development Projects
   {
     id: 5,
     title: "Morpion Solitaire",
@@ -131,7 +128,6 @@ export const projects: Project[] = [
     featured: false,
   },
   
-  // Design & Presentation Projects
   {
     id: 6,
     title: "Wireframes Netopsia",
@@ -196,7 +192,6 @@ export const projects: Project[] = [
     featured: false,
   },
   
-  // Software Development Projects
   {
     id: 13,
     title: "Le Donjon Infini",
@@ -252,7 +247,7 @@ export const experiences: Experience[] = [
     id: 1,
     title: "Apprentice - Cybersecurity Engineer",
     company: "Siemens",
-    logo: "/logos/siemens.png",
+    logo: "/lovable-uploads/09275dd5-751d-4eb5-98ae-8133e842c4c0.png",
     location: "Paris, France",
     startDate: "September 2024",
     endDate: "August 2027",
