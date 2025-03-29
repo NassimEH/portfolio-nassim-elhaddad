@@ -33,7 +33,7 @@ export const categories: CategoryInfo[] = [
     id: 'web_development',
     name: 'Développement Web',
     nameEn: 'Web Development',
-    technologies: ['React', 'Vue.js', 'Angular', 'Node.js', 'Express', 'Laravel', 'WordPress', 'TypeScript', 'JavaScript', 'HTML/CSS', 'PHP', 'Python', 'RiotJS', 'CSS Bulma', 'API TMDB'],
+    technologies: ['React', 'Node.js', 'Laravel', 'WordPress', 'TypeScript', 'JavaScript', 'HTML/CSS', 'PHP', 'Python', 'RiotJS', 'CSS Bulma', 'API TMDB'],
     color: 'from-blue-500 to-cyan-400'
   },
   {
@@ -47,35 +47,35 @@ export const categories: CategoryInfo[] = [
     id: 'data_science',
     name: 'Data Science',
     nameEn: 'Data Science',
-    technologies: ['Python', 'R', 'TensorFlow', 'PyTorch', 'Pandas', 'SQL'],
+    technologies: ['Python', 'R', 'SQL', 'PowerBI'],
     color: 'from-purple-500 to-indigo-400'
   },
   {
     id: 'design',
     name: 'Design & Présentation',
     nameEn: 'Design & Presentation',
-    technologies: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'PDF', 'Blender', 'PowerPoint', 'Design graphique', 'UI/UX', 'Communication orale', 'Ergonomie informatique', 'WCAG'],
+    technologies: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'PDF', 'Blender', 'PowerPoint', 'Design graphique', 'UI/UX', 'Communication orale', 'Ergonomie informatique'],
     color: 'from-pink-500 to-rose-400'
   },
   {
     id: 'software_development',
     name: 'Développement Logiciel',
     nameEn: 'Software Development',
-    technologies: ['Java', 'C', 'C++', 'Python', 'Qt', 'Java Swing', 'Windows', 'Linux'],
+    technologies: ['Java', 'C', 'Python', 'Java Swing', 'Windows', 'Linux'],
     color: 'from-orange-500 to-amber-400'
   },
   {
     id: 'devops',
     name: 'DevOps & Cloud',
     nameEn: 'DevOps & Cloud',
-    technologies: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Azure', 'CI/CD', 'Jenkins', 'Python', 'Django REST'],
+    technologies: ['Docker', 'Kubernetes'],
     color: 'from-orange-500 to-amber-400'
   },
   {
     id: 'other',
     name: 'Autres',
     nameEn: 'Other',
-    technologies: ['C++', 'Java', 'Go', 'Rust', 'Unity', 'Unreal Engine', 'Droit du travail', 'Rédaction', 'Communication orale', 'Management', 'Gestion de projet'],
+    technologies: ['Droit du travail', 'Rédaction', 'Communication orale', 'Management', 'Gestion de projet'],
     color: 'from-gray-500 to-slate-400'
   }
 ];
@@ -85,11 +85,11 @@ export const projects: Project[] = [
     id: 1,
     title: "WeListen",
     description: "Une plateforme web interactive pour découvrir et partager de la musique, avec des recommandations basées sur les goûts des utilisateurs. Développée à l'origine comme projet scolaire, elle est devenue une application innovante qui mélange partage musical et interaction sociale.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Spotify API", "HTML", "CSS", "JavaScript"],
+    technologies: ["React", "MongoDB", "TailwindCSS", "HTML", "CSS", "JavaScript"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/WeListen",
     demoUrl: "https://welisten-demo.vercel.app",
-    imageUrl: "/lovable-uploads/9b3212d9-ca44-4b77-90dc-f63293a089af.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQG9_0DNca7R7w/profile-treasury-image-shrink_800_800/B4EZVyIp_7HcAY-/0/1741376627283?e=1743868800&v=beta&t=yAq3CLRlQcsd7coyIpBNiVSLbOkRdztvxH6crTU0Aeo",
     featured: true,
     date: "Mars 2025"
   },
@@ -97,10 +97,10 @@ export const projects: Project[] = [
     id: 2,
     title: "DHCP ZTP Server",
     description: "Interface web conçue pour configurer facilement un système DHCP ZTP (Zero Touch Provisioning) sur des appareils spécifiques. Cette plateforme inclut une gestion des utilisateurs avec différents rôles et permissions, une interface claire et intuitive, et un système de gestion des connaissances.",
-    technologies: ["Python", "HTML", "CSS", "JavaScript", "SQL", "Django REST"],
+    technologies: ["Python", "HTML", "CSS", "JavaScript", "SQL", "Django"],
     category: 'devops',
     githubUrl: "https://github.com/NassimEH/WebZTP",
-    imageUrl: "/lovable-uploads/31aac4a4-a84d-4e5a-99c5-a403c80ecbd0.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQHjg-g2iJ9ZiQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1735558719605?e=1743868800&v=beta&t=sQNout9odyGrc3DX7R0uNF9-IHTDRBvO1pOVGk17Pxs",
     featured: true,
     date: "Décembre 2024"
   },
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     description: "Présentation de groupe sur le droit au télétravail en France pour un cours de droit social. Analyse des avantages (flexibilité, économies de coûts), des inconvénients (isolement, frontières floues entre vie professionnelle et personnelle), et du cadre juridique actuel.",
     technologies: ["PowerPoint", "Communication orale", "Droit du travail"],
     category: 'other',
-    githubUrl: "https://github.com/NassimEH/Teleworking-presentation",
+    githubUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEzkj3Oj_OZAA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734180737522?e=1743868800&v=beta&t=Eydh5tRVpeeqvTgIXKuBtxPlkKuTTTDqY50Uxqd1Tuc",
     imageUrl: "/lovable-uploads/23065449-95e7-4196-88c8-ccba4dccfafa.png",
     featured: false,
     date: "Décembre 2024"
@@ -133,7 +133,7 @@ export const projects: Project[] = [
     technologies: ["PowerPoint", "Communication orale"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Creativity-x-Music",
-    imageUrl: "/lovable-uploads/efea5584-fcc4-4dd8-9ddd-d015143d1b77.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFjMKMKqhIypQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734800313736?e=1743868800&v=beta&t=PMGHza0Ss1HheWjQ8fhPCpKCUw1sQ4oLrbt_v7Rfwxw",
     featured: false,
     date: "Novembre 2024"
   },
