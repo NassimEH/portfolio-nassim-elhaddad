@@ -308,7 +308,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Tableur-Java",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
     featured: true,
     date: "Février 2024"
   },
@@ -319,7 +319,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing", "UI/UX"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Diagrammes-Java",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGkv80_uHDDZw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898768030?e=1743868800&v=beta&t=mv3Vb0t5_lJPPUDqH60xCzOu1hImsDE_0lGVAjkGo-k",
     featured: false,
     date: "Décembre 2023"
   },
@@ -330,7 +330,7 @@ export const projects: Project[] = [
     technologies: ["HTML", "CSS", "JavaScript", "UI/UX", "Ergonomie informatique"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/Site-Web-Ergonomique",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGnPiHEhYc5MA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720901374751?e=1743868800&v=beta&t=0zWObAB6a0763f2FdBUBl1ET2tWQ6oy7vf-G4Gp_nys",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGnPiHEhYc5MA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720901374751?e=1743868800&v=beta&t=0zWObAB6a0763f2FdBUBl1ET2tWQ6oy7vf-G4Gp_nys",
     featured: false,
     date: "Octobre 2023"
   },
@@ -341,7 +341,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Donjon-Infini-PT2",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFC7VjYxg7X_Q/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900407926?e=1743868800&v=beta&t=6IQH5qPlj2Us4YUoYIjBab-v34YHg4k8TbUpi2VEHWU",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFC7VjYxg7X_Q/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900407926?e=1743868800&v=beta&t=6IQH5qPlj2Us4YUoYIjBab-v34YHg4k8TbUpi2VEHWU",
     featured: true,
     date: "Juillet 2023"
   },
@@ -352,7 +352,7 @@ export const projects: Project[] = [
     technologies: ["Windows", "Linux"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Dual-Boot",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGEl4k24_v3hw/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1722689320400?e=1743868800&v=beta&t=rRuOPxh7IeOwYZGMtv402R4DKSrYRNNcwdcnV6uOFnc",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGEl4k24_v3hw/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1722689320400?e=1743868800&v=beta&t=rRuOPxh7IeOwYZGMtv402R4DKSrYRNNcwdcnV6uOFnc",
     featured: false,
     date: "Février 2023"
   },
@@ -363,7 +363,7 @@ export const projects: Project[] = [
     technologies: ["PHP", "HTML", "CSS"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/Site-Web-Threecot",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEAeQbQUOAlXA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900642097?e=1743868800&v=beta&t=woMfV4JzbLsjjFX-A4M6KFsz1HbpEC7pB91qXQs5AlU",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEAeQbQUOAlXA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900642097?e=1743868800&v=beta&t=woMfV4JzbLsjjFX-A4M6KFsz1HbpEC7pB91qXQs5AlU",
     featured: false,
     date: "Février 2023"
   },
@@ -374,7 +374,7 @@ export const projects: Project[] = [
     technologies: ["C"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Bataille-Navale",
-    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGhBH2qySzzJQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898045454?e=1743868800&v=beta&t=VTrzgMHLtUjRIbb8lfUzzlWZvUWZSIrl-DiQMgceOEI",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGhBH2qySzzJQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720898045454?e=1743868800&v=beta&t=VTrzgMHLtUjRIbb8lfUzzlWZvUWZSIrl-DiQMgceOEI",
     featured: false,
     date: "Décembre 2022"
   }
