@@ -158,8 +158,8 @@ const Experience: React.FC = () => {
     {
       id: 2,
       degree: {
-        en: "Bachelor's degree",
-        fr: "Licence"
+        en: "Bachelor's degree in Computer Science (BUT)",
+        fr: "BUT Informatique"
       },
       institution: "Université Paris-Est Créteil (Paris 12)",
       location: {
@@ -176,8 +176,8 @@ const Experience: React.FC = () => {
       },
       logo: "/lovable-uploads/faf6c4ab-5656-42b7-ba95-3c6edbe70eb0.png",
       description: {
-        en: "Bachelor's degree in Computer Science.",
-        fr: "Licence en Informatique."
+        en: "Bachelor's University of Technology degree in Computer Science.",
+        fr: "BUT (Bachelor Universitaire de Technologie) en Informatique."
       }
     },
     {
@@ -304,7 +304,7 @@ const Experience: React.FC = () => {
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div className="flex items-center">
                         {exp.logo && (
-                          <div className="w-12 h-12 rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/5">
+                          <div className="w-12 h-12 aspect-square rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/5">
                             <img 
                               src={exp.logo} 
                               alt={exp.company} 
@@ -394,7 +394,7 @@ const Experience: React.FC = () => {
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div className="flex items-center">
                         {edu.logo && (
-                          <div className="w-12 h-12 rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/10">
+                          <div className="w-12 h-12 aspect-square rounded-lg glass-morphism flex items-center justify-center mr-3 overflow-hidden bg-white/10">
                             <img 
                               src={edu.logo} 
                               alt={edu.institution} 

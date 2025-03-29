@@ -314,7 +314,7 @@ export const education: Education[] = [
     id: 1,
     degree: "Engineer's degree in Computer science and Networks",
     institution: "Telecom SudParis",
-    logo: "/logos/telecom.png",
+    logo: "/lovable-uploads/48042697-212b-4742-b92a-f939a1c11a92.png",
     location: "Palaiseau, France",
     startDate: "2024",
     endDate: "2027",
@@ -322,19 +322,19 @@ export const education: Education[] = [
   },
   {
     id: 2,
-    degree: "Bachelor's degree",
+    degree: "Bachelor's degree in Computer Science (BUT)",
     institution: "Université Paris-Est Créteil (Paris 12)",
-    logo: "/logos/upec.png",
+    logo: "/lovable-uploads/faf6c4ab-5656-42b7-ba95-3c6edbe70eb0.png",
     location: "Créteil, France",
     startDate: "2022",
     endDate: "2024",
-    description: "Bachelor's degree in Computer Science."
+    description: "Bachelor's University of Technology degree in Computer Science."
   },
   {
     id: 3,
     degree: "High School Diploma",
     institution: "Lycée La Mare Carrée",
-    logo: "/logos/lycee.png",
+    logo: "/lovable-uploads/ad741a26-ddd7-4412-80a6-096b56f7bb86.png",
     location: "Moissy-Cramayel, France",
     startDate: "2019",
     endDate: "2022",

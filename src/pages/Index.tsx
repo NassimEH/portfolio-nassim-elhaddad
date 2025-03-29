@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
@@ -10,7 +9,6 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ParticleBackground from '../components/ParticleBackground';
 import ThemeLanguageSwitch from '../components/ThemeLanguageSwitch';
-import ResumeSection from '../components/ResumeSection';
 import { useRevealOnScroll, useParallax } from '../utils/transitions';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
@@ -104,10 +102,6 @@ const Index = () => {
       
       <main ref={sectionsRef}>
         <Hero />
-        
-        <div className="smooth-transition">
-          <ResumeSection />
-        </div>
         
         <div className="smooth-transition">
           <Experience />
