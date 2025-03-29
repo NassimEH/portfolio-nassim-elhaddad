@@ -32,40 +32,33 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen
           </button>
         </DialogHeader>
           
-        {project.imageUrl ? (
-          <div className="h-64 sm:h-96 w-full rounded-md overflow-hidden mb-6">
-            <motion.img
-              src={project.imageUrl}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              initial={{ scale: 1.05 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.4 }}
-            />
-          </div>
-        ) : (
-          <div className="h-48 sm:h-64 w-full rounded-md overflow-hidden mb-6 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center">
-            <motion.div
-              className="text-white/20 text-8xl font-bold"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              {project.title.charAt(0)}
-            </motion.div>
-          </div>
-        )}
-        
-        {project.date && (
+        <div className="mb-6">
           <div className="flex items-center text-sm text-muted-foreground mb-4">
-            <Calendar className="w-4 h-4 mr-2 text-cyan-400" />
-            <span>{t('projects.modal.date')}: {project.date}</span>
+            {project.date && (
+              <div className="flex items-center mr-4">
+                <Calendar className="w-4 h-4 mr-2 text-cyan-400" />
+                <span>{t('projects.modal.date')}: {project.date}</span>
+              </div>
+            )}
           </div>
-        )}
-        
-        <p className="text-muted-foreground mb-8">
-          {project.description}
-        </p>
+          
+          <p className="text-muted-foreground mb-8">
+            {project.description}
+          </p>
+          
+          {project.imageUrl && (
+            <div className="rounded-md overflow-hidden mb-6 border border-white/10">
+              <motion.img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-auto object-cover"
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+              />
+            </div>
+          )}
+        </div>
         
         <div className="mb-8">
           <h3 className="text-lg font-medium mb-3">{t('projects.modal.technologies')}</h3>
