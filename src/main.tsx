@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const rootElement = document.getElementById("root");
   if (rootElement) {
     createRoot(rootElement).render(<App />);
+    console.log("Application de portfolio démarrée avec succès!");
   } else {
     console.error("Root element not found");
   }
