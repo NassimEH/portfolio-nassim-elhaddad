@@ -59,7 +59,7 @@ const Experience: React.FC = () => {
       en: "June 2024",
       fr: "Juin 2024"
     },
-    logo: "/lovable-uploads/0752b7ad-cc95-4761-bb39-56d6ea8253e0.png",
+    logo: "https://www.dim-materre.fr/wp-content/uploads/2017/05/g8xwqH_z_400x400.png",
     description: {
       en: ["Migrating legacy systems to newer architectures, ensuring performance optimization.", "Developing and debugging custom scripts for network automation.", "Providing documentation for future maintenance and scalability of systems."],
       fr: ["Migration de systèmes existants vers des architectures plus récentes, garantissant l'optimisation des performances.", "Développement et débogage de scripts personnalisés pour l'automatisation du réseau.", "Fourniture de documentation pour la maintenance future et l'évolutivité des systèmes."]
