@@ -341,6 +341,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Java Swing"],
     category: 'software_development',
     githubUrl: "https://github.com/NassimEH/Donjon-Infini-PT2",
+    ImageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFC7VjYxg7X_Q/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1720900407926?e=1743868800&v=beta&t=6IQH5qPlj2Us4YUoYIjBab-v34YHg4k8TbUpi2VEHWU",
     featured: true,
     date: "Juillet 2023"
   },
