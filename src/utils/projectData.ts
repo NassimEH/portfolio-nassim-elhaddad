@@ -110,8 +110,8 @@ export const projects: Project[] = [
     description: "Présentation de groupe sur le droit au télétravail en France pour un cours de droit social. Analyse des avantages (flexibilité, économies de coûts), des inconvénients (isolement, frontières floues entre vie professionnelle et personnelle), et du cadre juridique actuel.",
     technologies: ["PowerPoint", "Communication orale", "Droit du travail"],
     category: 'other',
-    githubUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEzkj3Oj_OZAA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734180737522?e=1743868800&v=beta&t=Eydh5tRVpeeqvTgIXKuBtxPlkKuTTTDqY50Uxqd1Tuc",
-    imageUrl: "/lovable-uploads/23065449-95e7-4196-88c8-ccba4dccfafa.png",
+    githubUrl: "https://github.com/NassimEH/Teleworking-presentation",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQEzkj3Oj_OZAA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734180737522?e=1743868800&v=beta&t=Eydh5tRVpeeqvTgIXKuBtxPlkKuTTTDqY50Uxqd1Tuc",
     featured: false,
     date: "Décembre 2024"
   },
@@ -133,7 +133,7 @@ export const projects: Project[] = [
     technologies: ["PowerPoint", "Communication orale"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Creativity-x-Music",
-    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQFjMKMKqhIypQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1734800313736?e=1743868800&v=beta&t=PMGHza0Ss1HheWjQ8fhPCpKCUw1sQ4oLrbt_v7Rfwxw",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQHCjlChpBYYXw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1732969279412?e=1743868800&v=beta&t=o9ZPdX31MVBtGd-SPxvOnRgcED9CRn9ISdiY3xudAyI",
     featured: false,
     date: "Novembre 2024"
   },
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     technologies: ["PowerPoint", "Communication orale", "Management", "Gestion de projet"],
     category: 'other',
     githubUrl: "https://github.com/NassimEH/Presentation-Femmes-Entreprise",
-    imageUrl: "/lovable-uploads/7c62cba5-796b-436e-a0b8-e49f74b16df0.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGFzYO5Hoquzw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1731101869570?e=1743868800&v=beta&t=W8cZrtOk_Ndu8Fc1k7IbEL9vJivuDkVFTh2aqin5zWI",
     featured: false,
     date: "Novembre 2024"
   },
@@ -155,7 +155,7 @@ export const projects: Project[] = [
     technologies: ["WordPress", "SEO", "HTML", "CSS", "JavaScript"],
     category: 'web_development',
     githubUrl: "https://github.com/NassimEH/MonChauffeurVIP-redesign",
-    imageUrl: "/lovable-uploads/a3011007-3a93-44a3-a772-21d8e786cea1.png",
+    imageUrl: "https://lh3.googleusercontent.com/p/AF1QipOcuXHU-GbQ2wzWEcotpP9I3nWMvaav_3P7Ozsw=s680-w680-h510",
     featured: true,
     date: "Novembre 2024"
   },
@@ -166,7 +166,7 @@ export const projects: Project[] = [
     technologies: ["Blender"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Le-Cyborg-3D",
-    imageUrl: "/lovable-uploads/3c230ebd-9f41-4a3a-8cd4-1b902b317b92.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGU-M191afENw/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1728141870259?e=1743868800&v=beta&t=crivGEBS6YhXn5_QiP8-6skGdPkOA-GoKN8LL92WAeo",
     featured: false,
     date: "Octobre 2024"
   },
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     technologies: ["Blender"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Gameboy-3D",
-    imageUrl: "/lovable-uploads/fcc66d3e-7ac2-4208-8593-d9248304410f.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQG7HYPhhFc6yQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1728142229881?e=1743868800&v=beta&t=O8bVM0LdD9hsp-Ml9eRN_5U2ynAWGVAnf8mTcRlhZeM",
     featured: false,
     date: "Octobre 2024"
   },
@@ -188,7 +188,7 @@ export const projects: Project[] = [
     technologies: ["Blender"],
     category: 'design',
     githubUrl: "https://github.com/NassimEH/Room-3D",
-    imageUrl: "/lovable-uploads/adf0547f-2cee-4c69-970b-bb8a1c7664af.png",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGjvkrznlWmJw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1729376727927?e=1743868800&v=beta&t=L4xgjg6c18UOjSEsj6rwn5b03_4gMESSKF-iJ3CBGVk",
     featured: false,
     date: "Octobre 2024"
   },
@@ -198,7 +198,7 @@ export const projects: Project[] = [
     description: "Modèle 3D de deux chaises créé avec Blender.",
     technologies: ["Blender"],
     category: 'design',
-    githubUrl: "https://github.com/NassimEH/Chaises-3D",
+    githubUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQGjZ_bL_TEveA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1727533250474?e=1743868800&v=beta&t=GJoMohDlMv1ey_mtgDeKZHPmqbBfZCxPLaOWVLzXQq4",
     featured: false,
     date: "Septembre 2024"
   },
@@ -208,7 +208,7 @@ export const projects: Project[] = [
     description: "Mon premier projet de modélisation 3D avec Blender: une tasse. Réalisé grâce au ModelTT (club de TSP).",
     technologies: ["Blender"],
     category: 'design',
-    githubUrl: "https://github.com/NassimEH/mug-3D",
+    githubUrl: "https://media.licdn.com/dms/image/v2/D4E2DAQHLJaoHtTaPyg/profile-treasury-image-shrink_1920_1920/profile-treasury-image-shrink_1920_1920/0/1726949270931?e=1743868800&v=beta&t=8wismkcgkBfg9QukDpV4d1e_kOVaMGl_SUTClrMZMpQ",
     featured: false,
     date: "Septembre 2024"
   },
