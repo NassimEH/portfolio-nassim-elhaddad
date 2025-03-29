@@ -56,8 +56,10 @@
       "technologies": "Technologies",
       "visit_site": "Visit Site",
       "view_code": "View Code",
-      "close": "Close"
-    }
+      "close": "Close",
+      "date": "Date"
+    },
+    "no_projects": "No projects match these filters. Please try other criteria."
   },
   "experience": {
     "title": "MY JOURNEY",

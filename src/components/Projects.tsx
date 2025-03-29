@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { projects, categories, CategoryInfo, ProjectCategory } from '../utils/projectData';
 import { useTranslation } from 'react-i18next';
 import ProjectDetailModal from './ProjectDetailModal';
-import { Folder, ChevronDown, ChevronUp, Filter } from 'lucide-react';
+import { Folder, ChevronDown, ChevronUp, Filter, Calendar } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'featured'>('all');
@@ -171,9 +171,7 @@ const Projects: React.FC = () => {
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categories
-                  .filter(category => category.id !== 'data_science') // Exclure la catégorie "Data Science"
-                  .map((category: CategoryInfo) => (
+                {categories.map((category: CategoryInfo) => (
                   <div key={category.id} className="relative">
                     <motion.button
                       onClick={() => toggleCategoryMenu(category.id)}
@@ -260,6 +258,14 @@ const Projects: React.FC = () => {
                     <div className="absolute -right-2 -top-2 w-24 h-24 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
                     <h3 className="text-xl font-medium tracking-tight mb-2 group-hover:text-cyan-400 transition-colors duration-300">{project.title}</h3>
+                    
+                    {project.date && (
+                      <div className="flex items-center text-xs text-muted-foreground mb-2">
+                        <Calendar className="w-3 h-3 mr-1" />
+                        {project.date}
+                      </div>
+                    )}
+                    
                     <p className="text-muted-foreground mb-4 line-clamp-2 text-sm font-light">{project.description}</p>
                     
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -294,7 +300,7 @@ const Projects: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                Aucun projet ne correspond à ces filtres. Veuillez essayer d'autres critères.
+                {t('projects.no_projects')}
               </motion.div>
             )}
           </AnimatePresence>

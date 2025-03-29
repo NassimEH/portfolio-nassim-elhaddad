@@ -56,8 +56,10 @@
       "technologies": "Technologies",
       "visit_site": "Visiter le site",
       "view_code": "Voir le code",
-      "close": "Fermer"
-    }
+      "close": "Fermer",
+      "date": "Date"
+    },
+    "no_projects": "Aucun projet ne correspond à ces filtres. Veuillez essayer d'autres critères."
   },
   "experience": {
     "title": "MON PARCOURS",
