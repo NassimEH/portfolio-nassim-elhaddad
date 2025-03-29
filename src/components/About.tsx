@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '../utils/projectData';
@@ -117,7 +116,7 @@ const About: React.FC = () => {
       
       // Create a link element and trigger download
       const link = document.createElement('a');
-      link.href = '/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png'; // Use the original CV
+      link.href = '/portfolio-nassim-elhaddad/images/cv-nassim-elhaddad.png';
       link.download = 'cv-nassim-elhaddad.pdf';
       document.body.appendChild(link);
       link.click();
@@ -126,7 +125,7 @@ const About: React.FC = () => {
   };
   
   const viewCV = () => {
-    window.open('/lovable-uploads/ac0b53ac-bd3c-4dc8-a6a3-2d0e1a1ed9ab.png', '_blank');
+    window.open('/portfolio-nassim-elhaddad/images/cv-nassim-elhaddad.png', '_blank');
     
     toast({
       title: "Aperçu du CV",
@@ -405,7 +404,9 @@ const About: React.FC = () => {
                     </motion.button>
                     
                     <motion.button
-                      className={`flex items-center gap-2 px-6 py-3 rounded-lg ${hasDownloaded ? 'bg-green-500/20 text-green-300' : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'} transition-all duration-300`}
+                      className={`flex items-center gap-2 px-6 py-3 rounded-lg ${
+                        hasDownloaded ? 'bg-green-500/20 text-green-300' : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                      } transition-all duration-300`}
                       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(34,211,238,0.5)" }}
                       whileTap={{ scale: 0.95 }}
                       initial={{ opacity: 0, y: 20 }}
